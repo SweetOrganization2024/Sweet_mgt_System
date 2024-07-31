@@ -17,6 +17,8 @@ public class delete {
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
+    private String price_of_sweet;
+
 
     public delete(sweet appSweet) {
         this.AppSweet = appSweet;
@@ -39,16 +41,13 @@ public class delete {
         assertTrue( isRegistered);
     }
 
-    @When("The user adds sweet with name {string}, id {string} and type {string}")
-    public void theUserAddsSweetWithNameIdAndType(String name, String id, String type) {
-        newSweet.addsweet(new newSweet(name, id, type));
-    }
 
-    @When("The information is valid name is {string} and id is {string} and type is {string}")
-    public void theInformationIsValidNameIsAndIdIsAndTypeIs(String name, String id, String type) {
+    @When("The information is valid name is {string} and id is {string} and type is {string} and price is {string}")
+    public void theInformationIsValidNameIsAndIdIsAndTypeIs(String name, String id, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
+        this.price_of_sweet=price;
 
         boolean isValid = false;
         for (newSweet s : newSweet.getListOfSweet()) {
@@ -79,7 +78,9 @@ public class delete {
         }
 
         assertTrue("Sweet should be successfully deleted", isValid);
-        System.out.println("Current list of sweets after deletion: " + newSweet.getListOfSweet());
+        for (newSweet s : newSweet.getListOfSweet()) {
+            System.out.println(newSweet.printsweet(s));
+        }
     }
 
     @Then("The User should see the sweet successfully deleted")

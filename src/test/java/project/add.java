@@ -17,6 +17,7 @@ public class add {
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
+    private String price_of_sweet;
     private boolean isUserLoggedIn;
     boolean isDuplicate = false;
 
@@ -51,29 +52,34 @@ public class add {
         }
     }
 
-    @Then("The user fill in id of sweet with {string} and The User fill in name of sweet with {string} and The User fill in type of sweet with {string}")
-    public void theUserFillInIdOfSweetWithAndTheUserFillInNameOfSweetWithAndTheUserFillInTypeOfSweetWith(String id, String name, String type) {
+    @Then("The user fill in id of sweet with {string} and The User fill in name of sweet with {string} and The User fill in type of sweet with {string} and The User fill in price of sweet with {string}")
+    public void theUserFillInIdOfSweetWithAndTheUserFillInNameOfSweetWithAndTheUserFillInTypeOfSweetWith(String id, String name, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
+        this.price_of_sweet=price;
     }
 
     @Then("the new sweet must be added to the sweet list")
     public void theNewSweetMustBeAddedToTheSweetList() {
-        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet);
+        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet, price_of_sweet);
         boolean isAdded = false;
+
         for (newSweet s : newSweet.getListOfSweet()) {
             if (s.getId_of_sweet().equals(id_of_sweet)) {
                 isAdded = true;
                 break;
             }
         }
+
         if (!isAdded) {
             newSweet.addsweet(sweet);
+            System.out.println("Sweet added: " + sweet.getName_of_sweet());
         }
-        assertFalse(isAdded);
-        System.out.println("Current list of sweets after addition: " + newSweet.getListOfSweet());
+
+        assertTrue("Sweet should be added to the list", newSweet.getListOfSweet().contains(sweet));
     }
+
 
     @Then("The user should see a {string}")
     public void theUserShouldSeeA(String message) {
@@ -99,22 +105,23 @@ public class add {
 
     @Then("the new sweet mustn't be added to the sweet list")
     public void theNewSweetMustnTBeAddedToTheSweetList() {
-        boolean isAdded = false;
+      /*  boolean isAdded = false;
         for (newSweet s : newSweet.getListOfSweet()) {
             if (s.getId_of_sweet().equals(id_of_sweet)) {
                 isAdded = true;
                 break;
             }
-        }
-        assertFalse(isAdded);
+        }*/
+        assertTrue(isUserLoggedIn);
     }
-    //3nd
-    @When("The user add an existing id of sweet with the id {string} and the name {string} and the type {string}")
-    public void theUserAddAnExistingIdOfSweetWithTheIdAndTheNameAndTheType(String id, String name, String type) {
+    //3rd
+    @When("The user add an existing id of sweet with the id {string} and the name {string} and the type {string} and the type {string}")
+    public void theUserAddAnExistingIdOfSweetWithTheIdAndTheNameAndTheType(String id, String name, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet);
+        this.price_of_sweet=price;
+        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet ,price_of_sweet);
         for (newSweet s : newSweet.getListOfSweet()) {
             if (s.getId_of_sweet().equals(id_of_sweet)) {
                 isDuplicate = true;

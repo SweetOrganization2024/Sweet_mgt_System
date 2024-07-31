@@ -7,11 +7,28 @@ public class newSweet {
     String id_of_sweet;
     String name_of_sweet;
     String type_of_sweet;
+    String price_of_sweeet;
 
-    public newSweet(String id, String name, String type) {
+    public newSweet(String id, String name, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
+        this.price_of_sweeet=price;
+    }
+    public static String printsweet(newSweet sweet) {
+        return "ID: " + sweet.getId_of_sweet() + ", Name: " + sweet.getName_of_sweet() + ", Type: " + sweet.getType_of_sweet();
+    }
+
+    public String getPrice() {
+        return price_of_sweeet;
+    }
+
+    public void setPrice(String price) {
+        this.price_of_sweeet = price;
+    }
+
+    public static void deletesweet(newSweet ss) {
+        listOfSweet.remove(ss);
     }
 
     public String getId_of_sweet() {
@@ -45,8 +62,4 @@ public class newSweet {
     public static void addsweet(newSweet ss) {
         listOfSweet.add(ss);
     }
-    public static void deletesweet(newSweet ss1) {
-        listOfSweet.remove(ss1);
-    }
 }
-
