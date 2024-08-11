@@ -1,0 +1,3 @@
+04,cake, sweet, 30
+05,carrot cake, vegetarian, 25
+06,Macaron, zero sugar, 30

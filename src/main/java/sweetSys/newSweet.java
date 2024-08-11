@@ -3,7 +3,8 @@ package sweetSys;
 import java.util.ArrayList;
 
 public class newSweet {
-    static ArrayList<newSweet> listOfSweet = new ArrayList<>();
+    //static ArrayList<newSweet> listOfSweet = new ArrayList<>();
+
     String id_of_sweet;
     String name_of_sweet;
     String type_of_sweet;
@@ -15,6 +16,14 @@ public class newSweet {
         this.type_of_sweet = type;
         this.price_of_sweeet=price;
     }
+    public newSweet(){
+
+    }
+    public newSweet(String id, String name, String type) {
+        this.id_of_sweet = id;
+        this.name_of_sweet = name;
+        this.type_of_sweet = type;}
+
     public static String printsweet(newSweet sweet) {
         return "ID: " + sweet.getId_of_sweet() + ", Name: " + sweet.getName_of_sweet() + ", Type: " + sweet.getType_of_sweet();
     }
@@ -27,9 +36,7 @@ public class newSweet {
         this.price_of_sweeet = price;
     }
 
-    public static void deletesweet(newSweet ss) {
-        listOfSweet.remove(ss);
-    }
+
 
     public String getId_of_sweet() {
         return id_of_sweet;
@@ -55,11 +62,31 @@ public class newSweet {
         this.type_of_sweet = type_of_sweet;
     }
 
-    public static ArrayList<newSweet> getListOfSweet() {
-        return listOfSweet;
+    public static boolean if_the_type_sp_or_owner (String email, String password){
+        for (person f : sweet.getList_of_people()) {
+            if (f.getEmail().equals(email) && f.getPass().equals(password) &&
+                    (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean if_the_type_AD_or_USR (String email, String password){
+        for (person f : sweet.getList_of_people()) {
+            if (f.getEmail().equals(email) && f.getPass().equals(password) &&
+                    (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public static void addsweet(newSweet ss) {
-        listOfSweet.add(ss);
+    public static boolean isAdd(String id_of_sweet){
+        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
+            if (s.getId_of_sweet().equals(id_of_sweet)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

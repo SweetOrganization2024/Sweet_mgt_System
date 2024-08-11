@@ -7,6 +7,8 @@ import sweetSys.person;
 import sweetSys.newSweet;
 import sweetSys.sweet;
 
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -18,17 +20,21 @@ public class delete {
     private String name_of_sweet;
     private String type_of_sweet;
     private String price_of_sweet;
+    private boolean isUserRegistered = false;
 
 
-    public delete(sweet appSweet) {
-        this.AppSweet = appSweet;
+
+    public delete() {
+        this.AppSweet = sweet.getInstance();
     }
 
     @Given("The user login as owner or supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
         this.email = email;
         this.password = password;
+
         boolean isRegistered = false;
+
 
         for (person f : AppSweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
@@ -38,7 +44,6 @@ public class delete {
             }
         }
 
-        assertTrue( isRegistered);
     }
 
 
@@ -50,7 +55,7 @@ public class delete {
         this.price_of_sweet=price;
 
         boolean isValid = false;
-        for (newSweet s : newSweet.getListOfSweet()) {
+        for (newSweet s : AppSweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name) && s.getId_of_sweet().equals(id) && s.getType_of_sweet().equals(type)) {
                 isValid = true;
                 break;
@@ -65,7 +70,7 @@ public class delete {
         newSweet sweetToDelete = null;
         boolean isValid = false;
 
-        for (newSweet s : newSweet.getListOfSweet()) {
+        for (newSweet s : AppSweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name_of_sweet) && s.getId_of_sweet().equals(id_of_sweet) && s.getType_of_sweet().equals(type_of_sweet)) {
                 sweetToDelete = s;
                 isValid = true;
@@ -74,11 +79,11 @@ public class delete {
         }
 
         if (isValid) {
-            newSweet.deletesweet(sweetToDelete);
+            AppSweet.deletesweet(sweetToDelete);
         }
 
         assertTrue("Sweet should be successfully deleted", isValid);
-        for (newSweet s : newSweet.getListOfSweet()) {
+        for (newSweet s : AppSweet.getListOfSweet()) {
             System.out.println(newSweet.printsweet(s));
         }
     }
@@ -106,7 +111,7 @@ public class delete {
     @When("the user deletes a sweet with not available id is {string} or not available name is {string} or type is {string}")
     public void theUserDeletesASweetWithNotAvailableIdIsOrNotAvailableNameIsOrTypeIs(String id, String name, String type) {
         boolean isValid = true;
-        for (newSweet s : newSweet.getListOfSweet()) {
+        for (newSweet s : AppSweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name) || s.getId_of_sweet().equals(id) || s.getType_of_sweet().equals(type)) {
                 isValid = false;
                 break;

@@ -12,6 +12,6 @@ Feature: Sign Up
     Examples:
       | Email                 | Password     | ConfirmPassword | Message                               |
       | incoremail.com        | Password123! | Password123!    | invalid email syntax                  |
-      | hello@gmail.com       | Password123! | Password123!    | email is already registered           |
+      | incoremail.com       | Password123! | Password123!    | email is already registered           |
       | valid@email.com       | PssWord123   | pssword123      | weak password                         |
       | valid@email.com       | Password123! | Password456!    | password mismatch                     |

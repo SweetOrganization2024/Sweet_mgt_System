@@ -13,8 +13,17 @@ public class Userfile {
 
     public Userfile() {
     }
+    public static boolean emailIsRegisted (String email){
+        for (person p : Userfile.getUsers()) {
+            if (p.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public void readUsers(String fileName) {
+
+    public static void readUsers(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -37,4 +46,3 @@ public class Userfile {
         return users;
     }
 }
-

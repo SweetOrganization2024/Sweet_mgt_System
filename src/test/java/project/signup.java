@@ -2,17 +2,18 @@ package project;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweetSys.Userfile;
-import sweetSys.person;
-import sweetSys.successfull;
-import sweetSys.sweet;
+import sweetSys.*;
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
 
-import static org.junit.Assert.*;
+import io.cucumber.java.*;
+
+import java.util.List;
 
 public class signup {
-    private sweet Appsweet;
+    private static sweet AppSweet;
     private person per;
-    Userfile o = new Userfile();
+    static Userfile o = new Userfile();
     String email = "";
     String password = "";
     String firstName = "";
@@ -20,8 +21,21 @@ public class signup {
     String Confirm_password = "";
     String type = "";
 
-    public signup(sweet Appsweet) {
-        this.Appsweet = Appsweet;
+    @BeforeClass
+    public static void setUp() {
+        AppSweet = sweet.getInstance();
+        // AppSweet.getList_of_people().clear();
+        // o.readUsers(Userfile.FILE_NAME);
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        AppSweet.getList_of_people().clear();
+        System.out.println("Cleanup done.");
+    }
+
+    public signup() {
+        // this.AppSweet = sweet.getInstance();
     }
 
     @When("The user enter firstName with {string} and finalName with {string} and email with {string} and password with {string} and Confirm password with {string} and type with {string}")
@@ -33,29 +47,27 @@ public class signup {
         email = em;
         type = typ;
         o.readUsers(Userfile.FILE_NAME);
+
+
     }
 
     @Then("creating an account successfully")
     public void creatingAnAccountSuccessfully() {
         successfull s = new successfull(password, email);
         sweet ff = new sweet();
-        boolean isRegistered = false;
-        for (person f : ff.getList_of_people()) {
-            if (s.getEmail().equals(f.getEmail())) {
-                isRegistered = true;
-                break;
-            }
-        }
+        person ss=new person(email,password);
+
+        boolean isRegistered = person.findemail(ss);
+
         if (isRegistered) {
             throw new AssertionError("Email is already registered");
-        } else {
-            boolean isEmailValid = s.isValidEmail(email);
-            boolean isPasswordValid = password.equals(Confirm_password) && s.isValidPassword(password);
+        }
+        else {
+            boolean isEmailValid = successfull.isValidEmail(email);
+            boolean isPasswordValid = password.equals(Confirm_password) && successfull.isValidPassword(password);
 
             if (isEmailValid && isPasswordValid) {
-                s.addtoarray(password, email, firstName, finalName, type);
-                // Print the list of users after adding the new user
-                System.out.println("Current list of people after addition: " + sweet.getList_of_people());
+                s.addtoarray(password,email,type,firstName,finalName);
             } else {
                 throw new AssertionError("Account creation failed due to invalid email or password");
             }
@@ -80,7 +92,7 @@ public class signup {
 
         switch (message) {
             case "invalid email syntax":
-                if (!s.isValidEmail(email)) {
+                if (!successfull.isValidEmail(email)) {
                     System.out.println("Invalid email syntax.");
                 } else {
                     throw new AssertionError("Expected invalid email syntax error, but validation passed");
@@ -90,9 +102,12 @@ public class signup {
                 if (isEmailRegistered(email)) {
                     System.out.println("Email is already registered.");
                 }
+                else {
+                    throw new AssertionError("Expected email is already registered error, but it was not");
+                }
                 break;
             case "weak password":
-                if (!s.isValidPassword(password)) {
+                if (!successfull.isValidPassword(password)) {
                     System.out.println("Weak password provided.");
                 } else {
                     throw new AssertionError("Expected weak password error, but validation passed");
@@ -108,14 +123,15 @@ public class signup {
             default:
                 throw new AssertionError("Unexpected message: " + message);
         }
+        for (person pp: sweet.getList_of_people()){
+            System.out.println(pp.getEmail() + " " + pp.getType());
+        }
+        System.out.println(sweet.getList_of_people().size());
     }
 
+    // Method for checking if email is already registered
     private boolean isEmailRegistered(String email) {
-        for (person p : Appsweet.getList_of_people()) {
-            if (p.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        return Userfile.emailIsRegisted(email);
     }
+
 }
