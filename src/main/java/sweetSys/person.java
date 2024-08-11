@@ -20,6 +20,14 @@ public class person {
         this.pass = pass;
     }
 
+    public  static person retperson(person p){
+        for (person pp : sweet.getList_of_people()) {
+            if (p.getEmail().equals(p.getEmail()) && p.getPass().equals(p.getPass())) {
+               return pp;
+            }
+        }
+        return null;
+    }
     public person() {
     }
 
@@ -54,4 +62,51 @@ public class person {
 
     public void setType(String type) {
         this.type = type;
-    }}
+    }
+    public static boolean findemail(person p){
+        for (person f : sweet.getList_of_people()) {
+            if (f.getEmail().equals(p.getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean emailexi(String  em){
+        for (person f : sweet.getList_of_people()) {
+            if (f.getEmail().equals(em)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean ifpersonsignup(person pp) {
+        for (person p : sweet.getList_of_people()) {
+            if (pp.getEmail().equals(p.getEmail())) {
+                if (!pp.getPass().equals(p.getPass())) {
+                    sweet.is_loggin = false;
+                }
+               return true;
+            }
+        }
+        return false;
+    }
+    public static boolean isRightType( String email, String pass, String ty){
+        for( person p : sweet.getList_of_people()){
+            if(p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean rightlogin(person pp) {
+        for (person p : sweet.getList_of_people()) {
+            if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+}

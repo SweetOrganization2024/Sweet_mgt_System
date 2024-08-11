@@ -3,7 +3,7 @@ package sweetSys;
 import java.util.regex.Pattern;
 
 public class successfull {
-    private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 
     String password;
@@ -12,6 +12,11 @@ public class successfull {
     public successfull(String pass, String em) {
         this.password = pass;
         this.email = em;
+    }
+
+    public successfull() {
+        this.password = password;
+        this.email=email;
     }
 
     public String getEmail() {
@@ -44,16 +49,16 @@ public class successfull {
         if (password.length() < 8) {
             return "Password is too short";
         }
-        if (!password.matches(".*[A-Z].*")) {
+        if (!password.matches(".[A-Z].")) {
             return "Password should contain at least one uppercase letter";
         }
-        if (!password.matches(".*[a-z].*")) {
+        if (!password.matches(".[a-z].")) {
             return "Password should contain at least one lowercase letter";
         }
-        if (!password.matches(".*\\d.*")) {
+        if (!password.matches(".\\d.")) {
             return "Password should contain at least one digit";
         }
-        if (!password.matches(".*[\\p{Punct}].*")) {
+        if (!password.matches(".[\\p{Punct}].")) {
             return "Password should contain at least one special character";
         }
         return "Password is strong";

@@ -8,14 +8,26 @@ import java.util.List;
 
 public class sweet {
     public static List<person> list_of_people = new ArrayList<>();
-    public boolean is_loggin = false;
-
-    public sweet() {
-        // Load users when object is created
-        loadUsers();
+    public static ArrayList<newSweet> listOfSweet = new ArrayList<>();
+    private static sweet instance;
+    public static sweet getInstance() {
+        if (instance == null) {
+            instance = new sweet();
+        }
+        return instance;
     }
 
-    public void loadUsers() {
+    public static ArrayList<newSweet> getListOfSweet() {
+        return listOfSweet;
+    }
+
+    public static void setListOfSweet(ArrayList<newSweet> listOfSweet) {
+        sweet.listOfSweet = listOfSweet;
+    }
+
+    public static boolean is_loggin = false;
+
+    public sweet() {
         try (BufferedReader reader = new BufferedReader(new FileReader(Userfile.FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -41,5 +53,13 @@ public class sweet {
     public void setToList(person p) {
         list_of_people.add(p);
     }
-}
 
+    public static void addsweet(newSweet sweet) {
+        listOfSweet.add(sweet);
+        //System.out.println("Sweet added: " + sweet.getName_of_sweet());
+    }
+
+    public static void deletesweet(newSweet ss) {
+        listOfSweet.remove(ss);
+    }
+}

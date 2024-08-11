@@ -1,42 +1,50 @@
 package project;
 
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import sweetSys.newSweet;
 import sweetSys.person;
 import sweetSys.sweet;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class add {
-    private sweet AppSweet;
-    private String email;
-    private String password;
+    private static sweet AppSweet;
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
+    private String price_of_sweet;
     private boolean isUserLoggedIn;
     boolean isDuplicate = false;
 
-    public add(sweet appSweet) {
-        AppSweet = appSweet;
+    @BeforeClass
+    public static void setUp() {
+       // AppSweet = sweet.getInstance();
+        AppSweet.getListOfSweet().clear();
+        AppSweet.getList_of_people().clear();
+
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        AppSweet.getListOfSweet().clear();
+        AppSweet.getList_of_people().clear();
+
+        System.out.println("Cleanup done.");
+    }
+    public add() {
+       this.AppSweet = sweet.getInstance();
     }
 
     @Given("The user login as Owner or Supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
-        this.email = email;
-        this.password = password;
-        boolean isRegistered = false;
 
-        for (person f : AppSweet.getList_of_people()) {
-            if (f.getEmail().equals(email) && f.getPass().equals(password) &&
-                    (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
-                isRegistered = true;
-                break;
-            }
-        }
+        boolean isRegistered = newSweet.if_the_type_sp_or_owner(email,password);
 
         isUserLoggedIn = isRegistered;
         assertTrue("User should be logged in as Owner or Supplier", isRegistered);
@@ -51,29 +59,28 @@ public class add {
         }
     }
 
-    @Then("The user fill in id of sweet with {string} and The User fill in name of sweet with {string} and The User fill in type of sweet with {string}")
-    public void theUserFillInIdOfSweetWithAndTheUserFillInNameOfSweetWithAndTheUserFillInTypeOfSweetWith(String id, String name, String type) {
+    @Then("The user fill in id of sweet with {string} and The User fill in name of sweet with {string} and The User fill in type of sweet with {string} and The User fill in price of sweet with {string}")
+    public void theUserFillInIdOfSweetWithAndTheUserFillInNameOfSweetWithAndTheUserFillInTypeOfSweetWith(String id, String name, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
+        this.price_of_sweet=price;
     }
 
     @Then("the new sweet must be added to the sweet list")
     public void theNewSweetMustBeAddedToTheSweetList() {
-        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet);
-        boolean isAdded = false;
-        for (newSweet s : newSweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
-                isAdded = true;
-                break;
-            }
-        }
+        newSweet MySWEET = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet, price_of_sweet);
+        boolean isAdded = newSweet.isAdd(id_of_sweet);
+
         if (!isAdded) {
-            newSweet.addsweet(sweet);
+            sweet.listOfSweet.add(MySWEET);
+            System.out.println("Sweet added: " + MySWEET.getName_of_sweet());
         }
-        assertFalse(isAdded);
-        System.out.println("Current list of sweets after addition: " + newSweet.getListOfSweet());
+        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
+            System.out.println(newSweet.printsweet(s));
+        }
     }
+
 
     @Then("The user should see a {string}")
     public void theUserShouldSeeA(String message) {
@@ -83,44 +90,28 @@ public class add {
     //2rd
     @Given("The user login as admin or user with {string} and {string}")
     public void theUserLoginAsAdminOrUserWithAnd(String email, String password) {
-        this.email = email;
-        this.password = password;
-        boolean isRegistered = false;
-        for (person f : AppSweet.getList_of_people()) {
-            if (f.getEmail().equals(email) && f.getPass().equals(password) &&
-                    (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
-                isRegistered = true;
-                break;
-            }
-        }
+        boolean isRegistered =newSweet.if_the_type_AD_or_USR(email,password);
+
         isUserLoggedIn = isRegistered;
         assertTrue(isUserLoggedIn);
     }
 
     @Then("the new sweet mustn't be added to the sweet list")
     public void theNewSweetMustnTBeAddedToTheSweetList() {
-        boolean isAdded = false;
-        for (newSweet s : newSweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
-                isAdded = true;
-                break;
-            }
-        }
-        assertFalse(isAdded);
+        assertTrue(isUserLoggedIn);
     }
-    //3nd
-    @When("The user add an existing id of sweet with the id {string} and the name {string} and the type {string}")
-    public void theUserAddAnExistingIdOfSweetWithTheIdAndTheNameAndTheType(String id, String name, String type) {
+
+
+    //3rd
+    @When("The user add an existing id of sweet with the id {string} and the name {string} and the type {string} and the type {string}")
+    public void theUserAddAnExistingIdOfSweetWithTheIdAndTheNameAndTheType(String id, String name, String type, String price) {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet);
-        for (newSweet s : newSweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
-                isDuplicate = true;
-                break;
-            }
-        }
+        this.price_of_sweet=price;
+        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet ,price_of_sweet);
+        isDuplicate=newSweet.isAdd(id_of_sweet);
+
         assertTrue(isDuplicate);
     }
 
