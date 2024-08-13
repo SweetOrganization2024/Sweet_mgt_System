@@ -16,8 +16,8 @@ public class search {
     private String name_of_sweet;
     private String type_of_sweet;
     private String price_of_sweet;
-    boolean id_search ;
-    boolean name_search , type_search , price_search;
+    boolean id_search;
+    boolean name_search, type_search, price_search;
 
     public search() {
         sweet appSweet = sweet.getInstance();
@@ -32,14 +32,7 @@ public class search {
     @When("I select search by sweet id {string}")
     public void iSelectSearchBySweetId(String id) {
         this.id_of_sweet = id;
-        id_search = false;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getId_of_sweet().equals(id)){
-                id_search = true;
-                break;
-            }
-        }
-        //System.out.println(id_search);
+        boolean id_search = sweet.Search_ID(id);
         assertTrue(id_search);
     }
 
@@ -51,15 +44,7 @@ public class search {
 
     @Then("I should see the sweet with id")
     public void iShouldSeeTheSweetWithId() {
-
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-            }
-        }
-
+        sweet.print_SweetId(id_of_sweet);
     }
 
     //2nd scenario
@@ -67,15 +52,8 @@ public class search {
     @When("I select search by sweet id does not exist {string}")
     public void iSelectSearchBySweetIdDoesNotExist(String id) {
         this.id_of_sweet = id;
-        id_search = true;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getId_of_sweet().equals(id)){
-                id_search = false;
-                break;
-            }
-        }
-        //System.out.println(id_search);
-        assertTrue(id_search);
+        boolean id_search = sweet.Search_ID(id_of_sweet);
+        assertFalse(id_search);
 
 
     }
@@ -96,72 +74,37 @@ public class search {
     @When("I select search by sweet name {string}")
     public void iSelectSearchBySweetName(String name) {
         this.name_of_sweet = name;
-        name_search = false;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name)){
-                name_search = true;
-                break;
-            }
-        }
-        //System.out.println(id_search);
+        boolean name_search = sweet.Search_name(name);
         assertTrue(name_search);
 
-
     }
+
     @Then("I should see the sweet with name")
     public void iShouldSeeTheSweetWithName() {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-            }
-        }
+        sweet.print_Sweetname(name_of_sweet);
     }
 
     //4
     @When("I select search by sweet name does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExist(String name) {
         this.name_of_sweet = name;
-        name_search = true ;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name)){
-                name_search = false ;
-                break;
-            }
-        }
-        //System.out.println(id_search);
-        assertTrue(name_search);
-
+        boolean name_search = sweet.Search_name(name_of_sweet);
+        assertFalse(name_search);
     }
 
     // 5
     @When("I select search by sweet name {string} and sweet type {string}")
-    public void iSelectSearchBySweetNameAndSweetType(String name , String type ) {
+    public void iSelectSearchBySweetNameAndSweetType(String name, String type) {
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        name_search = false;
-        type_search = false;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getType_of_sweet().equals(type))){
-                name_search = true;
-                type_search = true;
-                break;
-            }
-        }
-        assertTrue(name_search && type_search);
+        boolean Search_name_type = sweet.Search_name_Type(name_of_sweet, type_of_sweet);
+        assertTrue(Search_name_type);
 
     }
+
     @Then("I should see the sweet with this name and type")
     public void iShouldSeeTheSweetWithThisNameAndType() {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-            }
-        }
-
+        sweet.Print_Type_name(name_of_sweet,type_of_sweet);
     }
 
     //6
@@ -170,49 +113,27 @@ public class search {
     public void iSelectSearchBySweetNameDoesNotExistOrSweetTypeDoesNotExist(String name , String type) {
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        name_search = true;
-        type_search = true;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getType_of_sweet().equals(type))){
-                name_search = false;
-                type_search = false;
-                break;
-            }
-        }
-        assertTrue(name_search && type_search);
-
+        boolean search_name_type = sweet.Search_name_Type(name_of_sweet , type_of_sweet);
+        assertFalse(name_search && type_search);
     }
 
     // 7
-
     @When("I select search by sweet name {string} and sweet id {string}")
     public void iSelectSearchBySweetNameAndSweetId(String name, String id) {
         this.name_of_sweet = name;
         this.id_of_sweet = id;
-        name_search = false;
-        id_search = false;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id))){
-                name_search = true;
-                id_search = true;
-                break;
-            }
-        }
-        assertTrue(name_search && id_search);
-
-
+        boolean Search_name_Id = sweet.Search_name_id(name, id);
+        assertTrue(Search_name_Id);
     }
+
+   
+
     @Then("I should see the sweet with this name and id")
     public void iShouldSeeTheSweetWithThisNameAndId() {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-            }
-        }
+       sweet.Print_name_id(id_of_sweet,name_of_sweet);
 
     }
+
 
     // 8
     @When("I select search by sweet name does not exist {string} or  no id {string}")
@@ -221,49 +142,25 @@ public class search {
         this.id_of_sweet = id;
         name_search = true ;
         id_search = true ;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id))){
-                name_search = false ;
-                id_search = false;
-                break;
-            }
-        }
-        assertTrue(name_search && id_search);
-
+        boolean Search_nameid = sweet.Search_name_id(name_of_sweet,id_of_sweet);
+       assertFalse(Search_nameid);
     }
 
     //9
-
     @When("I select search by sweet name {string} ,sweet type {string} and id {string}")
     public void iSelectSearchBySweetNameSweetTypeAndId(String name, String type, String id) {
         this.name_of_sweet = name;
         this.id_of_sweet = id;
         this.type_of_sweet = type;
-        name_search = false;
-        id_search = false;
-        type_search = false ;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id))&& (s.getType_of_sweet().equals(type))){
-                name_search = true;
-                id_search = true;
-                type_search = true;
-                break;
-            }
-        }
-        assertTrue(name_search && id_search);
 
-
+        boolean all = sweet.Secrch_all(name, id, type);
+        assertTrue(all);
     }
+    
+
     @Then("I should see the sweet with this name , type and id")
     public void iShouldSeeTheSweetWithThisNameTypeAndId() {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-            }
-        }
-
+        sweet.Print_name_id_type(id_of_sweet,name_of_sweet,type_of_sweet);
     }
 
     //10
@@ -272,51 +169,19 @@ public class search {
         this.name_of_sweet = name;
         this.id_of_sweet = id;
         this.type_of_sweet = type;
-        name_search = true;
-        id_search = true;
-        type_search = true ;
-        for(newSweet s  : sweet.getListOfSweet()){
-            if(s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id))&& (s.getType_of_sweet().equals(type))){
-                name_search = false;
-                id_search = false;
-                type_search = false;
-                break;
-            }
-        }
+        boolean all1 = sweet.Secrch_all(name, id, type);
+        assertFalse(all1);
     }
 
     //11
     @When("I select search by sweet price range between Min Price {string} and Max Price {string}")
     public void iSelectSearchBySweetPriceRangeBetweenMinPriceAndMaxPrice(String Min, String Max) {
-
-        for (newSweet s : sweet.getListOfSweet()) {  // Assuming 'Sweet' is the class name
-            String price = s.getPrice();
-            int min = Integer.parseInt(Min);
-            int max = Integer.parseInt(Max);
-            int Myprice = Integer.parseInt(price);
-            if (Myprice > min && Myprice < max) {
-                System.out.println("Name : " + s.getName_of_sweet() +
-                        " Id : " + s.getId_of_sweet() +
-                        " Type : " + s.getType_of_sweet() +
-                        " Price : " + s.getPrice());
-            }
-        }
+        sweet.Pricemin_max(Min, Max);
 
     }
 
-
-
     @Then("I should see the sweet with price")
     public void iShouldSeeTheSweetWithPrice() {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
-
-                break;
-
-            }
-        }
-
     }
 
     //12

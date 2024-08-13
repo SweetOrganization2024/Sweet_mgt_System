@@ -9,5 +9,8 @@
         <module name="Sweet_Software" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Sweet_mgt_System1" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

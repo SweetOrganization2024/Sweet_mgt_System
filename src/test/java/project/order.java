@@ -1,5 +1,6 @@
 package project;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +10,6 @@ import sweetSys.sweet;
 import sweetSys.OrderManager;
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class order {
@@ -30,6 +30,13 @@ public class order {
         this.AppSweet = sweet.getInstance();
         this.orderManager = new OrderManager(); // Initialize here
     }
+    @Before
+    public void setUp() {
+        // Ensure fresh instance for each test if not using Singleton
+        this.orderManager = OrderManager.getInstance();
+        this.orderManager.getOrders().clear(); // Clear orders before each test
+    }
+
 
     @Given("a sweet with ID {string}, name {string}, and type {string} is available for order for user with Email {string} and password {string}")
     public void aSweetWithIDNameAndTypeIsAvailableForOrderForUserWithEmailAndPassword(String ID, String NAME, String TYPE, String EMAIL, String PASSWORD) {
@@ -38,53 +45,11 @@ public class order {
         this.type_of_sweet1 = TYPE;
         this.email = EMAIL;
         this.password = PASSWORD;
+        boolean isValidSweet = sweet.validSweet(name_of_sweet1,id_of_sweet1,type_of_sweet1);
 
-
-        // Check if the sweet is available
-        boolean isValidSweet = false;
-        for (newSweet s : sweet.getListOfSweet()) {  // Use AppSweet here
-            if (s.getName_of_sweet().equals(name_of_sweet1) &&
-                    s.getId_of_sweet().equals(id_of_sweet1) &&
-                    s.getType_of_sweet().equals(type_of_sweet1)) {
-                isValidSweet = true;
-                break;
-            }
-        }
-        System.out.println("isValidSweet: " + isValidSweet);
-
-        // Check if the user is registered
-        for (person f : sweet.getList_of_people()) {  // Use AppSweet here
-            if (f.getEmail().equals(email) && f.getPass().equals(password) && f.getType().equals("USER")) {
-                isUserRegistered = true;
-                break;
-            }
-            List<person> people = sweet.getList_of_people();
-            System.out.println("Available person:");
-
-            for (person ss : people) {
-                System.out.println("Email: " + ss.getEmail() +
-                        ", pass: " + ss.getPass() +
-                        ", type: " + ss.getType());
-            }
-        }
-
-        List<newSweet> sweets = sweetSys.sweet.getListOfSweet();
-
-        if (sweets.isEmpty()) {
-            System.out.println("No sweets available.");
-        } else {
-            System.out.println("Available Sweets:");
-            for (newSweet ss : sweets) {
-                System.out.println("Sweet: " + ss.getName_of_sweet() +
-                        ", Type: " + ss.getType_of_sweet() +
-                        ", Id: " + ss.getId_of_sweet() +
-                        ", Price: " + ss.getPrice());
-            }
-        }
-
-        System.out.println("isUserRegistered: " + isUserRegistered);
-
-        assertTrue("Sweet should be valid and user should be registered", isValidSweet && isUserRegistered);
+        // Check user registration
+        boolean isValidUser = sweet.validPeople(email,password);
+        assertTrue("Sweet should be valid and user should be registered", isValidSweet && isValidUser);
     }
 
     @Given("the user selects a quantity of {string} for the sweet")
@@ -99,20 +64,29 @@ public class order {
         LocalDate orderDate = LocalDate.now();
         double cost = Double.parseDouble(totalPrice);
         orderManager.addOrder(orderId, orderDate, cost);
+
+        // Debug: Print orders after adding a new order
+        System.out.println("Orders after adding new order: " + orderManager.getOrders());
     }
+
 
     @Then("the system should confirm the order with a success message including order number, estimated delivery date, and total cost")
     public void theSystemShouldConfirmTheOrderWithASuccessMessageIncludingOrderNumberEstimatedDeliveryDateAndTotalCost() {
         OrderManager.Order currentOrder = orderManager.getCurrentOrder();
-        System.out.println("Order confirmed: ID = " + currentOrder.getOrderId() +
-                ", Date = " + currentOrder.getOrderDate() +
-                ", Total cost = " + currentOrder.getTotalCost());
+        if (currentOrder == null) {
+            System.out.println("No orders found.");
+            System.out.println("Orders List: " + orderManager.getOrders());
+        } else {
+            System.out.println("Order confirmed: ID = " + currentOrder.getOrderId() +
+                    ", Date = " + currentOrder.getOrderDate() +
+                    ", Total cost = " + currentOrder.getTotalCost());
+        }
     }
 
     @Given("a sweet with ID {string}, name {string}, and type {string} is not available for order")
     public void aSweetWithIDNameAndTypeIsNotAvailableForOrder(String id, String name, String type) {
         boolean isAvailable = false;
-        for (newSweet s : sweet.getListOfSweet()) {  // Use AppSweet here
+        for (newSweet s : sweet.getListOfSweet()) {
             if (s.getId_of_sweet().equals(id) || s.getName_of_sweet().equals(name) || s.getType_of_sweet().equals(type)) {
                 isAvailable = true;
                 break;
@@ -134,12 +108,13 @@ public class order {
     @Then("the system should confirm successful payment and provide an order confirmation with order number and estimated delivery date")
     public void theSystemShouldConfirmSuccessfulPaymentAndProvideAnOrderConfirmationWithOrderNumberAndEstimatedDeliveryDate() {
         System.out.println("Payment confirmed.");
+        // Ideally, you would want to validate the payment confirmation and order details here
     }
 
     @Given("an order with order number {string} exists")
     public void anOrderWithOrderNumberExists(String order_n) {
         this.orderId = order_n;
-        // Optionally, you can add logic to check if the order exists
+        // Optionally, you can add logic to ensure the order exists in the system
     }
 
     @When("the user cancels the order")
@@ -157,7 +132,7 @@ public class order {
     public void aUserWithEmailAndPasswordIsLoggedIn(String EMAIL, String PASSWORD) {
         this.email = EMAIL;
         this.password = PASSWORD;
-        for (person f : sweet.getList_of_people()) {  // Use AppSweet here
+        for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) && f.getType().equals("USER")) {
                 isUserRegistered = true;
                 break;

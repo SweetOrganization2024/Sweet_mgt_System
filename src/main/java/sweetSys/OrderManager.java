@@ -5,27 +5,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager {
-    private List<Order> orders;
+    private static OrderManager instance; // Singleton instance
+    private List<Order> orders; // Non-static list
+    private static int nextOrderId = 1;
 
     public OrderManager() {
         this.orders = new ArrayList<>();
+    }
+
+    // Static method to provide global access to the instance
+    public static synchronized OrderManager getInstance() {
+        if (instance == null) {
+            instance = new OrderManager();
+        }
+        return instance;
+    }
+
+    public static int getNextOrderId() {
+        return nextOrderId++;
+    }
+    public static int getPrevOrderId() {
+        return nextOrderId--;
     }
 
     public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
     public void addOrder(String orderId, LocalDate orderDate, double totalCost) {
         Order newOrder = new Order(orderId, orderDate, totalCost);
         orders.add(newOrder);
+        System.out.println("Order added: " + newOrder.getOrderId());
+        //System.out.println("Orders List: " + orders);
     }
 
     public Order getCurrentOrder() {
         if (orders.isEmpty()) {
+            System.out.println("No orders found.");
+            System.out.println("Orders List: " + orders);
             return null;
         }
         return orders.get(orders.size() - 1); // Return the last added order
@@ -35,9 +52,11 @@ public class OrderManager {
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
                 order.setStatus("cancelled");
+
                 return;
             }
         }
+
     }
 
     public void displayPastOrders() {
