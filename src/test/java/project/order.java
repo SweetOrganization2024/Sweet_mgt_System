@@ -9,63 +9,48 @@ import sweetSys.person;
 import sweetSys.sweet;
 import sweetSys.OrderManager;
 import java.time.LocalDate;
-import java.util.List;
 import static org.junit.Assert.*;
 
 public class order {
-    private sweet AppSweet;
     private OrderManager orderManager;
     private String email;
     private String password;
     private String orderId;
-    private String totalPrice;
     private boolean isUserRegistered = false;
     private boolean cancelled = false;
-    private String id_of_sweet1;
-    private String name_of_sweet1;
-    private String type_of_sweet1;
-    private String quantity;
 
     public order() {
-        this.AppSweet = sweet.getInstance();
-        this.orderManager = new OrderManager(); // Initialize here
+        sweet appSweet = sweet.getInstance();
+        this.orderManager = new OrderManager();
     }
     @Before
     public void setUp() {
-        // Ensure fresh instance for each test if not using Singleton
         this.orderManager = OrderManager.getInstance();
-        this.orderManager.getOrders().clear(); // Clear orders before each test
+        this.orderManager.getOrders().clear();
     }
 
 
     @Given("a sweet with ID {string}, name {string}, and type {string} is available for order for user with Email {string} and password {string}")
     public void aSweetWithIDNameAndTypeIsAvailableForOrderForUserWithEmailAndPassword(String ID, String NAME, String TYPE, String EMAIL, String PASSWORD) {
-        this.id_of_sweet1 = ID;
-        this.name_of_sweet1 = NAME;
-        this.type_of_sweet1 = TYPE;
         this.email = EMAIL;
         this.password = PASSWORD;
-        boolean isValidSweet = sweet.validSweet(name_of_sweet1,id_of_sweet1,type_of_sweet1);
+        boolean isValidSweet = sweet.validSweet(NAME, ID, TYPE);
 
-        // Check user registration
         boolean isValidUser = sweet.validPeople(email,password);
         assertTrue("Sweet should be valid and user should be registered", isValidSweet && isValidUser);
     }
 
     @Given("the user selects a quantity of {string} for the sweet")
     public void theUserSelectsAQuantityOfForTheSweet(String quan) {
-        this.quantity = quan;
     }
 
     @When("the user places an order with a total price of {string}")
     public void theUserPlacesAnOrderWithATotalPriceOf(String totalPrice) {
-        this.totalPrice = totalPrice;
         String orderId = "order" + (orderManager.getOrders().size() + 1); // Generate a new order ID
         LocalDate orderDate = LocalDate.now();
         double cost = Double.parseDouble(totalPrice);
         orderManager.addOrder(orderId, orderDate, cost);
 
-        // Debug: Print orders after adding a new order
         System.out.println("Orders after adding new order: " + orderManager.getOrders());
     }
 

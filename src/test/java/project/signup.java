@@ -6,13 +6,7 @@ import sweetSys.*;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
-import io.cucumber.java.*;
-
-import java.util.List;
-
 public class signup {
-    private static sweet AppSweet;
-    private person per;
     static Userfile o = new Userfile();
     String email = "";
     String password = "";
@@ -23,19 +17,17 @@ public class signup {
 
    @BeforeClass
     public static void setUp() {
-        AppSweet = sweet.getInstance();
-       // AppSweet.getList_of_people().clear();
-       // o.readUsers(Userfile.FILE_NAME);
+       sweet.getInstance();
+
     }
 
     @AfterClass
     public static void tearDown() {
-        AppSweet.getList_of_people().clear();
+        sweet.getList_of_people().clear();
         System.out.println("Cleanup done.");
     }
 
     public signup() {
-       // this.AppSweet = sweet.getInstance();
     }
 
     @When("The user enter firstName with {string} and finalName with {string} and email with {string} and password with {string} and Confirm password with {string} and type with {string}")
@@ -46,7 +38,7 @@ public class signup {
         Confirm_password = pass2;
         email = em;
         type = typ;
-        o.readUsers(Userfile.FILE_NAME);
+        Userfile.readUsers(Userfile.FILE_NAME);
 
 
     }
@@ -54,7 +46,7 @@ public class signup {
     @Then("creating an account successfully")
     public void creatingAnAccountSuccessfully() {
         successfull s = new successfull(password, email);
-        sweet ff = new sweet();
+        new sweet();
         person ss=new person(email,password);
 
         boolean isRegistered = person.findemail(ss);
@@ -88,40 +80,38 @@ public class signup {
 
     @Then("a {string} should appear")
     public void aShouldAppear(String message) {
-        successfull s = new successfull(password, email);
+        new successfull(password, email);
 
         switch (message) {
-            case "invalid email syntax":
+            case "invalid email syntax" -> {
                 if (!successfull.isValidEmail(email)) {
                     System.out.println("Invalid email syntax.");
                 } else {
                     throw new AssertionError("Expected invalid email syntax error, but validation passed");
                 }
-                break;
-            case "email is already registered":
+            }
+            case "email is already registered" -> {
                 if (isEmailRegistered(email)) {
                     System.out.println("Email is already registered.");
-                }
-                else {
+                } else {
                     throw new AssertionError("Expected email is already registered error, but it was not");
                 }
-                break;
-            case "weak password":
+            }
+            case "weak password" -> {
                 if (!successfull.isValidPassword(password)) {
                     System.out.println("Weak password provided.");
                 } else {
                     throw new AssertionError("Expected weak password error, but validation passed");
                 }
-                break;
-            case "password mismatch":
+            }
+            case "password mismatch" -> {
                 if (!password.equals(Confirm_password)) {
                     System.out.println("Password mismatch.");
                 } else {
                     throw new AssertionError("Expected password mismatch error, but passwords matched");
                 }
-                break;
-            default:
-                throw new AssertionError("Unexpected message: " + message);
+            }
+            default -> throw new AssertionError("Unexpected message: " + message);
         }
         for (person pp: sweet.getList_of_people()){
             System.out.println(pp.getEmail() + " " + pp.getType());
@@ -129,7 +119,6 @@ public class signup {
         System.out.println(sweet.getList_of_people().size());
     }
 
-    // Method for checking if email is already registered
     private boolean isEmailRegistered(String email) {
         return Userfile.emailIsRegisted(email);
     }

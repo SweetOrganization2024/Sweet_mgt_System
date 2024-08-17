@@ -1,4 +1,5 @@
 package project;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -8,30 +9,27 @@ import sweetSys.sweet;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
 public class update {
 
-
-    private sweet AppSweet;
+    private final sweet AppSweet;
     private String email;
     private String password;
-    private String id_of_sweet1="";
-    private String name_of_sweet1="";
-    private String type_of_sweet1="";
-    private String price_of_sweet1="";
-
+    private String id_of_sweet1 = "";
 
     boolean isValid = false;
 
     public update(sweet appSweet) {
-        AppSweet = appSweet;
+        this.AppSweet = appSweet;
     }
+
     @Given("The user logs in as owner or supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email2, String password2) {
         this.email = email2;
         this.password = password2;
         boolean isRegistered = false;
 
-        for (person f : AppSweet.getList_of_people()) {
+        for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 isRegistered = true;
@@ -39,19 +37,14 @@ public class update {
             }
         }
 
-
-        assertTrue( isRegistered);
+        assertTrue(isRegistered);
     }
-    @When("the user selects a valid sweet with ID {string} and name {string} and type {string} and price {string}")
-    public void theUserSelectsAValidSweetWithIDAndNameAndType(String id, String name, String type, String price) {
-        this.id_of_sweet1 = id;
-        this.name_of_sweet1 = name;
-        this.type_of_sweet1 = type;
-        this.price_of_sweet1=price;
 
+    @When("the user selects a valid sweet with ID {string} and name {string} and type {string} and price {string}")
+    public void theUserSelectsAValidSweetWithIDAndNameAndTypeAndPrice(String id, String name, String type, String price) {
+        this.id_of_sweet1 = id;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet1) && s.getId_of_sweet().equals(id_of_sweet1)
-                    && s.getType_of_sweet().equals(type_of_sweet1)) {
+            if (s.getId_of_sweet().equals(id_of_sweet1)) {
                 isValid = true;
                 break;
             }
@@ -61,11 +54,13 @@ public class update {
 
     @When("the user enters the new value to update {string} and {string}")
     public void theUserEntersTheNewValueToUpdateAnd(String nname, String ttype) {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                s.setName_of_sweet(nname);
-                s.setType_of_sweet(ttype);
-                break;
+        if (isValid) {
+            for (newSweet s : sweet.getListOfSweet()) {
+                if (s.getId_of_sweet().equals(id_of_sweet1)) {
+                    s.setName_of_sweet(nname);
+                    s.setType_of_sweet(ttype);
+                    break;
+                }
             }
         }
     }
@@ -75,49 +70,49 @@ public class update {
         assertTrue(isValid);
         System.out.println("Update done");
         for (newSweet s : sweet.getListOfSweet()) {
-            System.out.println(newSweet.printsweet(s));
+            System.out.println("ID: " + s.getId_of_sweet() + ", Name: " + s.getName_of_sweet() + ", Type: " + s.getType_of_sweet() + ", price:" + s.getPrice());
         }
     }
 
-
-    //2nd name
     @When("the user enters the new value to update {string}")
     public void theUserEntersTheNewValueToUpdate(String nname) {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                s.setName_of_sweet( nname);
-                break;
+        if (isValid) {
+            for (newSweet s : sweet.getListOfSweet()) {
+                if (s.getId_of_sweet().equals(id_of_sweet1)) {
+                    s.setName_of_sweet(nname);
+                    break;
+                }
             }
         }
     }
 
-
-    //3rd type
     @When("the user enters the new type to update {string}")
     public void theUserEntersTheNewTypeToUpdate(String ttype) {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                s.setType_of_sweet( ttype);
-                break;
+        if (isValid) {
+            for (newSweet s : sweet.getListOfSweet()) {
+                if (s.getId_of_sweet().equals(id_of_sweet1)) {
+                    s.setType_of_sweet(ttype);
+                    break;
+                }
             }
         }
     }
 
-    //4th
     @When("the user enters the new price to update {string}")
     public void theUserEntersTheNewPriceToUpdate(String ppric) {
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                s.setPrice(ppric);
-                break;
+        if (isValid) {
+            for (newSweet s : sweet.getListOfSweet()) {
+                if (s.getId_of_sweet().equals(id_of_sweet1)) {
+                    s.setPrice(ppric);
+                    break;
+                }
             }
         }
     }
-
-
-    //5th
     @Given("The user logs in as not owner or supplier with {string} and {string}")
-    public void theUserLogsInAsNotOwnerOrSupplierWithAnd(String string, String string2) {
+    public void theUserLogsInAsNotOwnerOrSupplierWithAnd(String email, String password) {
+        this.email = email;
+        this.password = password;
         boolean isRegistered = false;
 
         for (person f : sweet.getList_of_people()) {
@@ -128,22 +123,26 @@ public class update {
             }
         }
 
-        if (isRegistered) {assertTrue( isRegistered);}
-        else assertFalse(isRegistered);
-
+        if (isRegistered) {
+            assertTrue(isRegistered);
+        } else {
+            assertFalse(isRegistered);
+        }
     }
+
     @When("the user tries to update a sweet with an unavailable ID {string} or unavailable name {string} or type {string}")
-    public void theUserTriesToUpdateASweetWithAnUnavailableIDOrUnavailableNameOrType(String name, String id, String type) {
-        boolean isValid = true;
+    public void theUserTriesToUpdateASweetWithAnUnavailableIDOrUnavailableNameOrType(String id, String name, String type) {
+        boolean isInvalid = true;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) || s.getId_of_sweet().equals(id) || s.getType_of_sweet().equals(type)) {
-                isValid = false;
+            if (s.getId_of_sweet().equals(id) || s.getName_of_sweet().equals(name) || s.getType_of_sweet().equals(type)) {
+                isInvalid = false;
                 break;
             }
         }
-        if (isValid)
-            assertTrue("Sweet dont update || u are not owner or supplier", isValid);
-        else assertFalse(isValid);
+        if (isInvalid)
+            assertTrue("Sweet does not exist, cannot update", isInvalid);
+        else
+            assertFalse(isInvalid);
     }
 
     @Then("the user should see a {string} indicating the sweet does not exist")

@@ -20,7 +20,7 @@ public class person {
         this.pass = pass;
     }
 
-    public static person retperson(person p) {
+    public  static person retperson(person p){
         for (person pp : sweet.getList_of_people()) {
             if (p.getEmail().equals(p.getEmail()) && p.getPass().equals(p.getPass())) {
                 return pp;
@@ -28,7 +28,6 @@ public class person {
         }
         return null;
     }
-
     public person() {
     }
 
@@ -64,8 +63,7 @@ public class person {
     public void setType(String type) {
         this.type = type;
     }
-
-    public static boolean findemail(person p) {
+    public static boolean findemail(person p){
         for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(p.getEmail())) {
                 return true;
@@ -73,8 +71,7 @@ public class person {
         }
         return false;
     }
-
-    public static boolean emailexi(String em) {
+    public static boolean emailexi(String  em){
         for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(em)) {
                 return true;
@@ -82,7 +79,6 @@ public class person {
         }
         return false;
     }
-
     public static boolean ifpersonsignup(person pp) {
         for (person p : sweet.getList_of_people()) {
             if (pp.getEmail().equals(p.getEmail())) {
@@ -94,10 +90,9 @@ public class person {
         }
         return false;
     }
-
-    public static boolean isRightType(String email, String pass, String ty) {
-        for (person p : sweet.getList_of_people()) {
-            if (p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)) {
+    public static boolean isRightType( String email, String pass, String ty){
+        for( person p : sweet.getList_of_people()){
+            if(p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)){
                 return true;
             }
         }
@@ -114,6 +109,23 @@ public class person {
     }
 
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public CharSequence getPassword() {
+        return pass;
+    }
+
+    public void setLastName(String newLastName) {
+        this.lastName=newLastName;
+    }
 }

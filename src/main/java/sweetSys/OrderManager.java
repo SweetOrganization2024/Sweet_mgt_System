@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager {
-    private static OrderManager instance; // Singleton instance
-    private List<Order> orders; // Non-static list
+    private static OrderManager instance;
+    private final List<Order> orders;
     private static int nextOrderId = 1;
 
     public OrderManager() {
         this.orders = new ArrayList<>();
     }
 
-    // Static method to provide global access to the instance
     public static synchronized OrderManager getInstance() {
         if (instance == null) {
             instance = new OrderManager();
@@ -24,8 +23,8 @@ public class OrderManager {
     public static int getNextOrderId() {
         return nextOrderId++;
     }
-    public static int getPrevOrderId() {
-        return nextOrderId--;
+    public static void getPrevOrderId() {
+        nextOrderId--;
     }
 
     public List<Order> getOrders() {
@@ -36,7 +35,6 @@ public class OrderManager {
         Order newOrder = new Order(orderId, orderDate, totalCost);
         orders.add(newOrder);
         System.out.println("Order added: " + newOrder.getOrderId());
-        //System.out.println("Orders List: " + orders);
     }
 
     public Order getCurrentOrder() {
@@ -45,13 +43,13 @@ public class OrderManager {
             System.out.println("Orders List: " + orders);
             return null;
         }
-        return orders.get(orders.size() - 1); // Return the last added order
+        return orders.get(orders.size() - 1);
     }
 
     public void cancelOrder(String orderId) {
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
-                order.setStatus("cancelled");
+                order.setStatus();
 
                 return;
             }
@@ -68,16 +66,14 @@ public class OrderManager {
     }
 
     public static class Order {
-        private String orderId;
-        private LocalDate orderDate;
-        private double totalCost;
-        private String status;
+        private final String orderId;
+        private final LocalDate orderDate;
+        private final double totalCost;
 
         public Order(String orderId, LocalDate orderDate, double totalCost) {
             this.orderId = orderId;
             this.orderDate = orderDate;
             this.totalCost = totalCost;
-            this.status = "active";
         }
 
         public String getOrderId() {
@@ -92,12 +88,7 @@ public class OrderManager {
             return totalCost;
         }
 
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
+        public void setStatus() {
         }
     }
 }

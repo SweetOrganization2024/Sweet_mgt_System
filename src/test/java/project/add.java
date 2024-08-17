@@ -6,15 +6,11 @@ import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import sweetSys.newSweet;
-import sweetSys.person;
 import sweetSys.sweet;
-
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
 public class add {
-    private static sweet AppSweet;
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
@@ -24,21 +20,19 @@ public class add {
 
     @BeforeClass
     public static void setUp() {
-       // AppSweet = sweet.getInstance();
-        AppSweet.getListOfSweet().clear();
-        AppSweet.getList_of_people().clear();
+        sweet.getListOfSweet().clear();
+        sweet.getList_of_people().clear();
 
     }
 
     @AfterClass
     public static void tearDown() {
-        AppSweet.getListOfSweet().clear();
-        AppSweet.getList_of_people().clear();
+        sweet.getListOfSweet().clear();
+        sweet.getList_of_people().clear();
 
         System.out.println("Cleanup done.");
     }
     public add() {
-       this.AppSweet = sweet.getInstance();
     }
 
     @Given("The user login as Owner or Supplier with {string} and {string}")
@@ -53,7 +47,6 @@ public class add {
     @When("The user add a new sweet")
     public void theUserAddANewSweet() {
         if (isUserLoggedIn) {
-            // Logic to add new sweet
         } else {
             throw new AssertionError("User is not logged in");
         }
@@ -90,9 +83,8 @@ public class add {
     //2rd
     @Given("The user login as admin or user with {string} and {string}")
     public void theUserLoginAsAdminOrUserWithAnd(String email, String password) {
-        boolean isRegistered =newSweet.if_the_type_AD_or_USR(email,password);
 
-        isUserLoggedIn = isRegistered;
+        isUserLoggedIn = newSweet.if_the_type_AD_or_USR(email,password);
         assertTrue(isUserLoggedIn);
     }
 
@@ -109,7 +101,6 @@ public class add {
         this.name_of_sweet = name;
         this.type_of_sweet = type;
         this.price_of_sweet=price;
-        newSweet sweet = new newSweet(id_of_sweet, name_of_sweet, type_of_sweet ,price_of_sweet);
         isDuplicate=newSweet.isAdd(id_of_sweet);
 
         assertTrue(isDuplicate);

@@ -1,6 +1,5 @@
 package sweetSys;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -58,7 +57,6 @@ public class sweet {
 
     public static void addsweet(newSweet sweet) {
         listOfSweet.add(sweet);
-        //System.out.println("Sweet added: " + sweet.getName_of_sweet());
     }
 
     public static void deletesweet(newSweet ss) {
@@ -89,7 +87,7 @@ public class sweet {
 
     public static boolean Search_name(String name) {
         boolean nameSearch = false;
-        for (newSweet s : sweet.getListOfSweet()) { // Assuming 'Sweet' is the correct class name
+        for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name)) {
                 nameSearch = true;
                 break;
@@ -152,11 +150,10 @@ public class sweet {
 
     public static void Pricemin_max(String min1, String max1) {
         try {
-            // Trim whitespace and parse min and max values
             int min = Integer.parseInt(min1.trim());
             int max = Integer.parseInt(max1.trim());
 
-            for (newSweet s : sweet.getListOfSweet()) { // Assuming 'Sweet' is the correct class name
+            for (newSweet s : sweet.getListOfSweet()) {
                 String priceString = s.getPrice().trim();
                 try {
                     int Myprice = Integer.parseInt(priceString);
@@ -198,13 +195,13 @@ public class sweet {
     }
 
     public static void deletesweet1(String ss) {
-        List<newSweet> updatedList = new ArrayList<>();
+        ArrayList<newSweet> updatedList = new ArrayList<>();
         for (newSweet s : sweetSys.sweet.getListOfSweet()) {
             if (!s.getId_of_sweet().equals(ss)) {
                 updatedList.add(s);
             }
         }
-        sweetSys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
+        sweetSys.sweet.setListOfSweet(updatedList);
     }
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {

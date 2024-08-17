@@ -1,60 +1,31 @@
-Feature: notifications
+Feature: Communication and Notification
 
-  Scenario: Admin Approval for Business Account Creation
-    Given the admin is on the notification page in the admin account with email "samia10@gmail.com"
-    When a user submits a request to create a business account from the email "asmarsamia2003@gmail.com" and write the "message" of his service
-    And the admin receives a notification regarding the request for a business account
-    And the admin approves the request
-    Then a confirmation message "Your request has been approved "sent to the email address "asmarsamia2003@gmail.com"
+  Scenario: Notify Owner When a New Sweet is Added
+    Given an Owner has added a new sweet with ID '01', name Chocolate Cake, and price '100'
+    When the new sweet is successfully added to the system
+    Then an email notification should be sent to the Owner with the subject "New Sweet Added"
+    Then the email should contain the message: "A new sweet named 'Chocolate Cake' has been added to the system with ID '01' and price '100'."
 
-  Scenario: Admin Rejection for Business Account Creation
-    Given the admin is on the notification page in the admin account with email "samia10@gmail.com"
-    When a user submits a request to create a business account from the email "asmarsamia2003@gmail.com"  and write the "message" of his service
-    And the admin receives a notification regarding the request for a business account
-    And the admin rejects the request
-    Then a rejection message "Your request has been rejected" is sent to the email address "asmarsamia2003@gmail.com"
+  Scenario: Notify Owner When a Sweet is Updated
+    Given an Owner has updated the sweet with ID '01' to have a new name 'Chocolate Cake Deluxe' and new price '12'
+    When the sweet details are successfully updated in the system
+    Then an email notification should be sent to the Owner with the subject "Sweet Updated"
+    And the email should contain the message: "The sweet with ID '01' has been updated. New details: Name - 'Chocolate Cake Deluxe', Price - '12'."
 
+  Scenario: Notify Owner When a Sweet is Deleted
+    Given an Owner has deleted the sweet with ID '01'
+    When the sweet is successfully removed from the system
+    Then an email notification should be sent to the Owner with the subject "Sweet Deleted"
+    And the email should contain the message: "The sweet with ID '01' has been removed from the system."
 
-    Scenario: User Approval for Business Account Creation
-      Given the user is on the notification page in the user account with email "shahd22@gmail.com"
-      When a user submits a request to create a business account from the email "shahd.227.almasri@gmail.com" and write the "message" of his service
-      And the user receives a notification regarding the request for a business account
-      And the user approves the request
-      Then a confirmation message "Your request has been approved "sent to the email address "shahd.227.almasri@gmail.com"
+  Scenario: Notify User When an Order is Placed
+    Given a user has placed an order with sweet ID is '02'
+    When the order is successfully placed
+    Then an email notification should be sent to the user with the subject "Order Placed"
+    And the email should contain the message: "An order for sweet(s) with ID '02' has been placed. Total cost: '50'."
 
-    Scenario: User Rejection for Business Account Creation
-      Given the user is on the notification page in the user account with email "shahd22@gmail.com"
-      When a user submits a request to create a business account from the email "shahd.227.almasri@gmail.com"  and write the "message" of his service
-      And the user receives a notification regarding the request for a business account
-      And the user rejects the request
-      Then a rejection message "Your request has been rejected" is sent to the email address "shahd.227.almasri@gmail.com"
-
-
-     Scenario: Supplier Approval for Business Account Creation
-       Given the supplier is on the notification page in the supplier account with email "ahmad6@gmail.com"
-       When a supplier submits a request to create a business account from the email "ahmad6@gmail.com" and write the "message" of his service
-       And the supplier receives a notification regarding the request for a business account
-       And the supplier approves the request
-       Then a confirmation message "Your request has been approved "sent to the email address "ahmad6@gmail.com"
-
-     Scenario: Supplier Rejection for Business Account Creation
-       Given the supplier is on the notification page in the supplier account with email "ahmad6@gmail.com"
-       When a supplier submits a request to create a business account from the email "ahmad6@gmail.com" and write the "message" of his service
-       And the supplier receives a notification regarding the request for a business account
-       And the supplier rejects the request
-       Then a rejection message "Your request has been rejected" is sent to the email address "ahmad6@gmail.com"
-
-
-     Scenario: Owner Approval for Business Account Creation
-       Given the owner is on the notification page in the owner account with email "eman22@gmail.com"
-       When a owner submits a request to create a business account from the email "abdalazizeman9224@gmail.com" and write the "message" of his service
-       And the owner receives a notification regarding the request for a business account
-       And the owner approves the request
-       Then a confirmation message "Your request has been approved "sent to the email address "abdalazizeman9224@gmail.com"
-
-     Scenario: Owner Rejection for Business Account Creation
-       Given the owner is on the notification page in the owner account with email "eman22@gmail.com"
-       When a owner submits a request to create a business account from the email "abdalazizeman9224@gmail.com" and write the "message" of his service
-       And the owner receives a notification regarding the request for a business account
-       And the owner rejects the request
-       Then a rejection message "Your request has been rejected" is sent to the email address "abdalazizeman9224@gmail.com"
+  Scenario: Sending an approval email when a new account is created
+    Given a new account is created with email "newuser@example.com"
+    When the account is approved
+    Then an approval email should be sent to "newuser@example.com"
+    And the email should contain "Your account has been approved."

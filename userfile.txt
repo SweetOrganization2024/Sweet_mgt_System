@@ -1,4 +1,9 @@
-sami,asmar,supg856SS@gmail.com,kfh6j3nur58,Supplier
+samia,asmar,supg856SS@gmail.com,kfh6j3nur58,Supplier
 shahd,almasri,incoremail.com,4746f2781,USER
-samia,asmer,Adrdmain78@gmail.com,CHF68DNH,ADMIN
+sami,asmer,Adrdmain78@gmail.com,CHF68DNH,ADMIN
 eman,dajani,h2eLLo3@gmail.com,09SNBC6,Owner
+Samia1,Asmar,samiasoftware2@gmail.com,Samia11223344@@,USER
+Hala,sara,Halasara22@gmail.com,Hala34567##,Supplier
+Ahmad,Mohammad,AhmadM12@gmail.com,Ahmad12456**,Owner
+samiaaa,asmarrr,s12113993@stu.najah.edu,Samiaaa112233#@,Owner
+Shahd ,Almasri,shahd.227.almasri@gmail.com,Shahd112233##,Supplier

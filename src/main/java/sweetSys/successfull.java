@@ -15,8 +15,6 @@ public class successfull {
     }
 
     public successfull() {
-        this.password = password;
-        this.email=email;
     }
 
     public String getEmail() {
@@ -45,22 +43,4 @@ public class successfull {
         obj.setToList(b);
     }
 
-    public String passwordStrength(String password) {
-        if (password.length() < 8) {
-            return "Password is too short";
-        }
-        if (!password.matches(".[A-Z].")) {
-            return "Password should contain at least one uppercase letter";
-        }
-        if (!password.matches(".[a-z].")) {
-            return "Password should contain at least one lowercase letter";
-        }
-        if (!password.matches(".\\d.")) {
-            return "Password should contain at least one digit";
-        }
-        if (!password.matches(".[\\p{Punct}].")) {
-            return "Password should contain at least one special character";
-        }
-        return "Password is strong";
-    }
 }

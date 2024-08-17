@@ -5,9 +5,6 @@ import io.cucumber.java.en.Given;
 
 import sweetSys.newSweet;
 import sweetSys.sweet;
-
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class search {
@@ -15,12 +12,11 @@ public class search {
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
-    private String price_of_sweet;
     boolean id_search;
-    boolean name_search, type_search, price_search;
+    boolean name_search, type_search ;
 
     public search() {
-        sweet appSweet = sweet.getInstance();
+        sweet.getInstance();
     }
 
     @Given("I am on the search page")
@@ -47,7 +43,6 @@ public class search {
         sweet.print_SweetId(id_of_sweet);
     }
 
-    //2nd scenario
 
     @When("I select search by sweet id does not exist {string}")
     public void iSelectSearchBySweetIdDoesNotExist(String id) {
@@ -69,7 +64,6 @@ public class search {
 
     }
 
-    //3rd
 
     @When("I select search by sweet name {string}")
     public void iSelectSearchBySweetName(String name) {
@@ -84,7 +78,7 @@ public class search {
         sweet.print_Sweetname(name_of_sweet);
     }
 
-    //4
+
     @When("I select search by sweet name does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExist(String name) {
         this.name_of_sweet = name;
@@ -92,7 +86,7 @@ public class search {
         assertFalse(name_search);
     }
 
-    // 5
+
     @When("I select search by sweet name {string} and sweet type {string}")
     public void iSelectSearchBySweetNameAndSweetType(String name, String type) {
         this.name_of_sweet = name;
@@ -107,17 +101,17 @@ public class search {
         sweet.Print_Type_name(name_of_sweet,type_of_sweet);
     }
 
-    //6
+
 
     @When("I select search by sweet name does not exist {string} or sweet type does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExistOrSweetTypeDoesNotExist(String name , String type) {
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        boolean search_name_type = sweet.Search_name_Type(name_of_sweet , type_of_sweet);
+        sweet.Search_name_Type(name_of_sweet, type_of_sweet);
         assertFalse(name_search && type_search);
     }
 
-    // 7
+
     @When("I select search by sweet name {string} and sweet id {string}")
     public void iSelectSearchBySweetNameAndSweetId(String name, String id) {
         this.name_of_sweet = name;
@@ -135,7 +129,7 @@ public class search {
     }
 
 
-    // 8
+
     @When("I select search by sweet name does not exist {string} or  no id {string}")
     public void iSelectSearchBySweetNameDoesNotExistOrNoId(String name, String id) {
         this.name_of_sweet = name;
@@ -146,7 +140,7 @@ public class search {
        assertFalse(Search_nameid);
     }
 
-    //9
+
     @When("I select search by sweet name {string} ,sweet type {string} and id {string}")
     public void iSelectSearchBySweetNameSweetTypeAndId(String name, String type, String id) {
         this.name_of_sweet = name;
@@ -163,7 +157,7 @@ public class search {
         sweet.Print_name_id_type(id_of_sweet,name_of_sweet,type_of_sweet);
     }
 
-    //10
+
     @When("I select search by sweet name does not exist {string} or sweet type does not exist {string} or sweet id does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExistOrSweetTypeDoesNotExistOrSweetIdDoesNotExist(String name, String type, String id) {
         this.name_of_sweet = name;
@@ -173,7 +167,7 @@ public class search {
         assertFalse(all1);
     }
 
-    //11
+
     @When("I select search by sweet price range between Min Price {string} and Max Price {string}")
     public void iSelectSearchBySweetPriceRangeBetweenMinPriceAndMaxPrice(String Min, String Max) {
         sweet.Pricemin_max(Min, Max);
@@ -184,7 +178,7 @@ public class search {
     public void iShouldSeeTheSweetWithPrice() {
     }
 
-    //12
+
     @When("I need to see all sweets")
     public void iNeedToSeeAllSweets() {
         System.out.println("I need to see all sweets");

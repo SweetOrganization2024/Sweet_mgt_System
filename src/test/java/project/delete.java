@@ -1,13 +1,11 @@
 package project;
 
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweetSys.person;
 import sweetSys.newSweet;
+import sweetSys.person;
 import sweetSys.sweet;
-
-import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -15,17 +13,12 @@ import static org.junit.Assert.assertTrue;
 public class delete {
     private String email;
     private String password;
-    private sweet AppSweet;
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
-    private String price_of_sweet;
-    private boolean isUserRegistered = false;
-
 
 
     public delete() {
-        this.AppSweet = sweet.getInstance();
     }
 
     @Given("The user login as owner or supplier with {string} and {string}")
@@ -33,13 +26,10 @@ public class delete {
         this.email = email;
         this.password = password;
 
-        boolean isRegistered = false;
 
-
-        for (person f : AppSweet.getList_of_people()) {
+        for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
-                isRegistered = true;
                 break;
             }
         }
@@ -52,10 +42,9 @@ public class delete {
         this.id_of_sweet = id;
         this.name_of_sweet = name;
         this.type_of_sweet = type;
-        this.price_of_sweet=price;
 
         boolean isValid = false;
-        for (newSweet s : AppSweet.getListOfSweet()) {
+        for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name) && s.getId_of_sweet().equals(id) && s.getType_of_sweet().equals(type)) {
                 isValid = true;
                 break;
@@ -70,7 +59,7 @@ public class delete {
         newSweet sweetToDelete = null;
         boolean isValid = false;
 
-        for (newSweet s : AppSweet.getListOfSweet()) {
+        for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name_of_sweet) && s.getId_of_sweet().equals(id_of_sweet) && s.getType_of_sweet().equals(type_of_sweet)) {
                 sweetToDelete = s;
                 isValid = true;
@@ -79,11 +68,11 @@ public class delete {
         }
 
         if (isValid) {
-            AppSweet.deletesweet(sweetToDelete);
+            sweet.deletesweet(sweetToDelete);
         }
 
         assertTrue("Sweet should be successfully deleted", isValid);
-        for (newSweet s : AppSweet.getListOfSweet()) {
+        for (newSweet s : sweet.getListOfSweet()) {
             System.out.println(newSweet.printsweet(s));
         }
     }
@@ -97,7 +86,7 @@ public class delete {
     public void theUserLoginAsNotOwnerOrSupplierWithAnd(String string, String string2) {
         boolean isRegistered = false;
 
-        for (person f : AppSweet.getList_of_people()) {
+        for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 isRegistered = true;
@@ -111,7 +100,7 @@ public class delete {
     @When("the user deletes a sweet with not available id is {string} or not available name is {string} or type is {string}")
     public void theUserDeletesASweetWithNotAvailableIdIsOrNotAvailableNameIsOrTypeIs(String id, String name, String type) {
         boolean isValid = true;
-        for (newSweet s : AppSweet.getListOfSweet()) {
+        for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name) || s.getId_of_sweet().equals(id) || s.getType_of_sweet().equals(type)) {
                 isValid = false;
                 break;
