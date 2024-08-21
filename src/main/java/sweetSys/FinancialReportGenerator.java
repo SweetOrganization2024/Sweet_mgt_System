@@ -16,7 +16,6 @@ public class FinancialReportGenerator {
 
         double totalIncome = 0;
         double totalExpense = 0;
-
         for (String record : records) {
             String[] parts = record.split(",");
             if (parts.length == 3) {

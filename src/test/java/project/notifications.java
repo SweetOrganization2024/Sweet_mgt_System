@@ -17,7 +17,6 @@ public class notifications {
     private String emailBody;
     private String recipientEmail;
 
-
     @Given("an Owner has added a new sweet with ID {string}, name Chocolate Cake, and price {string}")
     public void anOwnerHasAddedANewSweetWithIDNameChocolateCakeAndPrice(String id, String price) {
         emailSent = false;
@@ -27,7 +26,7 @@ public class notifications {
     public void theNewSweetIsSuccessfullyAddedToTheSystem() {
         emailSubject = "New Sweet Added";
         emailBody = "A new sweet named 'Chocolate Cake' has been added to the system with ID '01' and price '100'.";
-        notificationService.notifyOwnerOfNewSweet("owner@example.com", "Chocolate Cake", "01", "100");
+        notificationService.notifyOwnerOfNewSweet("owner@example.com");
         emailSent = true;
         System.out.println("Email Body: " + emailBody);
     }

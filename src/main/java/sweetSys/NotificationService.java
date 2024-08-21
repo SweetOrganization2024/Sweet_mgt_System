@@ -4,9 +4,9 @@ public class NotificationService {
 
     private final EmailSender emailSender = new EmailSender();
 
-    public void notifyOwnerOfNewSweet(String ownerEmail, String sweetName, String sweetId, String sweetPrice) {
+    public void notifyOwnerOfNewSweet(String ownerEmail) {
         String subject = "New Sweet Added";
-        String body = String.format("A new sweet named '%s' has been added to the system with ID '%s' and price '%s'.", sweetName, sweetId, sweetPrice);
+        String body = String.format("The Added is done ");
         emailSender.sendEmail(ownerEmail, subject, body);
     }
 

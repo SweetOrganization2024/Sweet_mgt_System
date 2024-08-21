@@ -1,5 +1,6 @@
 package sweetSys;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class sweet {
 
     public static void addsweet(newSweet sweet) {
         listOfSweet.add(sweet);
+        //System.out.println("Sweet added: " + sweet.getName_of_sweet());
     }
 
     public static void deletesweet(newSweet ss) {
@@ -87,7 +89,7 @@ public class sweet {
 
     public static boolean Search_name(String name) {
         boolean nameSearch = false;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (newSweet s : sweet.getListOfSweet()) { // Assuming 'Sweet' is the correct class name
             if (s.getName_of_sweet().equals(name)) {
                 nameSearch = true;
                 break;
@@ -97,6 +99,9 @@ public class sweet {
     }
 
 
+    public static void deleteperson(person p){
+        list_of_people.remove(p);
+    }
     public static void print_Sweetname(String name) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name)) {
@@ -177,8 +182,8 @@ public class sweet {
         boolean valid = false;
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName_of_sweet().equals(name) && s.getId_of_sweet().equals(id) && s.getType_of_sweet().equals(type) ) {
-             valid=true;
-             break;}
+                valid=true;
+                break;}
 
         }
         return valid;
@@ -195,13 +200,13 @@ public class sweet {
     }
 
     public static void deletesweet1(String ss) {
-        ArrayList<newSweet> updatedList = new ArrayList<>();
+        List<newSweet> updatedList = new ArrayList<>();
         for (newSweet s : sweetSys.sweet.getListOfSweet()) {
             if (!s.getId_of_sweet().equals(ss)) {
                 updatedList.add(s);
             }
         }
-        sweetSys.sweet.setListOfSweet(updatedList);
+        sweetSys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
     }
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
@@ -233,6 +238,21 @@ public class sweet {
         return result;
     }
 
+    public static boolean idSupOrOwner(String email,String pass){
+        for (person p : sweet.getList_of_people()){
+            if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner"))){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public static person retperson(String email,String pass){
+        for (person p : getList_of_people()){
+            if (p.getEmail().equals(email) && p.getPass().equals(pass))
+                return p;
+        }
+        return null;
+    }
 
 }
