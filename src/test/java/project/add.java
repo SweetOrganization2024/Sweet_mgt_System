@@ -18,6 +18,8 @@ public class add {
     private String price_of_sweet;
     private boolean isUserLoggedIn;
     boolean isDuplicate = false;
+    private static final Logger logger = Logger.getLogger(add.class.getName());
+
 
     @BeforeClass
     public static void setUp() {
@@ -69,17 +71,17 @@ public class add {
 
         if (!isAdded) {
             sweet.listOfSweet.add(MySWEET);
-            System.out.println("Sweet added: " + MySWEET.getName_of_sweet());
+            logger.info("Sweet added: " + MySWEET.getName_of_sweet());
         }
         for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            System.out.println(newSweet.printsweet(s));
+            logger.info(newSweet.printsweet(s));
         }
     }
 
 
     @Then("The user should see a {string}")
     public void theUserShouldSeeA(String message) {
-        System.out.println(message);
+        logger.info(message);
     }
 
     //2rd
@@ -115,7 +117,7 @@ public class add {
 
     @Then("The user should see a message that adding the sweet failed")
     public void theUserShouldSeeAMessageThatAddingTheSweetFailed() {
-        System.out.println("Adding the sweet failed");
+       logger.info("Adding the sweet failed");
     }
 
 
