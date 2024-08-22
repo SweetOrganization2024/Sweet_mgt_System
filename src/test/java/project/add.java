@@ -8,6 +8,8 @@ import org.junit.BeforeClass;
 import sweetSys.newSweet;
 import sweetSys.person;
 import sweetSys.sweet;
+import java.util.logging.Logger;
+
 
 import static org.junit.Assert.assertTrue;
 
