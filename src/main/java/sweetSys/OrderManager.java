@@ -23,8 +23,8 @@ public class OrderManager {
     public static int getNextOrderId() {
         return nextOrderId++;
     }
-    public static void getPrevOrderId() {
-        nextOrderId--;
+    public static int getPrevOrderId() {
+        return nextOrderId--;
     }
 
     public List<Order> getOrders() {
@@ -49,7 +49,7 @@ public class OrderManager {
     public void cancelOrder(String orderId) {
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
-                order.setStatus();
+                order.setStatus("cancelled");
 
                 return;
             }
@@ -69,13 +69,14 @@ public class OrderManager {
         private final String orderId;
         private final LocalDate orderDate;
         private final double totalCost;
+        private  String status;
 
         public Order(String orderId, LocalDate orderDate, double totalCost) {
             this.orderId = orderId;
             this.orderDate = orderDate;
             this.totalCost = totalCost;
+            this.status = "active";
         }
-
         public String getOrderId() {
             return orderId;
         }
@@ -88,7 +89,8 @@ public class OrderManager {
             return totalCost;
         }
 
-        public void setStatus() {
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }

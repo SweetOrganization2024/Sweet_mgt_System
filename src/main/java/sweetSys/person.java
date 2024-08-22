@@ -28,8 +28,8 @@ public class person {
         }
         return null;
     }
-    public person() {
-    }
+    //public person() {
+    //}
 
     public person(String email, String password, String type, String firstName, String lastName) {
         this.email = email;
@@ -39,14 +39,14 @@ public class person {
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
+    //@Override
+   /* public String toString() {
         return "person{" +
                 "email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
                 ", type='" + type + '\'' +
                 '}';
-    }
+    }*/
 
     public String getEmail() {
         return email;
@@ -66,14 +66,6 @@ public class person {
     public static boolean findemail(person p){
         for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(p.getEmail())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean emailexi(String  em){
-        for (person f : sweet.getList_of_people()) {
-            if (f.getEmail().equals(em)) {
                 return true;
             }
         }
@@ -99,16 +91,6 @@ public class person {
         return false;
     }
 
-    public static boolean rightlogin(person pp) {
-        for (person p : sweet.getList_of_people()) {
-            if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     public String getFirstName() {
         return firstName;
     }
@@ -119,10 +101,6 @@ public class person {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public CharSequence getPassword() {
-        return pass;
     }
 
     public void setLastName(String newLastName) {

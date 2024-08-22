@@ -14,6 +14,7 @@ public class notifications {
     private final NotificationService notificationService = new NotificationService();
     private boolean emailSent;
     private String emailSubject;
+    private String firstname;
     private String emailBody;
     private String recipientEmail;
 
@@ -98,9 +99,10 @@ public class notifications {
         assertTrue(emailBody.contains("Total cost: '50'"));
     }
 
-    @Given("a new account has been created with the following details:")
-    public void aNewAccountHasBeenCreatedWithTheFollowingDetails(io.cucumber.datatable.DataTable dataTable) {
-        emailSent = false;
+    @Given("a new account is created with email {string} and name {string}")
+    public void aNewAccountIsCreatedWithEmailAndName(String email, String firstname) {
+        this.recipientEmail = email ;
+        this.firstname = firstname;
     }
 
     @When("the account is successfully created")
@@ -108,7 +110,7 @@ public class notifications {
         emailSubject = "Account Created Successfully";
         emailBody = "Hello shahd almasri, your account has been successfully created. Welcome to our system! Your username is 'shahd_almasri'.";
         notificationService.notifyUserOfNewAccount("user@example.com", "shahd_almasri");
-        emailSent = true; // Simulate email sent
+        emailSent = true;
     }
 
     @Then("the email should contain the account creation message")

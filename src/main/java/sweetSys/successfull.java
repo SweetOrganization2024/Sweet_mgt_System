@@ -17,13 +17,13 @@ public class successfull {
     public successfull() {
     }
 
-    public String getEmail() {
+   /* public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
+    }*/
 
     public static boolean isValidEmail(String email) {
         if (email == null || email.isEmpty()) {

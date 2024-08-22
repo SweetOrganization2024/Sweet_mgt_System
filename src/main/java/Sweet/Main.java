@@ -1,26 +1,25 @@
 package Sweet;
-
-import sweetSys.*;
-
 import java.io.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.Scanner;
+import sweetSys.*;
+import javax.mail.MessagingException;
 
 public class Main {
     public static final String FILE_NAME = "sweets.txt";
     static NotificationService notificationService = new NotificationService();
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MessagingException {
         Scanner scanner = new Scanner(System.in);
-        sweet.getInstance();
+        sweet app = sweet.getInstance();
         System.out.println("\n\n**   Welcome to the Sweet Management System   **\n");
         successfull user = new successfull();
         String firstName;
         String lastName;
         String email;
-        String password;
+        String password = null;
         String confirmPassword;
         String type = "";
         int choice;
@@ -50,7 +49,7 @@ public class Main {
 
                         if (!successfull.isValidEmail(email)) {
                             System.out.println("Invalid email syntax.");
-                        } else if (person.emailexi(email)) {
+                        } else if (emailexi(email)) {
                             System.out.println("Email is already registered.");
                             isAlreadyRegistered = true;
                         } else {
@@ -90,12 +89,21 @@ public class Main {
                     System.out.println("Sign up successful!");
                     x=true;
                     saveUserToFile(newUser, "userfile.txt");
-                    notificationService.notifyAdminOfNewAccount("asmarsamia2003@gmail.com", firstName + lastName, email);
+                    notifyAdminOfNewAccount("asmarsamia2003@gmail.com", firstName + lastName, email);
                     notificationService.notifyUserOfNewAccount(email, firstName);
 
+                    if (type.equals("ADMIN") || type.equals("Supplier") || type.equals("Owner")) {
+                        Manager(email,type);
+                    }
+                    else {
+                        int d=0;
+                        System.out.println("Welcome " + firstName +" to the system:");
+                        System.out.println("1. Do you want to Manage your account");
+                        System.out.println("2. Show menu:");
+                        d=scanner.nextInt();
+                        if(d ==1) PersonalAccountManagement(email,password);
+                        else menu(type,email);
 
-                    if (type.equals("ADMIN")) {
-                        AdminManager(email);
                     }
                     if(x){
                         menu(type, email);}
@@ -103,14 +111,14 @@ public class Main {
                 case 2 -> {
                     System.out.println("Enter your email:");
                     email = scanner.nextLine();
-                    if (!person.emailexi(email)) {
+                    if (!emailexi(email)) {
                         System.out.println("You are not exist in the system; you need to sign up.");
                     } else {
                         do {
                             System.out.println("Enter your password:");
                             password = scanner.nextLine();
                             person p = new person(email, password);
-                            if (person.rightlogin(p)) {
+                            if (rightlogin(p)) {
                                 isexist = true;
                             } else {
                                 System.out.println("Incorrect password. Please try again.");
@@ -139,8 +147,24 @@ public class Main {
                         System.out.println("Login successful!");
                         x=true;
                     }
-                    if (type.equals("ADMIN")) {
-                        AdminManager(email);
+                    if (type.equals("ADMIN") || type.equals("Supplier") || type.equals("Owner")) {
+                        Manager(email ,type);
+                    }
+                    else {
+                        String first="";
+                        for(person p: sweet.getList_of_people()){
+                            if (p.getEmail().equals(email) && p.getPass().equals(password)){
+                                first=p.getFirstName();
+                            }
+                        }
+                        int d=0;
+                        System.out.println("Welcome " + first +" to the system:");
+                        System.out.println("1. Do you want to Manage your account");
+                        System.out.println("2. Show menu:");
+                        d=scanner.nextInt();
+                        if(d ==1) PersonalAccountManagement(email,password);
+                        else menu(type,email);
+
                     }
                     if(x){
                         menu(type, email);}
@@ -149,7 +173,7 @@ public class Main {
             }
         } while (true);
     }
-    public static void menu(String type , String email) {
+    public static void menu(String type , String email) throws MessagingException {
         Scanner scanner = new Scanner(System.in);
         sweet.getInstance();
         new successfull();
@@ -180,24 +204,19 @@ public class Main {
             switch (menu) {
                 case 1 -> {
                     System.out.println("Adding a new sweet:");
-                    if (type.equals("Supplier") || type.equals("Owner") || type.equals("ADMIN")) {
+                    if (type.equals("Supplier") || type.equals("Owner")) {
                         System.out.println("Reading sweets from file :");
                         loadSweetsFromFile(FILE_NAME);
                         notificationService.notifyOwnerOfNewSweet(email);
 
-
-
-
                     } else {
                         System.out.println("You can't add sweet.");
                     }
-                    for (newSweet s : sweet.getListOfSweet()) {
-                        System.out.println(newSweet.printsweet(s));
-                    }
+
                 }
                 case 2 -> {
                     System.out.println("Deleting a sweet:");
-                    if (type.equals("Supplier") || type.equals("Owner") || type.equals("ADMIN")) {
+                    if (type.equals("Supplier") || type.equals("Owner")) {
                         sweet.getListOfSweet().clear();
 
                         loadSweetsFromFile(FILE_NAME);
@@ -230,7 +249,7 @@ public class Main {
                 }
                 case 3 -> {
                     System.out.println("Updating a sweet:");
-                    if (type.equals("Supplier") || type.equals("Owner") || type.equals("ADMIN")) {
+                    if (type.equals("Supplier") || type.equals("Owner")) {
                         sweet.getListOfSweet().clear();
 
                         loadSweetsFromFile(FILE_NAME);
@@ -464,7 +483,16 @@ public class Main {
                     scanner.nextLine();
                     switch (action) {
                         case 1:
+                            String feedback;
+                            int Rat;
                             OrderManager.getInstance().getCurrentOrder();
+                            System.out.println("Your Feedback:");
+                            feedback=scanner.nextLine();
+                            System.out.println("Your Ratting for this sweet:");
+                            Rat=scanner.nextInt();
+                            Feedback f=new Feedback(email,idd,feedback,Rat);
+                            f.saveFeedbackToFile();
+
                             break;
                         case 2:
                             System.out.print("Enter the Order ID to cancel: ");
@@ -545,7 +573,8 @@ public class Main {
 
 
 
-    public static void AdminManager(String email) {
+    public static void Manager(String email ,String type) {
+        loadSweetsFromFile(FILE_NAME);
 
         Scanner scanner = new Scanner(System.in);
         int admin;
@@ -554,7 +583,9 @@ public class Main {
             System.out.println("1. Manage user accounts");
             System.out.println("2. Generate financial reports");
             System.out.println("3. View best-selling products");
-            System.out.println("4. Exit");
+            System.out.println("4. Show Feedback");
+            System.out.println("5. Discount");
+            System.out.println("6. Exit");
             System.out.print("Please enter your choice: ");
 
             admin = scanner.nextInt();
@@ -578,10 +609,15 @@ public class Main {
                         System.out.println(newSweet.printsweet(sweet) + " Sales: " + sweet.getSale());
                     }
                 }
-                case 4 -> System.out.println("Exiting admin management. Goodbye!");
+                case  4-> Feedback.readFeedbackFromFile();
+                case 5 -> {if(type.equals("Supplier") || type.equals("Owner")){
+                    manageDiscounts();}
+                else System.out.println("You can't apply discount you want to be Supplier or Owner.");
+                }
+                case 6 -> System.out.println("Exiting admin management. Goodbye!");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
-        } while (admin!=4);
+        } while (admin!=6);
     }
     public static void manageUserAccounts() {
         boolean keepManaging = true;
@@ -672,7 +708,7 @@ public class Main {
         System.out.print("Enter last name: ");
         String lastName = scanner.nextLine();
 
-        if (person.emailexi(email)) {
+        if (emailexi(email)) {
             System.out.println("Email already exists. Please try again.");
             return;
         }
@@ -738,6 +774,258 @@ public class Main {
         }
     }
 
+    private static void manageDiscounts() {
+        boolean keepManaging = true;
+        Scanner scanner = new Scanner(System.in);
+        while (keepManaging) {
+            System.out.println("Discount Management Menu:");
+            System.out.println("1. Add a new discount");
+            System.out.println("2. View all discounts");
+            System.out.println("3. Apply a discount to a product");
+            System.out.println("4. Exit");
+            System.out.print("Please enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
+            switch (choice) {
+                case 1 -> addDiscount();
+                case 2 -> viewAllDiscounts();
+                case 3 -> applyDiscountToProduct();
+                case 4 -> {
+                    keepManaging = false;
+                    System.out.println("Returning to main menu...");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
 
+    private static void addDiscount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter discount ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Enter discount description: ");
+        String description = scanner.nextLine();
+        System.out.print("Enter discount percentage: ");
+        double percentage = scanner.nextDouble();
+        scanner.nextLine();
+        DiscountManager newDiscount = new DiscountManager(id, description, percentage);
+        DiscountManager.addDiscount(newDiscount);
+        System.out.println("Discount added successfully.");
+    }
+
+    private static void viewAllDiscounts() {
+        if (DiscountManager.getDiscounts().isEmpty()) {
+            System.out.println("No discounts available.");
+        } else {
+            for (DiscountManager discount : DiscountManager.getDiscounts()) {
+                System.out.println("ID: " + discount.getId() +
+                        ", Description: " + discount.getDescription() +
+                        ", Percentage: " + discount.getPercentage() + "%");
+            }
+        }
+    }
+
+    private static void applyDiscountToProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Sweet ID: ");
+        String productId = scanner.nextLine();
+        System.out.print("Enter discount ID to apply: ");
+        String discountId = scanner.nextLine();
+
+        DiscountManager discountToApply = null;
+        for (DiscountManager discount : DiscountManager.getDiscounts()) {
+            if (discount.getId().equals(discountId)) {
+                discountToApply = discount;
+                break;
+            }
+        }
+
+        if (discountToApply != null) {
+            double discountedPrice = DiscountManager.applyDiscountToProduct(productId, discountToApply);
+            System.out.println( discountToApply.getPercentage() + "g43g" +discountedPrice);
+            if (discountedPrice > 0) {
+                System.out.println("Discount applied. New price for Sweet ID " + productId + " is: " + discountedPrice);
+                saveSweetsToFile(sweet.getListOfSweet(), FILE_NAME);
+
+            } else {
+                System.out.println("Failed to apply discount.");
+            }
+        } else {
+            System.out.println("Discount ID not found.");
+        }
+    }
+    public static void PersonalAccountManagement(String email ,String pass){
+        Scanner scanner = new Scanner(System.in);
+        boolean keepManaging = true;
+
+        while (keepManaging) {
+            System.out.println("Personal Account Management Menu:");
+            System.out.println("1. Update Personal Information");
+            System.out.println("2. Change Password");
+            System.out.println("3. View Account Details");
+            System.out.println("4. Delete Account");
+            System.out.println("5. Exit");
+            System.out.print("Please enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1 -> updatePersonalInformation(email,pass,scanner);
+                case 2 -> changePassword(email,pass,scanner);
+                case 3 -> viewAccountDetails(email,pass);
+                case 4 -> deleteAccount(email,pass,scanner);
+                case 5 -> {
+                    keepManaging = false;
+                    System.out.println("Exiting personal account management. Goodbye!");
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void updatePersonalInformation(String email, String pass, Scanner scanner) {
+        System.out.print("Enter new first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Enter new last name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter new email: ");
+        String newEmail = scanner.nextLine();
+        person p = sweet.retperson(email, pass);
+        if (p != null) {
+            p.setFirstName(firstName);
+            p.setLastName(lastName);
+            p.setEmail(newEmail);
+
+            updateUserInFile(email, pass, p);
+
+            System.out.println("Personal information updated successfully.");
+        } else {
+            System.out.println("User not found.");
+        }
+    }
+
+    private static void updateUserInFile(String email, String pass, person updatedPerson) {
+        List<String> users = new ArrayList<>();
+        String filePath = "userfile.txt";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userDetails = line.split(",");
+                if (userDetails[2].equals(email) && userDetails[3].equals(pass)) {
+                    users.add(updatedPerson.getFirstName() + "," +
+                            updatedPerson.getLastName() + "," +
+                            updatedPerson.getEmail() + "," +
+                            updatedPerson.getPass() + ","+
+                            userDetails[4] );
+                } else {
+                    users.add(line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String user : users) {
+                writer.write(user);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing to the file: " + e.getMessage());
+        }
+    }
+
+    private static void changePassword(String email, String pass, Scanner scanner) {
+        person p =sweet.retperson(email,pass);
+        System.out.print("Enter current password: ");
+        String currentPassword = scanner.nextLine();
+
+        if (p.getPass().equals(currentPassword)) {
+            System.out.print("Enter new password: ");
+            String newPassword = scanner.nextLine();
+            p.setPass(newPassword);
+            updateUserInFile(email, pass, p);
+            System.out.println("Password changed successfully.");
+        } else {
+            System.out.println("Current password is incorrect.");
+        }
+    }
+    private static void viewAccountDetails(String email ,String pass) {
+        person p=sweet.retperson(email,pass);
+        System.out.println("Account Details:");
+        System.out.println("First Name: " + p.getFirstName());
+        System.out.println("Last Name: " + p.getLastName());
+        System.out.println("Email: " + p.getEmail());
+    }
+
+    private static void deleteAccount(String email ,String pass, Scanner scanner) {
+        person p=sweet.retperson(email,pass);
+        System.out.print("Are you sure you want to delete your account? (yes/no): ");
+        String confirmation = scanner.nextLine();
+
+        if (confirmation.equalsIgnoreCase("yes")) {
+            sweet.deleteperson(p);
+            deleteUserFromFile(email,pass);
+            System.out.println("Account deleted successfully.");
+        } else {
+            System.out.println("Account deletion cancelled.");
+        }
+    }
+
+    private static void deleteUserFromFile(String email, String pass) {
+        List<String> users = new ArrayList<>();
+        String filePath = "userfile.txt";
+        boolean userFound = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userDetails = line.split(",");
+                if (userDetails[2].equals(email) && userDetails[3].equals(pass)) {
+                    userFound = true;
+                    continue;
+                } else {
+                    users.add(line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + e.getMessage());
+        }
+        if (userFound) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String user : users) {
+                    writer.write(user);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error writing to the file: " + e.getMessage());
+            }
+            System.out.println("User deleted successfully.");
+        } else {
+            System.out.println("User not found.");
+        }
+    }
+    public static boolean rightlogin(person pp) {
+        for (person p : sweet.getList_of_people()) {
+            if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean emailexi(String  em){
+        for (person f : sweet.getList_of_people()) {
+            if (f.getEmail().equals(em)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void notifyAdminOfNewAccount(String adminEmail, String newAccountName, String newAccountEmail) {
+        String subject = "New Account Notification";
+        String body = String.format("Dear Admin, a new account has been created with the following details: Name - %s, Email - %s. Please review and approve if necessary.", newAccountName, newAccountEmail);
+        EmailSender.sendEmail(adminEmail, subject, body);
+    }
 }

@@ -37,21 +37,12 @@ public class DiscountManager {
     public void setId(String id) {
         this.id = id;
     }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getPercentage() {
         return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
     }
 
     public static double applyDiscountToProduct(String id ,DiscountManager d) {

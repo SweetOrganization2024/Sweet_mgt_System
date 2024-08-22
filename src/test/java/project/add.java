@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import sweetSys.newSweet;
+import sweetSys.person;
 import sweetSys.sweet;
 
 import static org.junit.Assert.assertTrue;
@@ -39,6 +40,7 @@ public class add {
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
 
         boolean isRegistered = newSweet.if_the_type_sp_or_owner(email,password);
+        person.isRightType(email,password,type_of_sweet);
 
         isUserLoggedIn = isRegistered;
         assertTrue("User should be logged in as Owner or Supplier", isRegistered);

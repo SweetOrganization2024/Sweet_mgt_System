@@ -170,6 +170,7 @@ public class search {
 
     @When("I select search by sweet price range between Min Price {string} and Max Price {string}")
     public void iSelectSearchBySweetPriceRangeBetweenMinPriceAndMaxPrice(String Min, String Max) {
+        sweet.getThePrice(name_of_sweet,type_of_sweet);
         sweet.Pricemin_max(Min, Max);
 
     }

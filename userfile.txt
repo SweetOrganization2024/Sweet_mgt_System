@@ -7,3 +7,5 @@ Hala,sara,Halasara22@gmail.com,Hala34567##,Supplier
 Ahmad,Mohammad,AhmadM12@gmail.com,Ahmad12456**,Owner
 samiaaa,asmarrr,s12113993@stu.najah.edu,Samiaaa112233#@,Owner
 Shahd ,Almasri,shahd.227.almasri@gmail.com,Shahd112233##,Supplier
+Nida,jarrar,nadoosh123@gmail.com,Nida112233@,USER
+

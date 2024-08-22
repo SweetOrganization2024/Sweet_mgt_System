@@ -1,12 +1,8 @@
 package project;
-
 import io.cucumber.java.en.*;
 import static org.junit.Assert.*;
 import sweetSys.*;
 import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
 
 public class discount {
     private sweet AppSweet;

@@ -36,6 +36,7 @@ public class login {
     @When("user enters the email {string} and user enters the password {string}")
     public void userEntersTheEmailAndUserEntersThePassword(String email, String password) {
         this.loggedInUser = person.retperson(new person(email, password));
+
     }
 
     @Then("user login succeeds")

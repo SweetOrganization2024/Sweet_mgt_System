@@ -80,7 +80,7 @@ public class chat_msg {
         logger.info("Chat history cleared.");
     }
 
-    public void printStatus() {
+   /* public void printStatus() {
         if (isErrorEncountered) {
             logger.info("Error: " + errorMessage);
         } else if (isMessageDelivered) {
@@ -98,7 +98,7 @@ public class chat_msg {
 
     public List<String> getReceivedMessages() {
         return new ArrayList<>(receivedMessages);
-    }
+    }*/
 
     public List<String> getChatHistory() {
         return new ArrayList<>(chatHistory);

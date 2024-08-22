@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 
 public class signup {
     static Userfile o = new Userfile();
+    private static person p;
     String email = "";
     String password = "";
     String firstName = "";
@@ -18,7 +19,6 @@ public class signup {
    @BeforeClass
     public static void setUp() {
        sweet.getInstance();
-
     }
 
     @AfterClass
@@ -32,12 +32,19 @@ public class signup {
 
     @When("The user enter firstName with {string} and finalName with {string} and email with {string} and password with {string} and Confirm password with {string} and type with {string}")
     public void theUserEnterFirstNameWithAndFinalNameWithAndEmailWithAndPasswordWithAndConfirmPasswordWithAndTypeWith(String fname, String finame, String em, String pass1, String pass2, String typ) {
+       person p = new person(email,password,type,firstName,finalName);
+       p.setEmail(email);
+       p.setPass(password);
+       p.setFirstName(firstName);
+       p.setLastName(finalName);
+       p.setType(type);
         firstName = fname;
         finalName = finame;
         password = pass1;
         Confirm_password = pass2;
         email = em;
         type = typ;
+
         Userfile.readUsers(Userfile.FILE_NAME);
 
 
@@ -48,7 +55,10 @@ public class signup {
         successfull s = new successfull(password, email);
         new sweet();
         person ss=new person(email,password);
-
+        firstName = ss.getFirstName();
+        finalName = ss.getLastName();
+        email = ss.getEmail();
+         password = ss.getPass();
         boolean isRegistered = person.findemail(ss);
 
         if (isRegistered) {
@@ -76,6 +86,7 @@ public class signup {
         email = em;
         password = pass1;
         Confirm_password = pass2;
+
     }
 
     @Then("a {string} should appear")

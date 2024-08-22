@@ -25,7 +25,7 @@ Feature: Communication and Notification
     And the email should contain the message: "An order for sweet(s) with ID '02' has been placed. Total cost: '50'."
 
   Scenario: Sending an approval email when a new account is created
-    Given a new account is created with email "newuser@example.com"
+    Given a new account is created with email "newuser@example.com" and name "Samia"
     When the account is approved
     Then an approval email should be sent to "newuser@example.com"
     And the email should contain "Your account has been approved."

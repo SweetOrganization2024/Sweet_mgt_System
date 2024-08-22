@@ -6,10 +6,10 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    private final String username = "SweetSystemInstitution@gmail.com";
-    private final String password = "dzfp eitg yfkg nspe";
+    private static final String username = "SweetSystemInstitution@gmail.com";
+    private static final String password = "dzfp eitg yfkg nspe";
 
-    private Properties getProperties() {
+    private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -18,7 +18,7 @@ public class EmailSender {
         return props;
     }
 
-    private Session getSession() {
+    private static Session getSession() {
         return Session.getInstance(getProperties(), new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
@@ -26,7 +26,7 @@ public class EmailSender {
         });
     }
 
-    public void sendEmail(String toEmail, String subject, String body) {
+    public static void sendEmail(String toEmail, String subject, String body) {
         try {
             Message message = new MimeMessage(getSession());
             message.setFrom(new InternetAddress(username));

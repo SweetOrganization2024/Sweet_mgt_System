@@ -58,7 +58,6 @@ public class sweet {
 
     public static void addsweet(newSweet sweet) {
         listOfSweet.add(sweet);
-        //System.out.println("Sweet added: " + sweet.getName_of_sweet());
     }
 
     public static void deletesweet(newSweet ss) {
@@ -253,6 +252,14 @@ public class sweet {
                 return p;
         }
         return null;
+    }
+    public static boolean idSupOrOwnerorAD(String email,String pass){
+        for (person p : sweet.getList_of_people()){
+            if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner") || p.getType().equals("ADMIN"))){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

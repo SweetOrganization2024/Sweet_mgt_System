@@ -33,11 +33,7 @@ public class NotificationService {
     }
 
 
-    public void notifyAdminOfNewAccount(String adminEmail, String newAccountName, String newAccountEmail) {
-        String subject = "New Account Notification";
-        String body = String.format("Dear Admin, a new account has been created with the following details: Name - %s, Email - %s. Please review and approve if necessary.", newAccountName, newAccountEmail);
-        emailSender.sendEmail(adminEmail, subject, body);
-    }
+
 
 
 }
