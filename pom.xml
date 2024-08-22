@@ -14,9 +14,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.organization>sweetorganization2024</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.coverage.exclusions>src/main/java/Sweet/System/App.java</sonar.coverage.exclusions>
-        <sonar.exclusions>src/main/java/Sweet/System/App.java</sonar.exclusions>
-        <sonar.test.exclusions>src/main/java/Sweet/System/App.java</sonar.test.exclusions>
+        <sonar.coverage.exclusions>src/main/java/Sweet/Main.java</sonar.coverage.exclusions>
+        <sonar.exclusions>src/main/java/Sweet/Main.java</sonar.exclusions>
+        <sonar.test.exclusions>src/main/java/Sweet/Main.java</sonar.test.exclusions>
     </properties>
 
     <dependencies>
