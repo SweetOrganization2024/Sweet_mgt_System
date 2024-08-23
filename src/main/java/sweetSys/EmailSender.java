@@ -3,10 +3,13 @@ package sweetSys;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EmailSender {
     private static final String EMAIL_USERNAME = "SweetSystemInstitution@gmail.com";
     private static final String EMAIL_PASSWORD = "dzfp eitg yfkg nspe";
+    private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
     private static Properties getProperties() {
         Properties props = new Properties();
@@ -19,7 +22,7 @@ public class EmailSender {
 
     private static Session getSession() {
         return Session.getInstance(getProperties(), new Authenticator() {
-             @Override
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
             }
@@ -34,8 +37,9 @@ public class EmailSender {
             message.setSubject(subject);
             message.setText(body);
             Transport.send(message);
-            System.out.println("Email sent successfully");
+            logger.info("Email sent successfully to " + toEmail);
         } catch (MessagingException e) {
+            logger.log(Level.SEVERE, "Failed to send email", e);
             throw new RuntimeException(e);
         }
     }
