@@ -21,6 +21,7 @@ public class chat {
     private String errorMessage;
 
     public chat() {
+        //
     }
 
     @Before
