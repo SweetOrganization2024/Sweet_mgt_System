@@ -22,7 +22,8 @@ public class DiscountManager {
     public void setEnd() {
         // Implementation for setting the end date
     }
-    
+
+    // Change return type to List<DiscountManager>
     public static List<DiscountManager> getDiscounts() {
         return discounts;
     }
