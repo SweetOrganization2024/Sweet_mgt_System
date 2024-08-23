@@ -6,7 +6,7 @@ public class newSweet {
     String type;
     String price;
     int sale=0;
-
+    
     public newSweet(String id, String name, String type, String price) {
         this.id = id;
         this.name = name;
