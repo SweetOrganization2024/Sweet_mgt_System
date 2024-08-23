@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Date;
 import java.io.*;
 public class Feedback {
-    private String emai;
-    private String sweetid;
-    private String feedbackText;
-    private int rating;
-    private Date feedbackDate;
+    private final String emai;
+    private final String sweetid;
+    private final String feedbackText;
+    private final int rating;
+    private final Date feedbackDate;
 
     public Feedback(String emai, String sweetid, String feedbackText, int rating) {
         this.emai = emai;
