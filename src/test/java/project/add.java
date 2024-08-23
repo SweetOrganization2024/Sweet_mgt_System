@@ -86,7 +86,7 @@ public class add {
     @Given("The user login as admin or user with {string} and {string}")
     public void theUserLoginAsAdminOrUserWithAnd(String email, String password) {
 
-        isUserLoggedIn = newSweet.if_the_type_AD_or_USR(email,password);
+        isUserLoggedIn = newSweet.isAdminOrUser(email,password);
         assertTrue(isUserLoggedIn);
     }
 
