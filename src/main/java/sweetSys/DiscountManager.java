@@ -5,14 +5,12 @@ public class DiscountManager {
     private String id;
     private String description;
     private double percentage;
-    private String end;
     private static ArrayList<DiscountManager> discounts = new ArrayList<>();
 
     public void setStart(String start) {
     }
 
     public void setEnd(String end) {
-        this.end = end;
     }
 
     public static ArrayList<DiscountManager> getDiscounts() {
