@@ -46,16 +46,6 @@ public class OrderManager {
         return orders.get(orders.size() - 1);
     }
 
-    public void cancelOrder(String orderId) {
-        for (Order order : orders) {
-            if (order.getOrderId().equals(orderId)) {
-                order.setStatus("cancelled");
-
-                return;
-            }
-        }
-
-    }
 
     public void displayPastOrders() {
         for (Order order : orders) {
@@ -87,8 +77,6 @@ public class OrderManager {
             return totalCost;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
-        }
+
     }
 }
