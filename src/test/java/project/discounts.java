@@ -5,7 +5,6 @@ import sweetSys.*;
 import java.text.ParseException;
 
 public class discounts {
-    private sweet AppSweet;
     double result;
     private DiscountManager discountManage;
     private newSweet sweetProduct;
@@ -14,11 +13,7 @@ public class discounts {
     private double percentage=0.0;
     private String start,end;
     boolean found = false;
-    public discounts() {
-        this.AppSweet = sweet.getInstance();
-    }
-
-
+   
     @Given("I am logged in as an Spplier or Owner with {string} and {string}")
     public void iAmLoggedInAsAnSpplierOrOwnerWithAnd(String email, String pass) {
         sweet.idSupOrOwner(email,pass);
