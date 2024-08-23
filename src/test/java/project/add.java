@@ -22,14 +22,14 @@ public class add {
     @BeforeClass
     public static void setUp() {
         sweet.getListOfSweet().clear();
-        sweet.getList_of_people().clear();
+        sweet.getPeopleList().clear();
 
     }
 
     @AfterClass
     public static void tearDown() {
         sweet.getListOfSweet().clear();
-        sweet.getList_of_people().clear();
+        sweet.getPeopleList().clear();
 
         System.out.println("Cleanup done.");
     }
