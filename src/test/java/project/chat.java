@@ -19,11 +19,7 @@ public class chat {
     private boolean isMessageDelivered;
     private boolean isErrorEncountered;
     private String errorMessage;
-
-    public chat() {
-        //
-    }
-
+    
     @Before
     public void setUp() {
         this.m = new ChatMessage();
