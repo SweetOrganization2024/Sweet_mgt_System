@@ -16,11 +16,7 @@ public class delete {
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
-
-
-    public delete() {
-    }
-
+    
     @Given("The user login as owner or supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
         this.email = email;
