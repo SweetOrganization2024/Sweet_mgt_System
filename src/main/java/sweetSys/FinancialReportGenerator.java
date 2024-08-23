@@ -16,20 +16,18 @@ public class FinancialReportGenerator {
 
         double totalIncome = 0;
         double totalExpense = 0;
-        for (String record : records) {
-            String[] parts = record.split(",");
+       for (String dataLine : records) { 
+            String[] parts = dataLine.split(",");
             if (parts.length == 3) {
-                String type = parts[0].trim();
+                String transactionType = parts[0].trim();
                 double amount = Double.parseDouble(parts[2].trim());
-
-                if (type.equalsIgnoreCase("Income")) {
+                if (transactionType.equalsIgnoreCase("Income")) {
                     totalIncome += amount;
-                } else if (type.equalsIgnoreCase("Expense")) {
+                } else if (transactionType.equalsIgnoreCase("Expense")) {
                     totalExpense += amount;
                 }
             }
         }
-
         double netProfit = totalIncome - totalExpense;
 
         System.out.println("Financial Report:");
