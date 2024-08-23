@@ -33,10 +33,7 @@ public class add {
 
         System.out.println("Cleanup done.");
     }
-    public add() {
-        //
-    }
-
+    
     @Given("The user login as Owner or Supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
 
