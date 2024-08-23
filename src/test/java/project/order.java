@@ -125,7 +125,7 @@ public class order {
     public void aUserWithEmailAndPasswordIsLoggedIn(String EMAIL, String PASSWORD) {
         this.email = EMAIL;
         this.password = PASSWORD;
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) && f.getType().equals("USER")) {
                 isUserRegistered = true;
                 break;
