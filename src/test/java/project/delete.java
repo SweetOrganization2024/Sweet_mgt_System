@@ -45,7 +45,7 @@ public class delete {
 
         boolean isValid = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && s.getId_of_sweet().equals(id) && s.getType_of_sweet().equals(type)) {
+            if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type)) {
                 isValid = true;
                 break;
             }
@@ -60,7 +60,7 @@ public class delete {
         boolean isValid = false;
 
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet) && s.getId_of_sweet().equals(id_of_sweet) && s.getType_of_sweet().equals(type_of_sweet)) {
+            if (s.getName().equals(name_of_sweet) && s.getId().equals(id_of_sweet) && s.getType().equals(type_of_sweet)) {
                 sweetToDelete = s;
                 isValid = true;
                 break;
@@ -81,7 +81,6 @@ public class delete {
     public void theUserShouldSeeTheSweetSuccessfullyDeleted() {
         System.out.println("Delete successful");
     }
-    //2nd
     @Given("The user login as not owner or supplier with {string} and {string}")
     public void theUserLoginAsNotOwnerOrSupplierWithAnd(String string, String string2) {
         boolean isRegistered = false;
@@ -101,7 +100,7 @@ public class delete {
     public void theUserDeletesASweetWithNotAvailableIdIsOrNotAvailableNameIsOrTypeIs(String id, String name, String type) {
         boolean isValid = true;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) || s.getId_of_sweet().equals(id) || s.getType_of_sweet().equals(type)) {
+            if (s.getName().equals(name) || s.getId().equals(id) || s.getType().equals(type)) {
                 isValid = false;
                 break;
             }
