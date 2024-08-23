@@ -5,11 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import sweetSys.newSweet;
-import sweetSys.person;
-import sweetSys.sweet;
-import java.util.logging.Logger;
-
+import sweet_sys.newSweet;
+import sweet_sys.person;
+import sweet_sys.sweet;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,8 +18,6 @@ public class add {
     private String price_of_sweet;
     private boolean isUserLoggedIn;
     boolean isDuplicate = false;
-    private static final Logger logger = Logger.getLogger(add.class.getName());
-
 
     @BeforeClass
     public static void setUp() {
@@ -73,20 +69,20 @@ public class add {
 
         if (!isAdded) {
             sweet.listOfSweet.add(MySWEET);
-            logger.info("Sweet added: " + MySWEET.getName_of_sweet());
+            System.out.println("Sweet added: " + MySWEET.getName());
         }
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            logger.info(newSweet.printsweet(s));
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+            System.out.println(newSweet.printsweet(s));
         }
     }
 
 
     @Then("The user should see a {string}")
     public void theUserShouldSeeA(String message) {
-        logger.info(message);
+        System.out.println(message);
     }
 
-    //2rd
+  
     @Given("The user login as admin or user with {string} and {string}")
     public void theUserLoginAsAdminOrUserWithAnd(String email, String password) {
 
@@ -99,8 +95,6 @@ public class add {
         assertTrue(isUserLoggedIn);
     }
 
-
-    //3rd
     @When("The user add an existing id of sweet with the id {string} and the name {string} and the type {string} and the type {string}")
     public void theUserAddAnExistingIdOfSweetWithTheIdAndTheNameAndTheType(String id, String name, String type, String price) {
         this.id_of_sweet = id;
@@ -119,7 +113,7 @@ public class add {
 
     @Then("The user should see a message that adding the sweet failed")
     public void theUserShouldSeeAMessageThatAddingTheSweetFailed() {
-       logger.info("Adding the sweet failed");
+        System.out.println("Adding the sweet failed");
     }
 
 
