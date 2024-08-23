@@ -1,208 +1,124 @@
 package project;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import sweetSys.ChatMessage;
-
-
-import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.text.ParseException;
+import java.util.Iterator;
+import org.junit.Assert;
+import sweetSys.DiscountManager;
+import sweetSys.newSweet;
+import sweetSys.sweet;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
+public class discount {
+    private sweet AppSweet = sweet.getInstance();
+    double result;
+    private DiscountManager discountManage;
+    private newSweet sweetProduct;
+    private String id = "";
+    private String description = "";
+    private double percentage = 0.0;
+    private String start;
+    private String end;
+    boolean found = false;
 
-public class chat {
-    private static final Logger logger = Logger.getLogger(chat.class.getName());
-
-    private ChatMessage m;
-    private String currentUser;
-    private List<String> receivedMessages;
-    private List<String> chatHistory;
-    private boolean isMessageDelivered;
-    private boolean isErrorEncountered;
-    private String errorMessage;
-
-    @Before
-    public void setUp() {
-        m = new ChatMessage();
-        receivedMessages = new ArrayList<>();
-        chatHistory = new ArrayList<>();
-        isMessageDelivered = false;
-        isErrorEncountered = false;
+    public discount() {
     }
 
-    @Given("I am logged in as {string}")
-    public void iAmLoggedInAs(String user) {
-        currentUser = user;
-        m.logIn(user);
-        logger.info("Logged in as: " + currentUser);
-    }
+    @Given("I am logged in as an Spplier or Owner with {string} and {string}")
+    public void iAmLoggedInAsAnSpplierOrOwnerWithAnd(String email, String pass) {
+        sweet.idSupOrOwner(email, pass);
+        Iterator var3 = sweet.getListOfSweet().iterator();
 
-    @Given("I am connected to {string}")
-    public void iAmConnectedTo(String user) {
-        m.connectToUser(user);
-    }
-
-    @When("I send a message {string} to {string}")
-    public void iSendAMessageTo(String message, String user) {
-        m.sendMessage(message);
-        isMessageDelivered = true;
-    }
-
-    @Then("the message should be delivered to {string} reliably")
-    public void theMessageShouldBeDeliveredToReliably(String user) {
-        assertTrue("Message should be delivered", isMessageDelivered);
-    }
-
-    @Then("{string} should see the message {string} in her chat window")
-    public void shouldSeeTheMessageInHerChatWindow(String user, String message) {
-        List<String> messages = m.getReceivedMessagesFor(user);
-        assertTrue("User should see the message", messages.contains(message));
-    }
-    @Then("I should receive a delivery confirmation for the message")
-    public void iShouldReceiveADeliveryConfirmationForTheMessage() {}
-
-    @When("{string} sends me a message {string}")
-    public void sendsMeAMessage(String user, String message) {
-        m.receiveMessage(message);
-        receivedMessages = m.getReceivedMessagesFor(currentUser);
-        chatHistory = m.getChatHistory();
-    }
-
-    @Then("I should receive the message {string} reliably")
-    public void iShouldReceiveTheMessageReliably(String message) {
-        assertTrue("Message should be received", receivedMessages.contains(message));
-    }
-
-    @Then("I should see the message {string} in my chat window")
-    public void iShouldSeeTheMessageInMyChatWindow(String msg) {
-        assertTrue("Message should be visible in chat window", chatHistory.contains(msg));
-    }
-
-    @Given("I have previously sent messages to {string}")
-    public void iHavePreviouslySentMessagesTo(String user) {
-        List<String> previousMessages = List.of("Hello"+ user);
-        m.addPreviousMessages(previousMessages);
-    }
-
-    @When("I view my chat history")
-    public void iViewMyChatHistory() {
-        chatHistory = m.getChatHistory();
-    }
-
-    @Then("I should see all messages sent to {string} in the correct order")
-    public void iShouldSeeAllMessagesSentToInTheCorrectOrder(String user) {
-        List<String> expectedChatHistory = m.getChatHistoryFor(user);
-        assertEquals("Chat history should be in correct order", expectedChatHistory, chatHistory);
-    }
-
-    @Then("I should be able to search through the chat history")
-    public void iShouldBeAbleToSearchThroughTheChatHistory() {
-        m.viewChatHistory();
-        String item = "Hello";
-        m.searchChatHistory(item);
-    }
-
-    @Then("I should have the option to delete individual messages or the entire chat history")
-    public void iShouldHaveTheOptionToDeleteIndividualMessagesOrTheEntireChatHistory() {
-        if (!chatHistory.isEmpty()) {
-            String messageToDelete = chatHistory.get(0);
-            m.deleteMessage(messageToDelete);
-            chatHistory.remove(messageToDelete);
-            assertTrue("Message should be deleted", !chatHistory.contains(messageToDelete));
+        while(var3.hasNext()) {
+            newSweet s = (newSweet)var3.next();
+            System.out.println(newSweet.printsweet(s));
         }
-        m.clearChatHistory();
-        chatHistory = m.getChatHistory(); // Refresh chatHistory after clearing
-        assertTrue("Chat history should be empty", chatHistory.isEmpty());
+
     }
 
-    @Then("the chat history should be subject to any storage limits")
-    public void theChatHistoryShouldBeSubjectToAnyStorageLimits() {
-        int maxStorageLimit = 100;
-        assertTrue("Chat history should not exceed storage limit", chatHistory.size() <= maxStorageLimit);
+    @When("I add a new discount with ID {string} and description {string}")
+    public void i_add_a_new_discount_with_ID_and_description(String idd, String desc) {
+        this.id = idd;
+        this.description = desc;
     }
 
-    @Given("I encounter an issue while sending or receiving a message")
-    public void iEncounterAnIssueWhileSendingOrReceivingAMessage() {
-        isErrorEncountered = true;
-        errorMessage = "Network issue encountered.";
+    @And("the discount percentage is {string}")
+    public void the_discount_percentage_is(String percentageString) {
+        this.percentage = Double.parseDouble(percentageString);
+        this.discountManage = new DiscountManager(this.id, this.description, this.percentage);
+        DiscountManager.addDiscount(this.discountManage);
     }
 
-    @Then("I should see an appropriate error message explaining the problem")
-    public void iShouldSeeAnAppropriateErrorMessageExplainingTheProblem() {
-        assertTrue("Error should be encountered", isErrorEncountered);
-        assertEquals("Error message should be correct", "Network issue encountered.", errorMessage);
+    @And("the discount is valid from {string} to {string}")
+    public void the_discount_is_valid_from_to(String startDate, String endDate) throws ParseException {
+        this.start = startDate;
+        this.end = startDate;
+        this.discountManage.setStart(this.start);
+        this.discountManage.setEnd(this.end);
+        System.out.println("Discount valid from " + this.start + " to " + this.end);
     }
 
-    @Then("I should be informed about any steps to resolve the issue")
-    public void iShouldBeInformedAboutAnyStepsToResolveTheIssue() {
-        String resolutionSteps = "Please check your network connection and try again.";
-        assertEquals("Resolution steps should be provided", resolutionSteps, "Please check your network connection and try again.");
-    }
+    @Then("the discount should be added successfully")
+    public void the_discount_should_be_added_successfully() {
+        Iterator var1 = DiscountManager.getDiscounts().iterator();
 
-    @Given("I am in a group chat with multiple users")
-    public void iAmInAGroupChatWithMultipleUsers() {
-        // This step is a placeholder; the group chat functionality should be implemented in the chat_msg class if needed
-    }
-
-    @When("I send a message in the group chat")
-    public void iSendAMessageInTheGroupChat() {
-        String groupMessage = "Hello Group!";
-        List<String> groupMembers = List.of("Hala", "samia", "eman");
-
-        for (String user : groupMembers) {
-            m.connectToUser(user);  // Simulate connection to each user
-            m.sendMessage(groupMessage);  // Send message
+        while(var1.hasNext()) {
+            DiscountManager d = (DiscountManager)var1.next();
+            if (d.getId().equals(this.id)) {
+                this.found = true;
+                break;
+            }
         }
+
+        Assert.assertTrue("Discount not added successfully.", this.found);
     }
 
-    @Then("all group members should receive the message reliably")
-    public void allGroupMembersShouldReceiveTheMessageReliably() {
-        List<String> groupMembers = List.of("Hala", "samia", "eman");
-        String groupMessage = "Hello Group!";
+    @And("I should see the discount in the list of discounts")
+    public void i_should_see_the_discount_in_the_list_of_discounts() {
+        Assert.assertTrue("Discount not found in the list.", this.found);
+    }
 
-        for (String user : groupMembers) {
-            List<String> messages = m.getReceivedMessagesFor(user);  // Retrieve messages for each user
-            assertTrue("All group members should receive the message", messages.contains(groupMessage));
+    @Given("a time-based discount with ID {string} is available")
+    public void a_time_based_discount_with_ID_is_available(String discountId) {
+        this.discountManage = null;
+        Iterator var2 = DiscountManager.getDiscounts().iterator();
+
+        while(var2.hasNext()) {
+            DiscountManager d = (DiscountManager)var2.next();
+            if (d.getId().equals(discountId)) {
+                this.discountManage = d;
+                break;
+            }
         }
+
+        Assert.assertNotNull("Discount ID not found.", this.discountManage);
     }
 
-    @Then("I should be able to join or leave the group chat at any time")
-    public void iShouldBeAbleToJoinOrLeaveTheGroupChatAtAnyTime() {
-        boolean canJoinGroup = true;
-        boolean canLeaveGroup = true;
-        assertTrue("User should be able to join the group", canJoinGroup);
-        assertTrue("User should be able to leave the group", canLeaveGroup);
-    }
+    @And("the sweet product with ID {string} has a price of {string}")
+    public void the_sweet_product_with_ID_has_a_price_of(String sweetId, String price) {
+        boolean val = false;
+        Iterator var4 = sweet.getListOfSweet().iterator();
 
-    @Given("I am offline")
-    public void iAmOffline() {
-        isMessageDelivered = false;
-        logger.info("I'm offline now");
-    }
-
-    @When("{string} sends me a message")
-    public void sendsMeAMessageWhenOffline(String user) {
-        if (!isMessageDelivered) {
-            receivedMessages.add("Message from " + user + " is stored.");
+        while(var4.hasNext()) {
+            newSweet n = (newSweet)var4.next();
+            if (n.getId().equals(sweetId) && n.getPrice().equals(price)) {
+                val = true;
+                break;
+            }
         }
+
+        Assert.assertTrue("This sweet not fount", val);
     }
 
-    @Then("the message should be stored and delivered to me once I am back online")
-    public void theMessageShouldBeStoredAndDeliveredToMeOnceIAmBackOnline() {
-        isMessageDelivered = true;
-        assertTrue("Stored message should be delivered once online", receivedMessages.contains("Message from samiaaa is stored."));
+    @When("I apply the discount with ID {string} to the sweet product with ID {string}")
+    public void i_apply_the_discount_with_ID_to_the_sweet_product_with_ID(String discountId, String sweetId) {
+        this.result = DiscountManager.applyDiscountToProduct(sweetId, this.discountManage);
     }
 
-    @Then("I should see the message in my chat window as soon as I reconnect")
-    public void iShouldSeeTheMessageInMyChatWindowAsSoonAsIReconnect() {
-        if (isMessageDelivered) {
-            receivedMessages.add("Message from samiaaa is delivered.");
-            assertTrue("Message should be visible in chat window", receivedMessages.contains("Message from samiaaa is delivered."));
-        }
+    @Then("the discounted price of the sweet product should be {string}")
+    public void the_discounted_price_of_the_sweet_product_should_be(String expectedDiscountedPrice) {
+        String actual = String.format("%.2f", this.result);
+        Assert.assertEquals(actual, expectedDiscountedPrice);
     }
 }
