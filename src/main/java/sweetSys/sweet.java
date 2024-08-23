@@ -10,6 +10,8 @@ public class sweet {
     public static List<person> peopleList = new ArrayList<>();
     public static ArrayList<newSweet> listOfSweet = new ArrayList<>();
     private static sweet instance;
+    private static final Logger logger = Logger.getLogger(sweet.class.getName());
+
 
     public static sweet getInstance() {
         if (instance == null) {
@@ -79,7 +81,7 @@ public class sweet {
     public static void print_SweetId(String id_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getId().equals(id_of_sweet)) {
-                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
 
                 break;
             }
@@ -104,7 +106,7 @@ public class sweet {
     public static void print_Sweetname(String name) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName().equals(name)) {
-                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
             }
         }
 
@@ -124,7 +126,7 @@ public class sweet {
     public static void Print_Type_name(String name, String Type) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName().equals(name) && s.getType().equals(Type)) {
-                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
                 break;
             }
         }
@@ -162,7 +164,7 @@ public class sweet {
                 try {
                     int Myprice = Integer.parseInt(priceString);
                     if (Myprice > min && Myprice < max) {
-                        System.out.println("Name : " + s.getName() +
+                        logger.info("Name : " + s.getName() +
                                 " Id : " + s.getId() +
                                 " Type : " + s.getType() +
                                 " Price : " + s.getPrice());
@@ -210,7 +212,7 @@ public class sweet {
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName().equals(name_of_sweet) && (s.getId().equals(id))) {
-                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
                 break;
             }
         }
@@ -219,7 +221,7 @@ public class sweet {
     public static void Print_name_id_type(String id , String name_of_sweet , String type) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName().equals(name_of_sweet) && (s.getId().equals(id)) && (s.getType().equals(type))) {
-                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
 
                 break;
             }
