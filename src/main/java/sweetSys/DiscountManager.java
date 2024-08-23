@@ -2,15 +2,15 @@ package sweetSys;
 import java.util.ArrayList;
 
 public class DiscountManager {
-    private String id;
-    private String description;
-    private double percentage;
-    private static ArrayList<DiscountManager> discounts = new ArrayList<>();
-    
-   public void setEnd(String end) {
-    }
+     private String id;
+    private final String description;
+    private final double percentage;
+    private static final ArrayList<DiscountManager> discounts = new ArrayList<>();
 
     public void setStart(String start) {
+    }
+
+    public void setEnd(String end) {
     }
 
     public static ArrayList<DiscountManager> getDiscounts() {
