@@ -71,7 +71,7 @@ public class add {
             sweet.listOfSweet.add(MySWEET);
             System.out.println("Sweet added: " + MySWEET.getName());
         }
-        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
             System.out.println(newSweet.printsweet(s));
         }
     }
