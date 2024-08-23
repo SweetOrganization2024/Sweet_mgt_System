@@ -46,8 +46,7 @@ public class add {
 
     @When("The user add a new sweet")
     public void theUserAddANewSweet() {
-        if (isUserLoggedIn) {
-        } else {
+        if (!isUserLoggedIn) {
             throw new AssertionError("User is not logged in");
         }
     }
