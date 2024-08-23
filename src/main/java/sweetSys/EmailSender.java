@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class EmailSender {
     private static final String EMAIL_USERNAME = "SweetSystemInstitution@gmail.com";
-    private static final String password = System.getenv("password");
+    private static final String EMAIL_PASSWORD = System.getenv("password");
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
     public EmailSender(){
@@ -27,7 +27,7 @@ public class EmailSender {
         return Session.getInstance(getProperties(), new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(EMAIL_USERNAME, password);
+                return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
             }
         });
     }
