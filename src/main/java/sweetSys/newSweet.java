@@ -1,6 +1,4 @@
 package sweetSys;
-
-
 public class newSweet {
 
     String id;
@@ -25,7 +23,7 @@ public class newSweet {
     }
 
     public static String printsweet(newSweet sweet) {
-        return "ID: " + sweet.getId_of_sweet() + ", Name: " + sweet.getName_of_sweet() + ", Type: " + sweet.getType_of_sweet();
+        return "ID: " + sweet.getId() + ", Name: " + sweet.getName() + ", Type: " + sweet.getType();
     }
 
     public String getPrice() {
@@ -38,24 +36,24 @@ public class newSweet {
 
 
 
-    public String getId_of_sweet() {
+    public String getId() {
         return id;
     }
 
 
-    public String getName_of_sweet() {
+    public String getName() {
         return name;
     }
 
-    public void setName_of_sweet(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getType_of_sweet() {
+    public String getType() {
         return type;
     }
 
-    public void setType_of_sweet(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -79,8 +77,8 @@ public class newSweet {
     }
 
     public static boolean isAdd(String id){
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id)) {
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+            if (s.getId().equals(id)) {
                 return true;
             }
         }
