@@ -30,6 +30,19 @@ public class EmailSender {
     }
 
     public static void sendEmail(String toEmail, String subject, String body) {
+        if (toEmail == null || toEmail.isEmpty()) {
+            logger.warning("Email address is not provided.");
+            return;
+        }
+        if (subject == null || subject.isEmpty()) {
+            logger.warning("Email subject is not provided.");
+            return;
+        }
+        if (body == null || body.isEmpty()) {
+            logger.warning("Email body is not provided.");
+            return;
+        }
+
         try {
             Message message = new MimeMessage(getSession());
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
