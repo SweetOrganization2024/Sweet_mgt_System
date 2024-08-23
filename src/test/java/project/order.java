@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class order { 
+    private sweet AppSweet;
     private OrderManager orderManager;
     private String email;
     private String password;
@@ -25,6 +26,7 @@ public class order {
     private String quantity;
 
     public order() {
+        this.AppSweet = sweet.getInstance();
         this.orderManager = new OrderManager();
     }
     @Before
