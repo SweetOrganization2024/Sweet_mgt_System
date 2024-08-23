@@ -37,9 +37,9 @@ public class EmailSender {
             message.setSubject(subject);
             message.setText(body);
             Transport.send(message);
-            logger.info("Email sent successfully to " + toEmail);
+            logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
         } catch (MessagingException e) {
-            logger.log(Level.SEVERE, "Failed to send email", e);
+            logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'", toEmail, subject), e);
             throw new RuntimeException(e);
         }
     }
