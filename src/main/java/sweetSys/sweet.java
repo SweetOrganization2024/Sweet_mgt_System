@@ -24,6 +24,9 @@ public class sweet {
     public static ArrayList<newSweet> getListOfSweet() {
         return listOfSweet;
     }
+    public static List<person> getPeopleList() {
+        return peopleList;
+    }
 
     public static void setListOfSweet(ArrayList<newSweet> listOfSweet) {
         sweet.listOfSweet = listOfSweet;
