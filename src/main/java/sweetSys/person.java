@@ -22,7 +22,7 @@ public class person {
 
     public  static person retperson(person p){
         for (person pp : sweet.getList_of_people()) {
-            if (p.getEmail().equals(pp.getEmail()) && p.getPass().equals(pp.getPass())) {
+            if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
                 return pp;
             }
         }
