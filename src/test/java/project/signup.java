@@ -27,9 +27,6 @@ public class signup {
         System.out.println("Cleanup done.");
     }
 
-    public signup() {
-    }
-
     @When("The user enter firstName with {string} and finalName with {string} and email with {string} and password with {string} and Confirm password with {string} and type with {string}")
     public void theUserEnterFirstNameWithAndFinalNameWithAndEmailWithAndPasswordWithAndConfirmPasswordWithAndTypeWith(String fname, String finame, String em, String pass1, String pass2, String typ) {
        person p = new person(email,password,type,firstName,finalName);
