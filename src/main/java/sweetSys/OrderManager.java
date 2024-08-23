@@ -3,13 +3,16 @@ package sweetSys;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class OrderManager {
     private static OrderManager instance;
     private final List<Order> orders;
     private static int nextOrderId = 1;
+    private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
 
-    public OrderManager() {
+    private OrderManager() {
         this.orders = new ArrayList<>();
     }
 
@@ -23,8 +26,9 @@ public class OrderManager {
     public static int getNextOrderId() {
         return nextOrderId++;
     }
+
     public static int getPrevOrderId() {
-        return nextOrderId--;
+        return --nextOrderId;
     }
 
     public List<Order> getOrders() {
@@ -34,13 +38,13 @@ public class OrderManager {
     public void addOrder(String orderId, LocalDate orderDate, double totalCost) {
         Order newOrder = new Order(orderId, orderDate, totalCost);
         orders.add(newOrder);
-        System.out.println("Order added: " + newOrder.getOrderId());
+        logger.info(String.format("Order added: %s", newOrder.getOrderId()));
     }
 
     public Order getCurrentOrder() {
         if (orders.isEmpty()) {
-            System.out.println("No orders found.");
-            System.out.println("Orders List: " + orders);
+            logger.info("No orders found.");
+            logger.info("Orders List: " + orders);
             return null;
         }
         return orders.get(orders.size() - 1);
@@ -50,18 +54,21 @@ public class OrderManager {
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
                 order.setStatus("cancelled");
-
+                logger.info(String.format("Order %s has been cancelled.", orderId));
                 return;
             }
         }
-
+        logger.warning(String.format("Order %s not found for cancellation.", orderId));
     }
 
     public void displayPastOrders() {
+        if (orders.isEmpty()) {
+            logger.info("No past orders to display.");
+            return;
+        }
         for (Order order : orders) {
-            System.out.println("Order ID: " + order.getOrderId() +
-                    ", Date: " + order.getOrderDate() +
-                    ", Total Cost: " + order.getTotalCost());
+            logger.info(String.format("Order ID: %s, Date: %s, Total Cost: %.2f",
+                    order.getOrderId(), order.getOrderDate(), order.getTotalCost()));
         }
     }
 
@@ -69,7 +76,7 @@ public class OrderManager {
         private final String orderId;
         private final LocalDate orderDate;
         private final double totalCost;
-        private  String status;
+        private String status;
 
         public Order(String orderId, LocalDate orderDate, double totalCost) {
             this.orderId = orderId;
@@ -77,6 +84,7 @@ public class OrderManager {
             this.totalCost = totalCost;
             this.status = "active";
         }
+
         public String getOrderId() {
             return orderId;
         }
