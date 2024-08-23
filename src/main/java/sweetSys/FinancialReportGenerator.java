@@ -2,21 +2,24 @@ package sweetSys;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FinancialReportGenerator {
 
     private static final String FILE_NAME = "financial_data.txt";
+    private static final Logger logger = Logger.getLogger(FinancialReportGenerator.class.getName());
 
     public static void generateFinancialReports() {
         List<String> records = readFinancialData();
         if (records.isEmpty()) {
-            System.out.println("No financial data found.");
+            logger.info("No financial data found.");
             return;
         }
 
         double totalIncome = 0;
         double totalExpense = 0;
-       for (String dataLine : records) { 
+        for (String dataLine : records) { 
             String[] parts = dataLine.split(",");
             if (parts.length == 3) {
                 String transactionType = parts[0].trim();
@@ -30,10 +33,8 @@ public class FinancialReportGenerator {
         }
         double netProfit = totalIncome - totalExpense;
 
-        System.out.println("Financial Report:");
-        System.out.println("Total Income: $" + totalIncome);
-        System.out.println("Total Expense: $" + totalExpense);
-        System.out.println("Net Profit/Loss: $" + netProfit);
+        logger.info(String.format("Financial Report:\nTotal Income: $%.2f\nTotal Expense: $%.2f\nNet Profit/Loss: $%.2f", 
+                                  totalIncome, totalExpense, netProfit));
     }
 
     private static List<String> readFinancialData() {
@@ -44,10 +45,8 @@ public class FinancialReportGenerator {
                 records.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Error reading financial data.");
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error reading financial data.", e);
         }
         return records;
     }
-
 }
