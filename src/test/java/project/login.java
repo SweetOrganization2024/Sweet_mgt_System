@@ -23,8 +23,6 @@ public class login {
         sweet.getList_of_people().clear();
         System.out.println("Cleanup done.");
     }
-    public login() {
-    }
 
 
     @When("user tries to login through the system")
