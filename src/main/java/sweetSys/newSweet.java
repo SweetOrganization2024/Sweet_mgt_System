@@ -3,17 +3,17 @@ package sweetSys;
 
 public class newSweet {
 
-    String id_of_sweet;
-    String name_of_sweet;
-    String type_of_sweet;
-    String price_of_sweeet;
+    String id;
+    String name;
+    String type;
+    String price;
     int sale=0;
 
     public newSweet(String id, String name, String type, String price) {
-        this.id_of_sweet = id;
-        this.name_of_sweet = name;
-        this.type_of_sweet = type;
-        this.price_of_sweeet=price;
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.price = price;
     }
 
     public int getSale() {
@@ -29,34 +29,34 @@ public class newSweet {
     }
 
     public String getPrice() {
-        return price_of_sweeet;
+        return price;
     }
 
     public void setPrice(String price) {
-        this.price_of_sweeet = price;
+        this.price = price;
     }
 
 
 
     public String getId_of_sweet() {
-        return id_of_sweet;
+        return id;
     }
 
 
     public String getName_of_sweet() {
-        return name_of_sweet;
+        return name;
     }
 
-    public void setName_of_sweet(String name_of_sweet) {
-        this.name_of_sweet = name_of_sweet;
+    public void setName_of_sweet(String name) {
+        this.name = name;
     }
 
     public String getType_of_sweet() {
-        return type_of_sweet;
+        return type;
     }
 
-    public void setType_of_sweet(String type_of_sweet) {
-        this.type_of_sweet = type_of_sweet;
+    public void setType_of_sweet(String type) {
+        this.type = type;
     }
 
     public static boolean if_the_type_sp_or_owner (String email, String password){
@@ -78,9 +78,9 @@ public class newSweet {
         return false;
     }
 
-    public static boolean isAdd(String id_of_sweet){
+    public static boolean isAdd(String id){
         for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
+            if (s.getId_of_sweet().equals(id)) {
                 return true;
             }
         }
