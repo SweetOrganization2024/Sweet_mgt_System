@@ -6,11 +6,11 @@ public class DiscountManager {
     private String description;
     private double percentage;
     private static ArrayList<DiscountManager> discounts = new ArrayList<>();
-
-    public void setStart(String start) {
+    
+   public void setEnd(String end) {
     }
 
-    public void setEnd(String end) {
+    public void setStart(String start) {
     }
 
     public static ArrayList<DiscountManager> getDiscounts() {
