@@ -11,17 +11,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class update {
-
-    private final sweet AppSweet;
     private String email;
     private String password;
     private String id_of_sweet1 = "";
 
     boolean isValid = false;
-
-    public update(sweet appSweet) {
-        this.AppSweet = appSweet;
-    }
 
     @Given("The user logs in as owner or supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email2, String password2) {
