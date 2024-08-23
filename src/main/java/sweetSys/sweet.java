@@ -20,7 +20,6 @@ public class sweet {
         return instance;
     }
     
-
     public static ArrayList<newSweet> getListOfSweet() {
         return listOfSweet;
     }
