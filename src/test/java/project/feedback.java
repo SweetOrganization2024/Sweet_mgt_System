@@ -9,15 +9,12 @@ import sweetSys.*;
 import static org.junit.Assert.assertTrue;
 
 public class feedback {
-    private sweet AppSweet;
     private String email,sweetid,discription;
     private int rating;
     private Feedback f;
     private String password;
     private boolean valid=false;
-    public feedback() {
-        this.AppSweet = sweet.getInstance();
-    }
+   
     @Given("I am logged in with {string} and {string}")
     public void iAmLoggedInAsAUserWithAnd(String em, String pa) {
         email=em;
