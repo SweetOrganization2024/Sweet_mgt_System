@@ -51,7 +51,7 @@ public class DiscountManager {
         double originalPrice;
         double per = d.getPercentage();
         for (newSweet n : sweet.getListOfSweet()) {
-            if (n.getId_of_sweet().equals(id)) {
+            if (n.getId().equals(id)) {
                 originalPrice = Double.parseDouble(n.getPrice());
                 dis = originalPrice * (per / 100);
                 n.setPrice(String.format("%.2f", dis));
