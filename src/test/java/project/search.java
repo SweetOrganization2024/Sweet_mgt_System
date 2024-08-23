@@ -55,7 +55,7 @@ public class search {
 
     @Then("I should not see any result")
     public void iShouldNotSeeAnyResult() {
-        ///
+        //
     }
 
     @Then("The massage  no result appears")
@@ -177,7 +177,9 @@ public class search {
 
     @Then("I should see the sweet with price")
     public void iShouldSeeTheSweetWithPrice() {
+        //
     }
+
 
 
     @When("I need to see all sweets")
