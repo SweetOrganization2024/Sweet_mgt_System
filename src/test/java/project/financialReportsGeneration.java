@@ -8,14 +8,10 @@ import sweetSys.sweet;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 public class financialReportsGeneration {
-    private sweet AppSweet;
     private String email;
     private String password;
     private boolean valid=false;
-    public financialReportsGeneration() {
-        this.AppSweet = sweet.getInstance();
-    }
-
+   
     @Given("I am logged in as a Supplier or Owner or ADMIN with {string} and {string}")
     public void iAmLoggedInAsASupplierOrOwnerOrADMINWithAnd(String em, String pas) {
         email=em;
