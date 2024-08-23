@@ -3,8 +3,8 @@ package sweetSys;
 import java.util.regex.Pattern;
 
 public class successfull {
-private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*+@(?:[a-zA-Z0-9-]+\\.)++[a-zA-Z]{2,7}$";
-        private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
+    private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 
     String password;
     String email;
@@ -17,14 +17,6 @@ private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA
     public successfull() {
     }
 
-   /* public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }*/
-
     public static boolean isValidEmail(String email) {
         if (email == null || email.isEmpty()) {
             return false;
@@ -33,7 +25,7 @@ private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA
     }
 
     public static boolean isValidPassword(String password) {
-        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\p{Punct}])[A-Za-z\\d\\p{Punct}]+$";
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]+$";
         return password.length() >= 8 && password.matches(pattern);
     }
 
