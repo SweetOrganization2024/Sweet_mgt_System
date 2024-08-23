@@ -83,7 +83,7 @@ public class discount {
     public void the_sweet_product_with_ID_has_a_price_of(String sweetId, String price) {
         boolean val=false;
         for (newSweet n: sweet.getListOfSweet()){
-            if(n.getId_of_sweet().equals(sweetId) && n.getPrice().equals(price)){
+            if(n.getId().equals(sweetId) && n.getPrice().equals(price)){
                 val=true;
                 break;
             }
