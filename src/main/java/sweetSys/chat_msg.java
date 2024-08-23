@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class chat_msg {
+public class ChatMessage {
     private String currentUser;
     private String connectedUser;
     private String sentMessage;
@@ -13,9 +13,9 @@ public class chat_msg {
     private boolean isMessageDelivered;
     private boolean isErrorEncountered;
     private String errorMessage;
-    private static final Logger logger = Logger.getLogger(chat_msg.class.getName());
+    private static final Logger logger = Logger.getLogger(ChatMessage.class.getName());
 
-    public chat_msg() {
+    public ChatMessage() {
         chatHistory = new ArrayList<>();
         receivedMessages = new ArrayList<>();
         isMessageDelivered = false;
@@ -44,7 +44,6 @@ public class chat_msg {
         }
     }
 
-
     public void receiveMessage(String message) {
         if (connectedUser != null) {
             receivedMessages.add(message);
@@ -68,7 +67,7 @@ public class chat_msg {
         } else {
             logger.info("Search term not found.");
         }
-}
+    }
 
     public void deleteMessage(String message) {
         chatHistory.remove(message);
@@ -80,22 +79,19 @@ public class chat_msg {
         logger.info("Chat history cleared.");
     }
 
-   /* public void printStatus() {
+    /*public void printStatus() {
         if (isErrorEncountered) {
             logger.info("Error: " + errorMessage);
         } else if (isMessageDelivered) {
             logger.info("Message delivered: " + sentMessage);
         }
     }
-
     public String getCurrentUser() {
         return currentUser;
     }
-
     public String getConnectedUser() {
         return connectedUser;
     }
-
     public List<String> getReceivedMessages() {
         return new ArrayList<>(receivedMessages);
     }*/
@@ -130,5 +126,4 @@ public class chat_msg {
         }
         return userReceivedMessages;
     }
-
 }
