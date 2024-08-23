@@ -8,7 +8,6 @@ import org.junit.AfterClass;
 
 public class signup {
     static Userfile o = new Userfile();
-    private static person p;
     String email = "";
     String password = "";
     String firstName = "";
