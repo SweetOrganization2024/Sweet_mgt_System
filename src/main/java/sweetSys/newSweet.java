@@ -16,7 +16,6 @@ public class newSweet {
     public int getSale() {
         return sale;
     }
-
     public void setSale(int sale1) {
         this.sale = sale+sale1;
     }
