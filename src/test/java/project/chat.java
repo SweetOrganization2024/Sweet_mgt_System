@@ -144,6 +144,7 @@ public class chat {
 
     @Given("I am in a group chat with multiple users")
     public void iAmInAGroupChatWithMultipleUsers() {
+        //
     }
 
     @When("I send a message in the group chat")
