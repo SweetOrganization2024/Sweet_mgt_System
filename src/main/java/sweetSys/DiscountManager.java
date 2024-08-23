@@ -20,7 +20,7 @@ public class DiscountManager {
         // Implementation for setting the end date
     }
 
-    public static List<DiscountManager> getDiscounts() {
+    public static ArrayList<DiscountManager> getDiscounts() {
         return discounts;
     }
 
