@@ -1,7 +1,5 @@
 package sweetSys;
-
 import java.util.ArrayList;
-
 public class DiscountManager {
     private String id;
     private final String description;
