@@ -1028,3 +1028,4 @@ public class Main {
         String body = String.format("Dear Admin, a new account has been created with the following details: Name - %s, Email - %s. Please review and approve if necessary.", newAccountName, newAccountEmail);
         EmailSender.sendEmail(adminEmail, subject, body);
     }
+}
