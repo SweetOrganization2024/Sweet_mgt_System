@@ -3,8 +3,8 @@ package sweetSys;
 import java.util.regex.Pattern;
 
 public class successfull {
-    private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-    private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
+private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*+@(?:[a-zA-Z0-9-]+\\.)++[a-zA-Z]{2,7}$";
+        private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 
     String password;
     String email;
