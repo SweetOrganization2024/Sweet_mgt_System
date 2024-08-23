@@ -2,11 +2,14 @@ package project;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import sweetSys.ChatMessage;
+
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweetSys.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,6 @@ public class chat {
 
     private ChatMessage m;
     private String currentUser;
-    private String connectedUser;
     private List<String> receivedMessages;
     private List<String> chatHistory;
     private boolean isMessageDelivered;
@@ -42,7 +44,6 @@ public class chat {
 
     @Given("I am connected to {string}")
     public void iAmConnectedTo(String user) {
-        this.connectedUser = user;
         m.connectToUser(user);
     }
 
@@ -84,7 +85,6 @@ public class chat {
 
     @Given("I have previously sent messages to {string}")
     public void iHavePreviouslySentMessagesTo(String user) {
-        this.connectedUser = user;
         List<String> previousMessages = List.of("Hello"+ user);
         m.addPreviousMessages(previousMessages);
     }
