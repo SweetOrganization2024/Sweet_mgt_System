@@ -13,6 +13,7 @@ public class newSweet {
         this.type = type;
         this.price = price;
     }
+
     public int getSale() {
         return sale;
     }
@@ -20,6 +21,7 @@ public class newSweet {
     public void setSale(int sale1) {
         this.sale = sale+sale1;
     }
+
     public static String printsweet(newSweet sweet) {
         return "ID: " + sweet.getId() + ", Name: " + sweet.getName() + ", Type: " + sweet.getType();
     }
@@ -56,7 +58,7 @@ public class newSweet {
     }
 
     public static boolean isOwnerOrSupplier (String email, String password){
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 return true;
@@ -65,7 +67,7 @@ public class newSweet {
         return false;
     }
     public static boolean isAdminOrUser (String email, String password){
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 return true;
