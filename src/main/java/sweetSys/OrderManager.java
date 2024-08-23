@@ -69,13 +69,11 @@ public class OrderManager {
         private final String orderId;
         private final LocalDate orderDate;
         private final double totalCost;
-        private  String status;
 
         public Order(String orderId, LocalDate orderDate, double totalCost) {
             this.orderId = orderId;
             this.orderDate = orderDate;
             this.totalCost = totalCost;
-            this.status = "active";
         }
         public String getOrderId() {
             return orderId;
