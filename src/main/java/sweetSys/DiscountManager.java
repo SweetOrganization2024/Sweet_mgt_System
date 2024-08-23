@@ -1,13 +1,12 @@
 package sweetSys;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DiscountManager {
     private String id;
     private final String description;
     private final double percentage;
-    private static final List<DiscountManager> discounts = new ArrayList<>();
+    private static final ArrayList<DiscountManager> discounts = new ArrayList<>();
 
     public DiscountManager(String id, String description, double percentage) {
         this.id = id;
@@ -23,8 +22,7 @@ public class DiscountManager {
         // Implementation for setting the end date
     }
 
-    // Change return type to List<DiscountManager>
-    public static List<DiscountManager> getDiscounts() {
+    public static ArrayList<DiscountManager> getDiscounts() {
         return discounts;
     }
 
@@ -53,7 +51,7 @@ public class DiscountManager {
         double originalPrice;
         double per = d.getPercentage();
         for (newSweet n : sweet.getListOfSweet()) {
-            if (n.getId().equals(id)) {
+            if (n.getId_of_sweet().equals(id)) {
                 originalPrice = Double.parseDouble(n.getPrice());
                 dis = originalPrice * (per / 100);
                 n.setPrice(String.format("%.2f", dis));
