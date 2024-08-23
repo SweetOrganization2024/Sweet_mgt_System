@@ -5,9 +5,8 @@ import javax.mail.internet.*;
 import java.util.Properties;
 
 public class EmailSender {
-
-    private static final String username = "SweetSystemInstitution@gmail.com";
-    private static final String password = "dzfp eitg yfkg nspe";
+    private static final String EMAIL_USERNAME = "SweetSystemInstitution@gmail.com";
+    private static final String EMAIL_PASSWORD = "dzfp eitg yfkg nspe";
 
     private static Properties getProperties() {
         Properties props = new Properties();
@@ -21,7 +20,7 @@ public class EmailSender {
     private static Session getSession() {
         return Session.getInstance(getProperties(), new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
             }
         });
     }
@@ -29,15 +28,12 @@ public class EmailSender {
     public static void sendEmail(String toEmail, String subject, String body) {
         try {
             Message message = new MimeMessage(getSession());
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
             message.setText(body);
-
             Transport.send(message);
-
             System.out.println("Email sent successfully");
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
