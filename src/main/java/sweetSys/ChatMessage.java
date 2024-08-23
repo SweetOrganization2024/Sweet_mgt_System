@@ -15,43 +15,42 @@ public class ChatMessage {
     public ChatMessage() {
         chatHistory = new ArrayList<>();
         receivedMessages = new ArrayList<>();
-        boolean isMessageDelivered = false;
     }
 
     public void logIn(String user) {
         this.currentUser = user;
-        logger.info(currentUser + " is logged in.");
+        logger.info(() -> String.format("%s is logged in.", currentUser));
     }
 
     public void connectToUser(String user) {
         this.connectedUser = user;
-        logger.info(currentUser + " is connected to " + connectedUser);
+        logger.info(() -> String.format("%s is connected to %s.", currentUser, connectedUser));
     }
 
     public void sendMessage(String message) {
         if (connectedUser != null) {
             receivedMessages.add(message);
             chatHistory.add(message);
-            logger.info("Message sent to " + connectedUser + ": " + message);
+            logger.info(() -> String.format("Message sent to %s: %s", connectedUser, message));
         } else {
             this.errorMessage = "Unable to send message, no user connected.";
+            logger.warning(errorMessage);
         }
     }
-
 
     public void receiveMessage(String message) {
         if (connectedUser != null) {
             receivedMessages.add(message);
             chatHistory.add(message);
-            logger.info("Received message: " + message);
+            logger.info(() -> String.format("Received message: %s", message));
         } else {
             this.errorMessage = "Unable to receive message, no user connected.";
-            logger.info(errorMessage);
+            logger.warning(errorMessage);
         }
     }
 
     public void viewChatHistory() {
-        logger.info("Chat History: " + chatHistory);
+        logger.info(() -> String.format("Chat History: %s", chatHistory));
     }
 
     public void searchChatHistory(String searchTerm) {
@@ -61,37 +60,17 @@ public class ChatMessage {
         } else {
             logger.info("Search term not found.");
         }
-}
+    }
 
     public void deleteMessage(String message) {
         chatHistory.remove(message);
-        logger.info("Message deleted: " + message);
+        logger.info(() -> String.format("Message deleted: %s", message));
     }
 
     public void clearChatHistory() {
         chatHistory.clear();
         logger.info("Chat history cleared.");
     }
-
-   /* public void printStatus() {
-        if (isErrorEncountered) {
-            logger.info("Error: " + errorMessage);
-        } else if (isMessageDelivered) {
-            logger.info("Message delivered: " + sentMessage);
-        }
-    }
-
-    public String getCurrentUser() {
-        return currentUser;
-    }
-
-    public String getConnectedUser() {
-        return connectedUser;
-    }
-
-    public List<String> getReceivedMessages() {
-        return new ArrayList<>(receivedMessages);
-    }*/
 
     public List<String> getChatHistory() {
         return new ArrayList<>(chatHistory);
@@ -110,7 +89,7 @@ public class ChatMessage {
     public void addPreviousMessages(List<String> messages) {
         for (String message : messages) {
             chatHistory.add(message);
-            logger.info("Added previous message to chat history: " + message);
+            logger.info(() -> String.format("Added previous message to chat history: %s", message));
         }
     }
 
@@ -123,5 +102,4 @@ public class ChatMessage {
         }
         return userReceivedMessages;
     }
-
 }
