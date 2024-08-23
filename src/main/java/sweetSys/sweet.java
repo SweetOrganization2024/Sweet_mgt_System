@@ -14,7 +14,6 @@ public class sweet {
     private static sweet instance;
     private static final Logger logger = Logger.getLogger(sweet.class.getName());
 
-
     public static sweet getInstance() {
         if (instance == null) {
             instance = new sweet();
