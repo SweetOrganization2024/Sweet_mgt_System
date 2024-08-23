@@ -14,13 +14,13 @@ public class login {
 
     @BeforeClass
     public static void setUp() {
-        sweet.getList_of_people().clear();
+        sweet.getPeopleList().clear();
 
     }
 
     @AfterClass
     public static void tearDown() {
-        sweet.getList_of_people().clear();
+        sweet.getPeopleList().clear();
         System.out.println("Cleanup done.");
     }
 
@@ -42,7 +42,7 @@ public class login {
         assertNotNull("Login failed when it should have succeeded.", loggedInUser);
 
 
-        for (person p: sweet.getList_of_people()){
+        for (person p: sweet.getPeopleList()){
             System.out.println("User name: "+ p.getEmail() + " Passweord: " + p.getPass() + " Type:" + p.getType());
         }
     }
