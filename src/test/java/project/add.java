@@ -5,9 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import sweet_sys.newSweet;
-import sweet_sys.person;
-import sweet_sys.sweet;
+import sweetSys.newSweet;
+import sweetSys.person;
+import sweetSys.sweet;
 
 import static org.junit.Assert.assertTrue;
 
