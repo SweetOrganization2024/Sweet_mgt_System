@@ -12,7 +12,7 @@ public class OrderManager {
     private static int nextOrderId = 1;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
 
-    private OrderManager() {
+    public OrderManager() {
         this.orders = new ArrayList<>();
     }
 
