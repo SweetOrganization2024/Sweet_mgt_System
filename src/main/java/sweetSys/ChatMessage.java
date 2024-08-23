@@ -44,6 +44,7 @@ public class ChatMessage {
         }
     }
 
+
     public void receiveMessage(String message) {
         if (connectedUser != null) {
             receivedMessages.add(message);
