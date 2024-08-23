@@ -199,12 +199,12 @@ public class sweet {
 
     public static void deletesweet1(String ss) {
         List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
             if (!s.getId().equals(ss)) {
                 updatedList.add(s);
             }
         }
-        sweet_sys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
+        sweetSys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
     }
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
