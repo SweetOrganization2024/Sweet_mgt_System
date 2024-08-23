@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class sweet {
     public static List<person> peopleList = new ArrayList<>();
-    public static final List<newSweet> listOfSweet = new ArrayList<>();
+    public static  List<newSweet> listOfSweet = new ArrayList<>();
      private static sweet instance;
     private static final Logger logger = Logger.getLogger(sweet.class.getName());
 
