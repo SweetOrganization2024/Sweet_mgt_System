@@ -300,9 +300,9 @@ public class Main {
                                 return;
                         }
                         for (newSweet s : sweet.getListOfSweet()) {
-                            if (s.getId_of_sweet().equals(idsweet)) {
-                                if (newName != null) s.setName_of_sweet(newName);
-                                if (newType != null) s.setType_of_sweet(newType);
+                            if (s.getId().equals(idsweet)) {
+                                if (newName != null) s.setName(newName);
+                                if (newType != null) s.setType(newType);
                                 if (newPrice != null) s.setPrice(newPrice);
                                 break;
                             }
@@ -395,7 +395,7 @@ public class Main {
                             break;
                         case 7:
                             for (newSweet s : sweet.getListOfSweet()) {
-                                System.out.println("Name: " + s.getName_of_sweet() + ", ID: " + s.getId_of_sweet() + ", Type: " + s.getType_of_sweet() + ", Price: " + s.getPrice());
+                                System.out.println("Name: " + s.getName() + ", ID: " + s.getId() + ", Type: " + s.getType() + ", Price: " + s.getPrice());
                             }
                             break;
                         default:
@@ -436,9 +436,9 @@ public class Main {
                         totalCost = quantity * price;
 
                         for (newSweet sweetItem : sweet.getListOfSweet()) {
-                            if (sweetItem.getId_of_sweet().equals(idd)) {
+                            if (sweetItem.getId().equals(idd)) {
                                 sweetItem.setSale(quantity);
-                                System.out.println(sweetItem.getName_of_sweet() + " " + sweetItem.getSale());
+                                System.out.println(sweetItem.getName() + " " + sweetItem.getSale());
                                 break;
                             }
                         }
@@ -554,7 +554,7 @@ public class Main {
     public static void saveSweetsToFile(List<newSweet> sweetsList, String fileName) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (newSweet sweetItem : sweetsList) {
-                bw.write(sweetItem.getId_of_sweet() + "," + sweetItem.getName_of_sweet() + "," + sweetItem.getType_of_sweet() + "," + sweetItem.getPrice());
+                bw.write(sweetItem.getId() + "," + sweetItem.getName() + "," + sweetItem.getType() + "," + sweetItem.getPrice());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -1028,4 +1028,3 @@ public class Main {
         String body = String.format("Dear Admin, a new account has been created with the following details: Name - %s, Email - %s. Please review and approve if necessary.", newAccountName, newAccountEmail);
         EmailSender.sendEmail(adminEmail, subject, body);
     }
-}
