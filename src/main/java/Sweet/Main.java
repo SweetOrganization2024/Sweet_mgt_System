@@ -85,7 +85,7 @@ public class Main {
                     }
 
                     person newUser = new person(email, password, type, firstName, lastName);
-                    sweet.getList_of_people().add(newUser);
+                    sweet.getPeopleList().add(newUser);
                     System.out.println("Sign up successful!");
                     x=true;
                     saveUserToFile(newUser, "userfile.txt");
@@ -152,7 +152,7 @@ public class Main {
                     }
                     else {
                         String first="";
-                        for(person p: sweet.getList_of_people()){
+                        for(person p: sweet.getPeopleList()){
                             if (p.getEmail().equals(email) && p.getPass().equals(password)){
                                 first=p.getFirstName();
                             }
@@ -655,7 +655,7 @@ public class Main {
         String email = scanner.nextLine();
         person userToUpdate = null;
 
-        for (person p : sweet.getList_of_people()) {
+        for (person p : sweet.getPeopleList()) {
             if (p.getEmail().equals(email)) {
                 userToUpdate = p;
                 break;
@@ -686,7 +686,7 @@ public class Main {
 
     private static void rewriteUserFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("userfile.txt"))) {
-            for (person p : sweet.getList_of_people()) {
+            for (person p : sweet.getPeopleList()) {
                 writer.println(p.getFirstName() + "," + p.getLastName()  + "," + p.getEmail() + "," + p.getPass() + "," + p.getType());
             }
         } catch (IOException e) {
@@ -714,18 +714,18 @@ public class Main {
         }
 
         person newPerson = new person(email, password, type, firstName, lastName);
-        sweet.getList_of_people().add(newPerson);
+        sweet.getPeopleList().add(newPerson);
         saveUserToFile(newPerson, "userfile.txt");
         System.out.println("User added successfully.");
     }
 
     public static void viewAllUsers() {
-        if (sweet.getList_of_people().isEmpty()) {
+        if (sweet.getPeopleList().isEmpty()) {
             System.out.println("No users to display.");
             return;
         }
 
-        for (person p : sweet.getList_of_people()) {
+        for (person p : sweet.getPeopleList()) {
             System.out.println("Name: "+ p.getFirstName() + " "+ p.getLastName() + " Email: "+ p.getEmail() + " Password: "+p.getPass() + " Type: "+ p.getType());
         }
     }
@@ -1008,7 +1008,7 @@ public class Main {
         }
     }
     public static boolean rightlogin(person pp) {
-        for (person p : sweet.getList_of_people()) {
+        for (person p : sweet.getPeopleList()) {
             if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
                 return true;
             }
@@ -1016,7 +1016,7 @@ public class Main {
         return false;
     }
     public static boolean emailexi(String  em){
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(em)) {
                 return true;
             }
