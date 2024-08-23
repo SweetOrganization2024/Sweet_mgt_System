@@ -1,10 +1,11 @@
 package sweetSys;
 import java.util.ArrayList;
+import java.util.List;
 public class DiscountManager {
     private String id;
     private final String description;
     private final double percentage;
-    private static final ArrayList<DiscountManager> discounts = new ArrayList<>();
+    private static final List<DiscountManager> discounts = new ArrayList<>();
 
     public DiscountManager(String id, String description, double percentage) {
         this.id = id;
