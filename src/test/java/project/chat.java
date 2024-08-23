@@ -2,12 +2,11 @@ package project;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import sweetSys.chat_msg;
-
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import sweetSys.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.logging.Logger;
 public class chat {
     private static final Logger logger = Logger.getLogger(chat.class.getName());
 
-    private chat_msg m;
+    private ChatMessage m;
     private String currentUser;
     private String connectedUser;
     private List<String> receivedMessages;
@@ -27,7 +26,7 @@ public class chat {
 
     @Before
     public void setUp() {
-        m = new chat_msg();
+        m = new ChatMessage();
         receivedMessages = new ArrayList<>();
         chatHistory = new ArrayList<>();
         isMessageDelivered = false;
