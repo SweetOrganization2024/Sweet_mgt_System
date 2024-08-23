@@ -21,7 +21,6 @@ public class newSweet {
     public void setSale(int sale1) {
         this.sale = sale+sale1;
     }
-
     public static String printsweet(newSweet sweet) {
         return "ID: " + sweet.getId() + ", Name: " + sweet.getName() + ", Type: " + sweet.getType();
     }
