@@ -44,7 +44,7 @@ public class update {
     public void theUserSelectsAValidSweetWithIDAndNameAndTypeAndPrice(String id, String name, String type, String price) {
         this.id_of_sweet1 = id;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet1)) {
+            if (s.getId().equals(id_of_sweet1)) {
                 isValid = true;
                 break;
             }
@@ -56,9 +56,9 @@ public class update {
     public void theUserEntersTheNewValueToUpdateAnd(String nname, String ttype) {
         if (isValid) {
             for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                    s.setName_of_sweet(nname);
-                    s.setType_of_sweet(ttype);
+                if (s.getId().equals(id_of_sweet1)) {
+                    s.setName(nname);
+                    s.setType(ttype);
                     break;
                 }
             }
@@ -70,7 +70,7 @@ public class update {
         assertTrue(isValid);
         System.out.println("Update done");
         for (newSweet s : sweet.getListOfSweet()) {
-            System.out.println("ID: " + s.getId_of_sweet() + ", Name: " + s.getName_of_sweet() + ", Type: " + s.getType_of_sweet() + ", price:" + s.getPrice());
+            System.out.println("ID: " + s.getId() + ", Name: " + s.getName() + ", Type: " + s.getType() + ", price:" + s.getPrice());
         }
     }
 
@@ -78,8 +78,8 @@ public class update {
     public void theUserEntersTheNewValueToUpdate(String nname) {
         if (isValid) {
             for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                    s.setName_of_sweet(nname);
+                if (s.getId().equals(id_of_sweet1)) {
+                    s.setName(nname);
                     break;
                 }
             }
@@ -90,8 +90,8 @@ public class update {
     public void theUserEntersTheNewTypeToUpdate(String ttype) {
         if (isValid) {
             for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId_of_sweet().equals(id_of_sweet1)) {
-                    s.setType_of_sweet(ttype);
+                if (s.getId().equals(id_of_sweet1)) {
+                    s.setType(ttype);
                     break;
                 }
             }
@@ -102,7 +102,7 @@ public class update {
     public void theUserEntersTheNewPriceToUpdate(String ppric) {
         if (isValid) {
             for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId_of_sweet().equals(id_of_sweet1)) {
+                if (s.getId().equals(id_of_sweet1)) {
                     s.setPrice(ppric);
                     break;
                 }
@@ -134,7 +134,7 @@ public class update {
     public void theUserTriesToUpdateASweetWithAnUnavailableIDOrUnavailableNameOrType(String id, String name, String type) {
         boolean isInvalid = true;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id) || s.getName_of_sweet().equals(name) || s.getType_of_sweet().equals(type)) {
+            if (s.getId().equals(id) || s.getName().equals(name) || s.getType().equals(type)) {
                 isInvalid = false;
                 break;
             }
