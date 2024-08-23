@@ -15,11 +15,11 @@ public class DiscountManager {
         this.percentage = percentage;
     }
 
-    public void setStart() {
+    public void setStart(String start) {
         // Implementation for setting the start date
     }
 
-    public void setEnd() {
+    public void setEnd(String end) {
         // Implementation for setting the end date
     }
 
