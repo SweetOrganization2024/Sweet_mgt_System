@@ -11,7 +11,7 @@ import sweetSys.OrderManager;
 import java.time.LocalDate;
 import static org.junit.Assert.*;
 
-public class order {
+public class order { 
     private OrderManager orderManager;
     private String email;
     private String password;
