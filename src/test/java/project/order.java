@@ -9,7 +9,6 @@ import sweetSys.person;
 import sweetSys.sweet;
 import sweetSys.OrderManager;
 import java.time.LocalDate;
-import java.util.List;
 import static org.junit.Assert.*;
 
 public class order {
@@ -83,7 +82,7 @@ public class order {
     public void aSweetWithIDNameAndTypeIsNotAvailableForOrder(String id, String name, String type) {
         boolean isAvailable = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id) || s.getName_of_sweet().equals(name) || s.getType_of_sweet().equals(type)) {
+            if (s.getId().equals(id) || s.getName().equals(name) || s.getType().equals(type)) {
                 isAvailable = true;
                 break;
             }
