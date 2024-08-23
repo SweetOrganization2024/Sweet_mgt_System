@@ -12,6 +12,7 @@ public class Userfile {
     public static final String FILE_NAME = "userfile.txt";
 
     public Userfile() {
+        //constr
     }
     public static boolean emailIsRegisted (String email){
         for (person p : Userfile.getUsers()) {
