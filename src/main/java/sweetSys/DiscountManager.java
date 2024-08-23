@@ -1,4 +1,4 @@
-package sweet_sys;
+package sweetSys;
 import java.util.ArrayList;
 
 public class DiscountManager {
