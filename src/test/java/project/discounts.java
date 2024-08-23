@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import sweetSys.*;
 import java.text.ParseException;
 
-public class discount {
+public class discounts {
     private sweet AppSweet;
     double result;
     private DiscountManager discountManage;
@@ -14,7 +14,7 @@ public class discount {
     private double percentage=0.0;
     private String start,end;
     boolean found = false;
-    public discount() {
+    public discounts() {
         this.AppSweet = sweet.getInstance();
     }
 
