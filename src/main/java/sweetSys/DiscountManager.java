@@ -26,9 +26,10 @@ public class DiscountManager {
         this.description = description;
         this.percentage = percentage;
     }
-    public static void addDiscount(DiscountManager D) {
-        discounts.add(D);
+    public static void addDiscount(DiscountManager discount) {
+    discounts.add(discount);
     }
+
 
     public String getId() {
         return id;
