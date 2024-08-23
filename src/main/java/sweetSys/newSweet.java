@@ -54,7 +54,7 @@ public class newSweet {
         this.type = type;
     }
 
-    public static boolean if_the_type_sp_or_owner (String email, String password){
+    public static boolean isOwnerOrSupplier (String email, String password){
         for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
