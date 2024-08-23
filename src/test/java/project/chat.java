@@ -139,7 +139,7 @@ public class chat {
     @Then("I should be informed about any steps to resolve the issue")
     public void iShouldBeInformedAboutAnyStepsToResolveTheIssue() {
         String resolutionSteps = "Please check your network connection and try again.";
-        Assert.assertEquals("Resolution steps should be provided", resolutionSteps, "Please check your network connection and try again.");
+        Assert.assertEquals("Resolution steps should be provided",  "Please check your network connection and try again.",resolutionSteps);
     }
 
     @Given("I am in a group chat with multiple users")
