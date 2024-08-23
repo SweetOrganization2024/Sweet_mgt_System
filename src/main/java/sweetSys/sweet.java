@@ -66,7 +66,7 @@ public class sweet {
     public static boolean Search_ID(String id) {
         boolean id_search = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id)) {
+            if (s.getId().equals(id)) {
                 id_search = true;
                 break;
             }
@@ -77,8 +77,8 @@ public class sweet {
 
     public static void print_SweetId(String id_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId_of_sweet().equals(id_of_sweet)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            if (s.getId().equals(id_of_sweet)) {
+                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
 
                 break;
             }
@@ -88,7 +88,7 @@ public class sweet {
     public static boolean Search_name(String name) {
         boolean nameSearch = false;
         for (newSweet s : sweet.getListOfSweet()) { // Assuming 'Sweet' is the correct class name
-            if (s.getName_of_sweet().equals(name)) {
+            if (s.getName().equals(name)) {
                 nameSearch = true;
                 break;
             }
@@ -102,8 +102,8 @@ public class sweet {
     }
     public static void print_Sweetname(String name) {
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            if (s.getName().equals(name)) {
+                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
             }
         }
 
@@ -112,7 +112,7 @@ public class sweet {
     public static boolean Search_name_Type(String name, String type) {
         boolean nametype_search1 = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && (s.getType_of_sweet().equals(type))) {
+            if (s.getName().equals(name) && (s.getType().equals(type))) {
                 nametype_search1 = true;
                 break;
             }
@@ -122,8 +122,8 @@ public class sweet {
 
     public static void Print_Type_name(String name, String Type) {
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && s.getType_of_sweet().equals(Type)) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            if (s.getName().equals(name) && s.getType().equals(Type)) {
+                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
                 break;
             }
         }
@@ -132,7 +132,7 @@ public class sweet {
     public static boolean Search_name_id(String name, String id) {
         boolean nameid_Search = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id))) {
+            if (s.getName().equals(name) && (s.getId().equals(id))) {
                 nameid_Search = true;
                 break;
             }
@@ -143,7 +143,7 @@ public class sweet {
     public static boolean Secrch_all(String name, String id, String type) {
         boolean all = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && (s.getId_of_sweet().equals(id)) && (s.getType_of_sweet().equals(type))) {
+            if (s.getName().equals(name) && (s.getId().equals(id)) && (s.getType().equals(type))) {
                 all = true;
                 break;
             }
@@ -161,9 +161,9 @@ public class sweet {
                 try {
                     int Myprice = Integer.parseInt(priceString);
                     if (Myprice > min && Myprice < max) {
-                        System.out.println("Name : " + s.getName_of_sweet() +
-                                " Id : " + s.getId_of_sweet() +
-                                " Type : " + s.getType_of_sweet() +
+                        System.out.println("Name : " + s.getName() +
+                                " Id : " + s.getId() +
+                                " Type : " + s.getType() +
                                 " Price : " + s.getPrice());
                     }
                 } catch (NumberFormatException e) {
@@ -179,7 +179,7 @@ public class sweet {
     public static boolean validSweet(String name, String id, String type) {
         boolean valid = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && s.getId_of_sweet().equals(id) && s.getType_of_sweet().equals(type) ) {
+            if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type) ) {
                 valid=true;
                 break;}
 
@@ -199,17 +199,17 @@ public class sweet {
 
     public static void deletesweet1(String ss) {
         List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            if (!s.getId_of_sweet().equals(ss)) {
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+            if (!s.getId().equals(ss)) {
                 updatedList.add(s);
             }
         }
-        sweetSys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
+        sweet_sys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
     }
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet) && (s.getId_of_sweet().equals(id))) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            if (s.getName().equals(name_of_sweet) && (s.getId().equals(id))) {
+                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
                 break;
             }
         }
@@ -217,8 +217,8 @@ public class sweet {
 
     public static void Print_name_id_type(String id , String name_of_sweet , String type) {
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name_of_sweet) && (s.getId_of_sweet().equals(id)) && (s.getType_of_sweet().equals(type))) {
-                System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            if (s.getName().equals(name_of_sweet) && (s.getId().equals(id)) && (s.getType().equals(type))) {
+                System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
 
                 break;
             }
@@ -228,7 +228,7 @@ public class sweet {
     public static String getThePrice(String name, String type) {
         String result= "";
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName_of_sweet().equals(name) && s.getType_of_sweet().equals(type)) {
+            if (s.getName().equals(name) && s.getType().equals(type)) {
                 result = s.getPrice();
                 break;
             }
