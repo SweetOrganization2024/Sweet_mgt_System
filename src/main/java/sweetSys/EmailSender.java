@@ -11,6 +11,9 @@ public class EmailSender {
     private static final String EMAIL_PASSWORD = "dzfp eitg yfkg nspe";
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
+    public EmailSender(){
+
+}
     private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
