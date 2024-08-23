@@ -23,7 +23,7 @@ public class signup {
 
     @AfterClass
     public static void tearDown() {
-        sweet.getList_of_people().clear();
+        sweet.getPeopleList().clear();
         System.out.println("Cleanup done.");
     }
 
@@ -121,10 +121,10 @@ public class signup {
             }
             default -> throw new AssertionError("Unexpected message: " + message);
         }
-        for (person pp: sweet.getList_of_people()){
+        for (person pp: sweet.getPeopleList()){
             System.out.println(pp.getEmail() + " " + pp.getType());
         }
-        System.out.println(sweet.getList_of_people().size());
+        System.out.println(sweet.getPeopleList().size());
     }
 
     private boolean isEmailRegistered(String email) {
