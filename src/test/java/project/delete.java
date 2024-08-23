@@ -23,7 +23,7 @@ public class delete {
         this.password = password;
 
 
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 break;
@@ -81,7 +81,7 @@ public class delete {
     public void theUserLoginAsNotOwnerOrSupplierWithAnd(String string, String string2) {
         boolean isRegistered = false;
 
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 isRegistered = true;
