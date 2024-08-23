@@ -8,7 +8,7 @@ import sweetSys.sweet;
 import static org.junit.Assert.*;
 
 public class search {
-
+    
     private String id_of_sweet;
     private String name_of_sweet;
     private String type_of_sweet;
