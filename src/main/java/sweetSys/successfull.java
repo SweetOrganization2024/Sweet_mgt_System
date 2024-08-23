@@ -2,37 +2,37 @@ package sweetSys;
 
 import java.util.regex.Pattern;
 
-public class Successfull {
-    private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(SIMPLE_EMAIL_PATTERN);
+public class successfull {
+    private static final String SIMPLE_EMAIL_PATTERN ="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 
-    private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{8,}$";
+    String password;
+    String email;
 
-    private final Sweet sweetService; 
-
-    private String password;
-    private String email;
-
-    public Successfull(String password, String email, Sweet sweetService) {
-        this.password = password;
-        this.email = email;
-        this.sweetService = sweetService;
+    public successfull(String pass, String em) {
+        this.password = pass;
+        this.email = em;
     }
 
-    public Successfull(Sweet sweetService) {
-        this.sweetService = sweetService;
+    public successfull() {
     }
 
     public static boolean isValidEmail(String email) {
-        return email != null && !email.isEmpty() && EMAIL_PATTERN.matcher(email).matches();
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        return pattern.matcher(email).matches();
     }
 
     public static boolean isValidPassword(String password) {
-        return password != null && password.matches(PASSWORD_PATTERN);
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]+$";
+        return password.length() >= 8 && password.matches(pattern);
     }
 
-    public void addToArray(String password, String email, String firstName, String lastName, String type) {
-        Person person = new Person(email, password, type, firstName, lastName);
-        sweetService.setToList(person);
+    public void addtoarray(String password, String email, String firstName, String finalName, String type) {
+        sweet obj = new sweet();
+        person b = new person(email, password, type, firstName, finalName);
+        obj.setToList(b);
     }
+
 }
