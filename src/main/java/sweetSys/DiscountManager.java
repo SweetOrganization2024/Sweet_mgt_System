@@ -21,7 +21,7 @@ public class DiscountManager {
         // Implementation for setting the end date
     }
 
-    public static ArrayList<DiscountManager> getDiscounts() {
+    public static List<DiscountManager> getDiscounts() { // Returning List type
         return discounts;
     }
 
