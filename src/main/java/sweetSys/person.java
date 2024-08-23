@@ -21,7 +21,7 @@ public class person {
     }
 
     public  static person retperson(person p){
-        for (person pp : sweet.getList_of_people()) {
+        for (person pp : sweet.getPeopleList()) {
             if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
                 return pp;
             }
@@ -54,7 +54,7 @@ public class person {
         this.type = type;
     }
     public static boolean findemail(person p){
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(p.getEmail())) {
                 return true;
             }
@@ -62,7 +62,7 @@ public class person {
         return false;
     }
     public static boolean ifpersonsignup(person pp) {
-        for (person p : sweet.getList_of_people()) {
+        for (person p : sweet.getPeopleList()) {
             if (pp.getEmail().equals(p.getEmail())) {
                 if (!pp.getPass().equals(p.getPass())) {
                     sweet.is_loggin = false;
@@ -73,7 +73,7 @@ public class person {
         return false;
     }
     public static boolean isRightType( String email, String pass, String ty){
-        for( person p : sweet.getList_of_people()){
+        for( person p : sweet.getPeopleList()){
             if(p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)){
                 return true;
             }
