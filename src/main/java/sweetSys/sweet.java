@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class sweet {
-    public static List<person> list_of_people = new ArrayList<>();
+    public static List<person> peopleList = new ArrayList<>();
     public static ArrayList<newSweet> listOfSweet = new ArrayList<>();
     private static sweet instance;
 
@@ -39,7 +39,7 @@ public class sweet {
                     String userEmail = parts[2].trim();
                     String userPassword = parts[3].trim();
                     String userType = parts[4].trim();
-                    list_of_people.add(new person(userEmail, userPassword, userType, firstName, lastName));
+                    peopleList.add(new person(userEmail, userPassword, userType, firstName, lastName));
                 }
             }
         } catch (IOException e) {
@@ -48,11 +48,11 @@ public class sweet {
     }
 
     public static List<person> getList_of_people() {
-        return list_of_people;
+        return peopleList;
     }
 
     public void setToList(person p) {
-        list_of_people.add(p);
+        peopleList.add(p);
     }
 
     public static void addsweet(newSweet sweet) {
@@ -98,7 +98,7 @@ public class sweet {
 
 
     public static void deleteperson(person p){
-        list_of_people.remove(p);
+        peopleList.remove(p);
     }
     public static void print_Sweetname(String name) {
         for (newSweet s : sweet.getListOfSweet()) {
