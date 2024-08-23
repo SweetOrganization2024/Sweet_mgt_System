@@ -47,7 +47,7 @@ public class sweet {
         }
     }
 
-    public static List<person> getList_of_people() {
+    public static List<person> getPeopleList() {
         return peopleList;
     }
 
@@ -188,7 +188,7 @@ public class sweet {
     }
     public static boolean validPeople(String email , String pass) {
         boolean isUserRegistered = false;
-        for (person f : sweet.getList_of_people()) {
+        for (person f : sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(pass) && f.getType().equals("USER")) {
                 isUserRegistered = true;
                 break;
@@ -237,7 +237,7 @@ public class sweet {
     }
 
     public static boolean idSupOrOwner(String email,String pass){
-        for (person p : sweet.getList_of_people()){
+        for (person p : sweet.getPeopleList()){
             if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner"))){
                 return true;
             }
@@ -246,14 +246,14 @@ public class sweet {
     }
 
     public static person retperson(String email,String pass){
-        for (person p : getList_of_people()){
+        for (person p : getPeopleList()){
             if (p.getEmail().equals(email) && p.getPass().equals(pass))
                 return p;
         }
         return null;
     }
     public static boolean idSupOrOwnerorAD(String email,String pass){
-        for (person p : sweet.getList_of_people()){
+        for (person p : sweet.getPeopleList()){
             if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner") || p.getType().equals("ADMIN"))){
                 return true;
             }
