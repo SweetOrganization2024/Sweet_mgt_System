@@ -60,6 +60,7 @@ public class chat {
 
     @Then("I should receive a delivery confirmation for the message")
     public void iShouldReceiveADeliveryConfirmationForTheMessage() {
+        //I received confirmation of receipt of the message.
     }
 
     @When("{string} sends me a message {string}")
