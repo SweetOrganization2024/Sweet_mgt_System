@@ -188,7 +188,7 @@ public class search {
     @Then("I should see all sweets")
     public void iShouldSeeAllSweets() {
         for (newSweet s : sweet.getListOfSweet()) {
-            System.out.println("Name : " + s.getName_of_sweet() + " Id : " + s.getId_of_sweet() + " Type :" + s.getType_of_sweet() + " Price : " + s.getPrice());
+            System.out.println("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
 
         }
 
