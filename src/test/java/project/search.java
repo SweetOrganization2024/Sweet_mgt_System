@@ -55,7 +55,7 @@ public class search {
 
     @Then("I should not see any result")
     public void iShouldNotSeeAnyResult() {
-
+        ///
     }
 
     @Then("The massage  no result appears")
