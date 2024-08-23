@@ -13,7 +13,6 @@ public class newSweet {
         this.type = type;
         this.price = price;
     }
-
     public int getSale() {
         return sale;
     }
