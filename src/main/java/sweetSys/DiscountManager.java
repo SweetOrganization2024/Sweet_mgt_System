@@ -7,12 +7,6 @@ public class DiscountManager {
     private final double percentage;
     private static final ArrayList<DiscountManager> discounts = new ArrayList<>();
 
-    public void setStart(String start) {
-    }
-
-    public void setEnd(String end) {
-    }
-
     public static ArrayList<DiscountManager> getDiscounts() {
         return discounts;
     }
