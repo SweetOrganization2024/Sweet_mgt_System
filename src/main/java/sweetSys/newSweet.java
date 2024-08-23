@@ -65,7 +65,7 @@ public class newSweet {
         }
         return false;
     }
-    public static boolean if_the_type_AD_or_USR (String email, String password){
+    public static boolean isAdminOrUser (String email, String password){
         for (person f : sweet.getList_of_people()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
