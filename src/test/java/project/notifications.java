@@ -3,7 +3,6 @@ package project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import javax.mail.MessagingException;
 import sweetSys.*;
 
 import static org.junit.Assert.assertEquals;
