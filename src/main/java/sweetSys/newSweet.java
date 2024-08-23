@@ -77,7 +77,7 @@ public class newSweet {
     }
 
     public static boolean isAdd(String id){
-        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
             if (s.getId().equals(id)) {
                 return true;
             }
