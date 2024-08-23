@@ -39,7 +39,7 @@ public class add {
     @Given("The user login as Owner or Supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
 
-        boolean isRegistered = newSweet.if_the_type_sp_or_owner(email,password);
+        boolean isRegistered = newSweet.isOwnerOrSupplier(email,password);
         person.isRightType(email,password,type_of_sweet);
 
         isUserLoggedIn = isRegistered;
