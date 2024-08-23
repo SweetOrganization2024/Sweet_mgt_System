@@ -7,19 +7,15 @@ import java.util.logging.Logger;
 public class ChatMessage {
     private String currentUser;
     private String connectedUser;
-    private String sentMessage;
-    private List<String> receivedMessages;
-    private List<String> chatHistory;
-    private boolean isMessageDelivered;
-    private boolean isErrorEncountered;
+    private final List<String> receivedMessages;
+    private final List<String> chatHistory;
     private String errorMessage;
     private static final Logger logger = Logger.getLogger(ChatMessage.class.getName());
 
     public ChatMessage() {
         chatHistory = new ArrayList<>();
         receivedMessages = new ArrayList<>();
-        isMessageDelivered = false;
-        isErrorEncountered = false;
+        boolean isMessageDelivered = false;
     }
 
     public void logIn(String user) {
@@ -34,12 +30,10 @@ public class ChatMessage {
 
     public void sendMessage(String message) {
         if (connectedUser != null) {
-            this.sentMessage = message;
             receivedMessages.add(message);
             chatHistory.add(message);
             logger.info("Message sent to " + connectedUser + ": " + message);
         } else {
-            this.isErrorEncountered = true;
             this.errorMessage = "Unable to send message, no user connected.";
         }
     }
@@ -51,7 +45,6 @@ public class ChatMessage {
             chatHistory.add(message);
             logger.info("Received message: " + message);
         } else {
-            this.isErrorEncountered = true;
             this.errorMessage = "Unable to receive message, no user connected.";
             logger.info(errorMessage);
         }
@@ -68,7 +61,7 @@ public class ChatMessage {
         } else {
             logger.info("Search term not found.");
         }
-    }
+}
 
     public void deleteMessage(String message) {
         chatHistory.remove(message);
@@ -80,19 +73,22 @@ public class ChatMessage {
         logger.info("Chat history cleared.");
     }
 
-    /*public void printStatus() {
+   /* public void printStatus() {
         if (isErrorEncountered) {
             logger.info("Error: " + errorMessage);
         } else if (isMessageDelivered) {
             logger.info("Message delivered: " + sentMessage);
         }
     }
+
     public String getCurrentUser() {
         return currentUser;
     }
+
     public String getConnectedUser() {
         return connectedUser;
     }
+
     public List<String> getReceivedMessages() {
         return new ArrayList<>(receivedMessages);
     }*/
@@ -127,4 +123,5 @@ public class ChatMessage {
         }
         return userReceivedMessages;
     }
+
 }
