@@ -1,12 +1,13 @@
 package sweetSys;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiscountManager {
     private String id;
     private final String description;
     private final double percentage;
-    private static final ArrayList<DiscountManager> discounts = new ArrayList<>();
+    private static final List<DiscountManager> discounts = new ArrayList<>();
 
     public DiscountManager(String id, String description, double percentage) {
         this.id = id;
@@ -14,15 +15,15 @@ public class DiscountManager {
         this.percentage = percentage;
     }
 
-    public void setStart(String start) {
+    public void setStart() {
         // Implementation for setting the start date
     }
 
-    public void setEnd(String end) {
+    public void setEnd() {
         // Implementation for setting the end date
     }
-
-    public static ArrayList<DiscountManager> getDiscounts() {
+    
+    public static List<DiscountManager> getDiscounts() {
         return discounts;
     }
 
