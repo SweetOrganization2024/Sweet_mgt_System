@@ -52,10 +52,6 @@ public class sweet {
         }
     }
 
-    public static List<person> getPeopleList() {
-        return peopleList;
-    }
-
     public void setToList(person p) {
         peopleList.add(p);
     }
