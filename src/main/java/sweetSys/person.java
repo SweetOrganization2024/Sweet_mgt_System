@@ -22,14 +22,13 @@ public class person {
 
     public  static person retperson(person p){
         for (person pp : sweet.getList_of_people()) {
-            if (p.getEmail().equals(p.getEmail()) && p.getPass().equals(p.getPass())) {
+            if (p.getEmail().equals(pp.getEmail()) && p.getPass().equals(pp.getPass())) {
                 return pp;
             }
         }
         return null;
     }
-    //public person() {
-    //}
+  
 
     public person(String email, String password, String type, String firstName, String lastName) {
         this.email = email;
@@ -38,15 +37,6 @@ public class person {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    //@Override
-   /* public String toString() {
-        return "person{" +
-                "email='" + email + '\'' +
-                ", pass='" + pass + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }*/
 
     public String getEmail() {
         return email;
