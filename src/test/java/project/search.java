@@ -28,7 +28,7 @@ public class search {
     @When("I select search by sweet id {string}")
     public void iSelectSearchBySweetId(String id) {
         this.idOfSweet = id;
-        boolean idSearch = Sweet.searchID(id);
+        idSearch = Sweet.searchID(id);
         assertTrue(idSearch);
     }
 
@@ -47,7 +47,7 @@ public class search {
     @When("I select search by sweet id does not exist {string}")
     public void iSelectSearchBySweetIdDoesNotExist(String id) {
         this.idOfSweet = id;
-        boolean idSearch = Sweet.searchID(idOfSweet);
+        idSearch = Sweet.searchID(idOfSweet);
         assertFalse(idSearch);
 
 
@@ -68,7 +68,7 @@ public class search {
     @When("I select search by sweet name {string}")
     public void iSelectSearchBySweetName(String name) {
         this.nameOfSweet = name;
-        boolean nameSearch = Sweet.searchName(name);
+         nameSearch = Sweet.searchName(name);
         assertTrue(nameSearch);
 
     }
@@ -82,7 +82,7 @@ public class search {
     @When("I select search by sweet name does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExist(String name) {
         this.nameOfSweet = name;
-        boolean localNameSearch = Sweet.searchName(nameOfSweet);
+        nameSearch = Sweet.searchName(nameOfSweet);
 assertFalse(localNameSearch);
     }
 
