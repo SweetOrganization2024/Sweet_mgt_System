@@ -144,10 +144,9 @@ public class notifications {
 
     @When("the account is approved")
     public void the_account_is_approved() {
-        EmailSender emailSender = new EmailSender();
         emailSubject = "Account Approved";
         emailBody = "Your account has been approved.";
-        emailSender.sendEmail(recipientEmail, emailSubject, emailBody);
+       EmailSender.sendEmail(recipientEmail, emailSubject, emailBody);
     }
 
     @Then("an approval email should be sent to {string}")
