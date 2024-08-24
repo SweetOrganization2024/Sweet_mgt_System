@@ -165,7 +165,7 @@ public class notifications {
 
     @Then("the email should be sent by {string}")
     public void the_email_should_be_sent_by(String senderEmail) {
-        assertEquals(senderEmail, "SweetSystemInstitution@gmail.com");
+        assertEquals("SweetSystemInstitution@gmail.com", senderEmail);
     }
 
 
