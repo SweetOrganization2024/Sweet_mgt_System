@@ -34,6 +34,7 @@ Feature:order
       | 05          | Vegan carrot cake     | Vegetarian diet    | incoremail.com      | 4746f2781     | 3            | 150         | 8765432187654321  | 01/25           |
       | 06          | Macaron               | zero sugar         | incoremail.com      | 4746f2781     | 1            | 50          | 1122334455667788  | 11/23           |
 
+ 
   Scenario Outline: View order history
     Given a user with Email "<email>" and password "<password>" is logged in
     When the user requests to view their order history
