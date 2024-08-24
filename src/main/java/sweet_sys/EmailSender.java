@@ -1,4 +1,5 @@
 package sweet_sys;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
@@ -11,10 +12,9 @@ public class EmailSender {
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
     public EmailSender() {
-        // This constructor is intentionally left empty. It is provided for future
-        // extensibility or if initialization logic is needed later. Currently, there
-        // are no instance-specific fields to initialize.
+        //
     }
+
     public static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -32,7 +32,7 @@ public class EmailSender {
             }
         });
     }
-   
+
     public static void sendEmail(String toEmail, String subject, String body) {
         if (toEmail == null || toEmail.isEmpty()) {
             logger.warning("Email address is not provided.");
@@ -47,20 +47,26 @@ public class EmailSender {
             throw new IllegalArgumentException("Email body must be provided.");
         }
 
-    try {
-        Message message = new MimeMessage(getSession());
-        message.setFrom(new InternetAddress(EMAIL_USERNAME));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-        message.setSubject(subject);
-        message.setText(body);
-
-        Transport.send(message);
-        logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
-    } catch (MessagingException e) {
-        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
-        throw new RuntimeException(String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject), e);
+        try {
+            Message message = new MimeMessage(getSession());
+            message.setFrom(new InternetAddress(EMAIL_USERNAME));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject(subject);
+            message.setText(body);
+            Transport.send(message);
+            logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
+        } catch (MessagingException e) {
+            logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
+            throw new EmailSendingException(
+                    String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject),
+                    e
+            );
+        }
     }
+
+    private static class EmailSendingException extends RuntimeException {
+        public EmailSendingException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
-
-
 }
