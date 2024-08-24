@@ -1,5 +1,4 @@
 package project;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,8 +13,7 @@ public class persontest {
     private String type1;
     private String lastName1;
     private String firstName1;
-    boolean validEmail = false, validPass = false;
-
+    
     @Given("a person with email {string}, password {string}, type {string}, first name {string}, and last name {string}")
     public void createFullPerson(String email, String password, String type, String firstName, String lastName) {
         email1 = email;
