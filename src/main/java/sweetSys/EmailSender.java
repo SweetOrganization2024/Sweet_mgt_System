@@ -12,8 +12,9 @@ public final class EmailSender {
     private static final String EMAIL_PASSWORD = System.getenv("password");
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
+    
     private EmailSender() {
-        // This constructor is intentionally left empty to prevent instantiation
+        // Prevent instantiation
     }
 
     public static Properties getProperties() {
