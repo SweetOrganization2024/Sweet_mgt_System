@@ -19,7 +19,6 @@ private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-
         }
         return pattern.matcher(email).matches();
     }
-
     public static boolean isValidPassword(String password) {
         String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]+$";
         return password.length() >= 8 && password.matches(pattern);
