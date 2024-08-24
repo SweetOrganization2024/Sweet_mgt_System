@@ -63,7 +63,7 @@ public class order {
     @When("the user places an order with a total price of {string}")
     public void theUserPlacesAnOrderWithATotalPriceOf(String totalPrice) {
         this.totalPrice = totalPrice;
-        String orderId = "order" + (orderManager.getOrders().size() + 1); // Generate a new order ID
+        orderId = "order" + (orderManager.getOrders().size() + 1); // Generate a new order ID
         LocalDate orderDate = LocalDate.now();
         double cost = Double.parseDouble(totalPrice);
         orderManager.addOrder(orderId, orderDate, cost);
