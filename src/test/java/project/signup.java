@@ -103,9 +103,7 @@ public class signup {
                 throw new AssertionError("Expected confirm password is required error, but it was not");
             }
         } else {
-            Successfull s = new Successfull(password, email);
 
-            // Validate based on the expected message
             switch (message) {
                 case "invalid email syntax":
                     if (!Successfull.isValidEmail(email)) {
