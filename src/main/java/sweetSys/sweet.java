@@ -13,7 +13,6 @@ public class sweet {
     public static  List<newSweet> listOfSweet = new ArrayList<>();
      private static sweet instance;
     private static final Logger logger = Logger.getLogger(sweet.class.getName());
-    private static final Logger LOGGER = Logger.getLogger(sweet.class.getName());
 
 
     public static sweet getInstance() {
@@ -51,7 +50,7 @@ public class sweet {
                 }
             }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "An error occurred", e);
+            logger.log(Level.SEVERE, "An error occurred", e);
         }
     }
 
