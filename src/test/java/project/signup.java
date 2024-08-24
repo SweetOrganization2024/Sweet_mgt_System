@@ -71,9 +71,15 @@ public class signup {
         confirmPassword = pass2;
     }
 
-    @Then("a {string} should appear")
+  @Then("a {string} should appear")
     public void aMessageShouldAppear(String message) {
-        if (email.isEmpty()) {
+        if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+            if (message.equals("email and password are required")) {
+                System.out.println("Email and password are required.");
+            } else {
+                throw new AssertionError("Expected email and password are required error, but it was not");
+            }
+        } else if (email.isEmpty()) {
             if (message.equals("email is required")) {
                 System.out.println("Email is required.");
             } else {
@@ -100,6 +106,7 @@ public class signup {
         } else {
             successfull s = new successfull(password, email);
 
+            // Validate based on the expected message
             switch (message) {
                 case "invalid email syntax":
                     if (!successfull.isValidEmail(email)) {
@@ -129,11 +136,19 @@ public class signup {
                         throw new AssertionError("Expected password mismatch error, but passwords matched");
                     }
                     break;
+                case "successful signup":
+                    // Add logic to verify successful signup, e.g., check if user is added
+                    if (isEmailRegistered(email)) {
+                        throw new AssertionError("Signup failed, email is already registered.");
+                    }
+                    System.out.println("Signup was successful.");
+                    break;
                 default:
                     throw new AssertionError("Unexpected message: " + message);
             }
         }
     }
+
 
     private boolean isEmailRegistered(String email) {
         return Userfile.emailIsRegisted(email);
