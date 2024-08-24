@@ -3,9 +3,9 @@ package project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweet_sys.newSweet;
-import sweet_sys.person;
-import sweet_sys.sweet;
+import sweet_sys.NewSweet;
+import sweet_sys.Person;
+import sweet_sys.Sweet;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,9 +13,9 @@ import static org.junit.Assert.assertTrue;
 public class delete {
     private String email;
     private String password;
-    private String id_of_sweet;
-    private String name_of_sweet;
-    private String type_of_sweet;
+    private String idOfSweet;
+    private String nameOfSweet;
+    private String typeOfSweet;
     
     @Given("The user login as owner or supplier with {string} and {string}")
     public void theUserLoginAsOwnerOrSupplierWithAnd(String email, String password) {
@@ -23,7 +23,7 @@ public class delete {
         this.password = password;
 
 
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 break;
@@ -31,16 +31,14 @@ public class delete {
         }
 
     }
-
-
     @When("The information is valid name is {string} and id is {string} and type is {string} and price is {string}")
     public void theInformationIsValidNameIsAndIdIsAndTypeIs(String name, String id, String type, String price) {
-        this.id_of_sweet = id;
-        this.name_of_sweet = name;
-        this.type_of_sweet = type;
+        this.idOfSweet = id;
+        this.nameOfSweet = name;
+        this.typeOfSweet = type;
 
         boolean isValid = false;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type)) {
                 isValid = true;
                 break;
@@ -52,11 +50,11 @@ public class delete {
 
     @Then("The specified sweet must be deleted from sweet list")
     public void theSpecifiedSweetMustBeDeletedFromSweetList() {
-        newSweet sweetToDelete = null;
+        NewSweet sweetToDelete = null;
         boolean isValid = false;
 
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName().equals(name_of_sweet) && s.getId().equals(id_of_sweet) && s.getType().equals(type_of_sweet)) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
+            if (s.getName().equals(nameOfSweet) && s.getId().equals(idOfSweet) && s.getType().equals(typeOfSweet)) {
                 sweetToDelete = s;
                 isValid = true;
                 break;
@@ -64,12 +62,12 @@ public class delete {
         }
 
         if (isValid) {
-            sweet.deletesweet(sweetToDelete);
+            Sweet.deletesweet(sweetToDelete);
         }
 
         assertTrue("Sweet should be successfully deleted", isValid);
-        for (newSweet s : sweet.getListOfSweet()) {
-            System.out.println(newSweet.printsweet(s));
+        for (NewSweet s : Sweet.getListOfSweet()) {
+            System.out.println(NewSweet.printsweet(s));
         }
     }
 
@@ -81,7 +79,7 @@ public class delete {
     public void theUserLoginAsNotOwnerOrSupplierWithAnd(String string, String string2) {
         boolean isRegistered = false;
 
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 isRegistered = true;
@@ -95,7 +93,7 @@ public class delete {
     @When("the user deletes a sweet with not available id is {string} or not available name is {string} or type is {string}")
     public void theUserDeletesASweetWithNotAvailableIdIsOrNotAvailableNameIsOrTypeIs(String id, String name, String type) {
         boolean isValid = true;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name) || s.getId().equals(id) || s.getType().equals(type)) {
                 isValid = false;
                 break;

@@ -2,14 +2,14 @@ package sweet_sys;
 
 import java.util.regex.Pattern;
 
-public class successfull {
+public class Successfull {
 private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final Pattern pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 
     String password;
     String email;
 
-    public successfull(String pass, String em) {
+    public Successfull(String pass, String em) {
         this.password = pass;
         this.email = em;
     }
@@ -25,8 +25,8 @@ private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-
     }
 
     public void addtoarray(String password, String email, String firstName, String finalName, String type) {
-        sweet obj = new sweet();
-        person b = new person(email, password, type, firstName, finalName);
+        Sweet obj = new Sweet();
+        Person b = new Person(email, password, type, firstName, finalName);
         obj.setToList(b);
     }
 

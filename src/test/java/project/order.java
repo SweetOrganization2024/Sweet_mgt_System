@@ -4,9 +4,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweet_sys.newSweet;
-import sweet_sys.person;
-import sweet_sys.sweet;
+import sweet_sys.NewSweet;
+import sweet_sys.Person;
+import sweet_sys.Sweet;
 import sweet_sys.OrderManager;
 import java.time.LocalDate;
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class order { 
-    private sweet AppSweet;
+    private Sweet appSweet;
     private OrderManager orderManager;
     private String email;
     private String password;
@@ -24,15 +24,15 @@ public class order {
     private String totalPrice;
     private boolean isUserRegistered = false;
     private boolean cancelled = false;
-    private String id_of_sweet1;
-    private String name_of_sweet1;
-    private String type_of_sweet1;
+    private String idOfSweet1;
+    private String nameOfSweet1;
+    private String typeOfSweet1;
     private String quantity;
 
 
 
     public order() {
-        this.AppSweet = sweet.getInstance();
+        this.appSweet = Sweet.getInstance();
         this.orderManager = new OrderManager();
     }
     @Before
@@ -43,15 +43,15 @@ public class order {
 
 
     @Given("a sweet with ID {string}, name {string}, and type {string} is available for order for user with Email {string} and password {string}")
-    public void aSweetWithIDNameAndTypeIsAvailableForOrderForUserWithEmailAndPassword(String ID, String NAME, String TYPE, String EMAIL, String PASSWORD) {
-        this.id_of_sweet1 = ID;
-        this.name_of_sweet1 = NAME;
-        this.type_of_sweet1 = TYPE;
-        this.email = EMAIL;
-        this.password = PASSWORD;
-        boolean isValidSweet = sweet.validSweet(name_of_sweet1,id_of_sweet1,type_of_sweet1);
+    public void aSweetWithIDNameAndTypeIsAvailableForOrderForUserWithEmailAndPassword(String id , String name , String type, String email, String password) {
+        this.idOfSweet1 = id;
+        this.nameOfSweet1 = name;
+        this.typeOfSweet1 = type;
+        this.email = email;
+        this.password = password;
+        boolean isValidSweet = Sweet.validSweet(nameOfSweet1, idOfSweet1, typeOfSweet1);
 
-        boolean isValidUser = sweet.validPeople(email,password);
+        boolean isValidUser = Sweet.validPeople(email,password);
         assertTrue("Sweet should be valid and user should be registered", isValidSweet && isValidUser);
     }
 
@@ -87,7 +87,7 @@ public class order {
     @Given("a sweet with ID {string}, name {string}, and type {string} is not available for order")
     public void aSweetWithIDNameAndTypeIsNotAvailableForOrder(String id, String name, String type) {
         boolean isAvailable = false;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getId().equals(id) || s.getName().equals(name) || s.getType().equals(type)) {
                 isAvailable = true;
                 break;
@@ -102,8 +102,8 @@ public class order {
     }
 
     @When("the user enters payment information with card number {string} and expiration date {string}")
-    public void theUserEntersPaymentInformationWithCardNumberAndExpirationDate(String card_number, String expiration_date) {
-        System.out.println("Payment info: Card number = " + card_number + ", Expiration date = " + expiration_date);
+    public void theUserEntersPaymentInformationWithCardNumberAndExpirationDate(String cardNumber, String expirationDate) {
+        System.out.println("Payment info: Card number = " + cardNumber + ", Expiration date = " + expirationDate);
     }
 
     @Then("the system should confirm successful payment and provide an order confirmation with order number and estimated delivery date")
@@ -112,8 +112,8 @@ public class order {
     }
 
     @Given("an order with order number {string} exists")
-    public void anOrderWithOrderNumberExists(String order_n) {
-        this.orderId = order_n;
+    public void anOrderWithOrderNumberExists(String orderN) {
+        this.orderId = orderN;
     }
 
     @When("the user cancels the order")
@@ -121,18 +121,17 @@ public class order {
         orderManager.cancelOrder(orderId);
         cancelled = true;
     }
-
     @Then("the system should confirm that the order with order number {string} has been cancelled")
     public void theSystemShouldConfirmThatTheOrderWithOrderNumberHasBeenCancelled(String ordernumber) {
         assertTrue("Order should be cancelled", cancelled);
     }
 
     @Given("a user with Email {string} and password {string} is logged in")
-    public void aUserWithEmailAndPasswordIsLoggedIn(String EMAIL, String PASSWORD) {
-        this.email = EMAIL;
-        this.password = PASSWORD;
-        for (person f : sweet.getPeopleList()) {
-            if (f.getEmail().equals(email) && f.getPass().equals(password) && f.getType().equals("USER")) {
+    public void aUserWithEmailAndPasswordIsLoggedIn(String email, String password) {
+        this.email = email;
+        this.password = password;
+        for (Person f : Sweet.getPeopleList()) {
+            if (f.getEmail().equals(this.email) && f.getPass().equals(this.password) && f.getType().equals("USER")) {
                 isUserRegistered = true;
                 break;
             }
@@ -161,7 +160,7 @@ public class order {
     @Then("the system should log a warning indicating that the order with order number {string} is already cancelled")
     public void theSystemShouldLogAWarningIndicatingThatTheOrderWithOrderNumberIsAlreadyCancelled(String number) {
        boolean x=false;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (number != s.getId()){
                 x=true;
                 System.out.println("the order already cancelled");

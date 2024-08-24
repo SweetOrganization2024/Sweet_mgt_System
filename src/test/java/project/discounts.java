@@ -7,7 +7,7 @@ import java.text.ParseException;
 public class discounts {
     double result;
     private DiscountManager discountManage;
-    private newSweet sweetProduct;
+    private NewSweet sweetProduct;
     private String id ="";
     private String description="";
     private double percentage=0.0;
@@ -16,9 +16,9 @@ public class discounts {
    
     @Given("I am logged in as an Spplier or Owner with {string} and {string}")
     public void iAmLoggedInAsAnSpplierOrOwnerWithAnd(String email, String pass) {
-        sweet.idSupOrOwner(email,pass);
-        for (newSweet s:sweet.getListOfSweet()){
-            System.out.println(newSweet.printsweet(s));
+        Sweet.idSupOrOwner(email,pass);
+        for (NewSweet s: Sweet.getListOfSweet()){
+            System.out.println(NewSweet.printsweet(s));
         }
     }
 
@@ -77,7 +77,7 @@ public class discounts {
     @And("the sweet product with ID {string} has a price of {string}")
     public void the_sweet_product_with_ID_has_a_price_of(String sweetId, String price) {
         boolean val=false;
-        for (newSweet n: sweet.getListOfSweet()){
+        for (NewSweet n: Sweet.getListOfSweet()){
             if(n.getId().equals(sweetId) && n.getPrice().equals(price)){
                 val=true;
                 break;

@@ -4,7 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import sweet_sys.FinancialReportGenerator;
-import sweet_sys.sweet;
+import sweet_sys.Sweet;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 public class financialReportsGeneration {
@@ -16,7 +16,7 @@ public class financialReportsGeneration {
     public void iAmLoggedInAsASupplierOrOwnerOrADMINWithAnd(String em, String pas) {
         email=em;
         password=pas;
-        if(sweet.idSupOrOwnerorAD(email,password)){
+        if(Sweet.idSupOrOwnerorAD(email,password)){
             valid=true;
         }
         assertTrue(valid);
@@ -36,7 +36,7 @@ public class financialReportsGeneration {
     public void iAmLoggedInAsAUserWithAnd(String em, String pas) {
         email=em;
         password=pas;
-        if(sweet.idSupOrOwnerorAD(email,password)){
+        if(Sweet.idSupOrOwnerorAD(email,password)){
             valid=true;
         }
         assertFalse(valid);

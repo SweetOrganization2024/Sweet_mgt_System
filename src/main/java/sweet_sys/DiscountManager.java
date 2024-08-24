@@ -49,7 +49,7 @@ public class DiscountManager {
         double dis = 0.0;
         double originalPrice;
         double per = d.getPercentage();
-        for (newSweet n : sweet.getListOfSweet()) {
+        for (NewSweet n : Sweet.getListOfSweet()) {
             if (n.getId().equals(id)) {
                 originalPrice = Double.parseDouble(n.getPrice());
                 dis = originalPrice * (per / 100);

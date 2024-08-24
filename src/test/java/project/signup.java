@@ -16,12 +16,12 @@ public class signup {
 
     @BeforeClass
     public static void setUp() {
-        sweet.getInstance();
+        Sweet.getInstance();
     }
 
     @AfterClass
     public static void tearDown() {
-        sweet.getPeopleList().clear();
+        Sweet.getPeopleList().clear();
         System.out.println("Cleanup done.");
     }
 
@@ -43,9 +43,9 @@ public class signup {
             throw new AssertionError("All fields are required");
         }
 
-        successfull s = new successfull(password, email);
-        boolean isEmailValid = successfull.isValidEmail(email);
-        boolean isPasswordValid = password.equals(confirmPassword) && successfull.isValidPassword(password);
+        Successfull s = new Successfull(password, email);
+        boolean isEmailValid = Successfull.isValidEmail(email);
+        boolean isPasswordValid = password.equals(confirmPassword) && Successfull.isValidPassword(password);
 
         if (isEmailValid && isPasswordValid) {
             if (isEmailRegistered(email)) {
@@ -103,12 +103,12 @@ public class signup {
                 throw new AssertionError("Expected confirm password is required error, but it was not");
             }
         } else {
-            successfull s = new successfull(password, email);
+            Successfull s = new Successfull(password, email);
 
             // Validate based on the expected message
             switch (message) {
                 case "invalid email syntax":
-                    if (!successfull.isValidEmail(email)) {
+                    if (!Successfull.isValidEmail(email)) {
                         System.out.println("Invalid email syntax.");
                     } else {
                         throw new AssertionError("Expected invalid email syntax error, but validation passed");
@@ -122,7 +122,7 @@ public class signup {
                     }
                     break;
                 case "weak password":
-                    if (!successfull.isValidPassword(password)) {
+                    if (!Successfull.isValidPassword(password)) {
                         System.out.println("Weak password provided.");
                     } else {
                         throw new AssertionError("Expected weak password error, but validation passed");

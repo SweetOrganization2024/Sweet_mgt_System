@@ -3,9 +3,9 @@ package project;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import sweet_sys.newSweet;
-import sweet_sys.person;
-import sweet_sys.sweet;
+import sweet_sys.NewSweet;
+import sweet_sys.Person;
+import sweet_sys.Sweet;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertFalse;
 public class update {
     private String email;
     private String password;
-    private String id_of_sweet1 = "";
+    private String idOfSweet1 = "";
 
     boolean isValid = false;
 
@@ -23,7 +23,7 @@ public class update {
         this.password = password2;
         boolean isRegistered = false;
 
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 isRegistered = true;
@@ -36,9 +36,9 @@ public class update {
 
     @When("the user selects a valid sweet with ID {string} and name {string} and type {string} and price {string}")
     public void theUserSelectsAValidSweetWithIDAndNameAndTypeAndPrice(String id, String name, String type, String price) {
-        this.id_of_sweet1 = id;
-        for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getId().equals(id_of_sweet1)) {
+        this.idOfSweet1 = id;
+        for (NewSweet s : Sweet.getListOfSweet()) {
+            if (s.getId().equals(idOfSweet1)) {
                 isValid = true;
                 break;
             }
@@ -49,8 +49,8 @@ public class update {
     @When("the user enters the new value to update {string} and {string}")
     public void theUserEntersTheNewValueToUpdateAnd(String nname, String ttype) {
         if (isValid) {
-            for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId().equals(id_of_sweet1)) {
+            for (NewSweet s : Sweet.getListOfSweet()) {
+                if (s.getId().equals(idOfSweet1)) {
                     s.setName(nname);
                     s.setType(ttype);
                     break;
@@ -63,7 +63,7 @@ public class update {
     public void theSystemUpdatesTheSweetInTheSweetList() {
         assertTrue(isValid);
         System.out.println("Update done");
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             System.out.println("ID: " + s.getId() + ", Name: " + s.getName() + ", Type: " + s.getType() + ", price:" + s.getPrice());
         }
     }
@@ -71,8 +71,8 @@ public class update {
     @When("the user enters the new value to update {string}")
     public void theUserEntersTheNewValueToUpdate(String nname) {
         if (isValid) {
-            for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId().equals(id_of_sweet1)) {
+            for (NewSweet s : Sweet.getListOfSweet()) {
+                if (s.getId().equals(idOfSweet1)) {
                     s.setName(nname);
                     break;
                 }
@@ -83,8 +83,8 @@ public class update {
     @When("the user enters the new type to update {string}")
     public void theUserEntersTheNewTypeToUpdate(String ttype) {
         if (isValid) {
-            for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId().equals(id_of_sweet1)) {
+            for (NewSweet s : Sweet.getListOfSweet()) {
+                if (s.getId().equals(idOfSweet1)) {
                     s.setType(ttype);
                     break;
                 }
@@ -95,8 +95,8 @@ public class update {
     @When("the user enters the new price to update {string}")
     public void theUserEntersTheNewPriceToUpdate(String ppric) {
         if (isValid) {
-            for (newSweet s : sweet.getListOfSweet()) {
-                if (s.getId().equals(id_of_sweet1)) {
+            for (NewSweet s : Sweet.getListOfSweet()) {
+                if (s.getId().equals(idOfSweet1)) {
                     s.setPrice(ppric);
                     break;
                 }
@@ -109,7 +109,7 @@ public class update {
         this.password = password;
         boolean isRegistered = false;
 
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 isRegistered = true;
@@ -127,7 +127,7 @@ public class update {
     @When("the user tries to update a sweet with an unavailable ID {string} or unavailable name {string} or type {string}")
     public void theUserTriesToUpdateASweetWithAnUnavailableIDOrUnavailableNameOrType(String id, String name, String type) {
         boolean isInvalid = true;
-        for (newSweet s : sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getId().equals(id) || s.getName().equals(name) || s.getType().equals(type)) {
                 isInvalid = false;
                 break;

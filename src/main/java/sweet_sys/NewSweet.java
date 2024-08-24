@@ -1,5 +1,5 @@
 package sweet_sys;
-public class newSweet {
+public class NewSweet {
 
     String id;
     String name;
@@ -7,7 +7,7 @@ public class newSweet {
     String price;
     int sale=0;
     
-    public newSweet(String id, String name, String type, String price) {
+    public NewSweet(String id, String name, String type, String price) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -22,7 +22,7 @@ public class newSweet {
         this.sale = sale+sale1;
     }
 
-    public static String printsweet(newSweet sweet) {
+    public static String printsweet(NewSweet sweet) {
         return "ID: " + sweet.getId() + ", Name: " + sweet.getName() + ", Type: " + sweet.getType();
     }
 
@@ -58,7 +58,7 @@ public class newSweet {
     }
 
     public static boolean isOwnerOrSupplier (String email, String password){
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("Owner") || f.getType().equals("Supplier"))) {
                 return true;
@@ -67,7 +67,7 @@ public class newSweet {
         return false;
     }
     public static boolean isAdminOrUser (String email, String password){
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(password) &&
                     (f.getType().equals("ADMIN") || f.getType().equals("USER"))) {
                 return true;
@@ -77,7 +77,7 @@ public class newSweet {
     }
 
     public static boolean isAdd(String id){
-        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getId().equals(id)) {
                 return true;
             }

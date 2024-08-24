@@ -1,6 +1,6 @@
 package sweet_sys;
 
-public class person {
+public class Person {
     String email;
     String pass;
     String type;
@@ -15,13 +15,13 @@ public class person {
         this.pass = pass;
     }
 
-    public person(String email, String pass) {
+    public Person(String email, String pass) {
         this.email = email;
         this.pass = pass;
     }
 
-    public  static person retperson(person p){
-        for (person pp : sweet.getPeopleList()) {
+    public  static Person retperson(Person p){
+        for (Person pp : Sweet.getPeopleList()) {
             if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
                 return pp;
             }
@@ -30,7 +30,7 @@ public class person {
     }
   
 
-    public person(String email, String password, String type, String firstName, String lastName) {
+    public Person(String email, String password, String type, String firstName, String lastName) {
         this.email = email;
         this.pass = password;
         this.type = type;
@@ -53,8 +53,8 @@ public class person {
     public void setType(String type) {
         this.type = type;
     }
-    public static boolean findemail(person p){
-        for (person f : sweet.getPeopleList()) {
+    public static boolean findemail(Person p){
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(p.getEmail())) {
                 return true;
             }
@@ -62,7 +62,7 @@ public class person {
         return false;
     }
     public static boolean isRightType( String email, String pass, String ty){
-        for( person p : sweet.getPeopleList()){
+        for( Person p : Sweet.getPeopleList()){
             if(p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)){
                 return true;
             }

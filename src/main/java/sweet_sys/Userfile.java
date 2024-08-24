@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 
 public class Userfile {
-    protected static List<person> users = new ArrayList<>();
+    protected static List<Person> users = new ArrayList<>();
 
     public static final String FILE_NAME = "userfile.txt";
     private static final Logger LOGGER = Logger.getLogger(Userfile.class.getName());
@@ -21,7 +21,7 @@ public class Userfile {
         //constr
     }
     public static boolean emailIsRegisted (String email){
-        for (person p : Userfile.getUsers()) {
+        for (Person p : Userfile.getUsers()) {
             if (p.getEmail().equals(email)) {
                 return true;
             }
@@ -41,7 +41,7 @@ public class Userfile {
                     String userEmail = parts[2].trim();
                     String userPassword = parts[3].trim();
                     String userType = parts[4].trim();
-                    users.add(new person(userEmail, userPassword, userType, firstName, lastName));
+                    users.add(new Person(userEmail, userPassword, userType, firstName, lastName));
                 }
             }
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class Userfile {
         }
     }
 
-    public static List<person> getUsers() {
+    public static List<Person> getUsers() {
         return users;
     }
 }

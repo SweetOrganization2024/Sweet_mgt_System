@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import sweet_sys.*;
 
 public class persontest {
-    private person p;
+    private Person p;
     private String email1;
     private String password1;
     private String type1;
@@ -22,36 +22,36 @@ public class persontest {
         type1 = type;
         firstName1 = firstName;
         lastName1 = lastName;
-        p =new person("","","","","");
+        p =new Person("","","","","");
 
     }
 
     @When("the person's email should be in right pattern")
     public void thePersonSEmailShouldBeInRightPattern() {
-        assertTrue(successfull.isValidEmail(email1));
+        assertTrue(Successfull.isValidEmail(email1));
         p.setEmail(email1);
     }
     @When("the person's password should be in right pattern")
     public void thePersonSPasswordShouldBeInRightPattern() {
-        assertTrue(successfull.isValidPassword(password1));
+        assertTrue(Successfull.isValidPassword(password1));
         p.setPass(password1);
     }
     @When("the person is new")
     public void thePersonIsNew() {
-        assertNull(sweet.retperson(email1,password1));
+        assertNull(Sweet.retperson(email1,password1));
     }
     @Then("add the person")
     public void addThePerson() {
         p.setType(type1);
         p.setFirstName(firstName1);
         p.setLastName(lastName1);
-        sweet.setToList(p);
+        Sweet.setToList(p);
     }
 
     @Given("a person with email {string} and password {string}")
     public void aPersonWithEmailAndPassword(String email, String pas) {
-        p = sweet.retperson(email,pas);
-        assertTrue(person.findemail(p));
+        p = Sweet.retperson(email,pas);
+        assertTrue(Person.findemail(p));
     }
 
     @Then("the person's type should be {string}")
@@ -76,7 +76,7 @@ public class persontest {
         email1 = email;
         password1 = password;
         type1 = type;
-        p = sweet.retperson(email,password);
+        p = Sweet.retperson(email,password);
     }
 
     @Then("the person should have the type {string}")

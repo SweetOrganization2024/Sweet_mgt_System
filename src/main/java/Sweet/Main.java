@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws MessagingException {
         Scanner scanner = new Scanner(System.in);
-        sweet app = sweet.getInstance();
+        Sweet app = Sweet.getInstance();
         System.out.println("\n\n**   Welcome to the Sweet Management System   **\n");
         String firstName;
         String lastName;
@@ -46,7 +46,7 @@ public class Main {
                         System.out.println("Enter your email:");
                         email = scanner.nextLine();
 
-                        if (!successfull.isValidEmail(email)) {
+                        if (!Successfull.isValidEmail(email)) {
                             System.out.println("Invalid email syntax.");
                         } else if (emailexi(email)) {
                             System.out.println("Email is already registered.");
@@ -54,11 +54,11 @@ public class Main {
                         } else {
                             isAlreadyRegistered = false;
                         }
-                    } while (!successfull.isValidEmail(email) || isAlreadyRegistered);
+                    } while (!Successfull.isValidEmail(email) || isAlreadyRegistered);
                     do {
                         System.out.println("Enter your password:");
                         password = readPassword();
-                    } while (!successfull.isValidPassword(password));
+                    } while (!Successfull.isValidPassword(password));
                     do {
                         System.out.println("Confirm password:");
                         confirmPassword = readPassword();
@@ -83,8 +83,8 @@ public class Main {
                         }
                     }
 
-                    person newUser = new person(email, password, type, firstName, lastName);
-                    sweet.getPeopleList().add(newUser);
+                    Person newUser = new Person(email, password, type, firstName, lastName);
+                    Sweet.getPeopleList().add(newUser);
                     System.out.println("Sign up successful!");
                     x=true;
                     saveUserToFile(newUser, "userfile.txt");
@@ -116,7 +116,7 @@ public class Main {
                         do {
                             System.out.println("Enter your password:");
                             password = scanner.nextLine();
-                            person p = new person(email, password);
+                            Person p = new Person(email, password);
                             if (rightlogin(p)) {
                                 isexist = true;
                             } else {
@@ -141,7 +141,7 @@ public class Main {
                                 case 4 -> type = "Owner";
                                 default -> System.out.println("Invalid user type.");
                             }
-                        } while (!person.isRightType(email, password, type));
+                        } while (!Person.isRightType(email, password, type));
 
                         System.out.println("Login successful!");
                         x=true;
@@ -151,7 +151,7 @@ public class Main {
                     }
                     else {
                         String first="";
-                        for(person p: sweet.getPeopleList()){
+                        for(Person p: Sweet.getPeopleList()){
                             if (p.getEmail().equals(email) && p.getPass().equals(password)){
                                 first=p.getFirstName();
                             }
@@ -174,7 +174,7 @@ public class Main {
     }
     public static void menu(String type , String email) throws MessagingException {
         Scanner scanner = new Scanner(System.in);
-        sweet.getInstance();
+        Sweet.getInstance();
         boolean is_add;
         String idsweet = null;
         String namesweet = null;
@@ -214,19 +214,19 @@ public class Main {
                 case 2 -> {
                     System.out.println("Deleting a sweet:");
                     if (type.equals("Supplier") || type.equals("Owner")) {
-                        sweet.getListOfSweet().clear();
+                        Sweet.getListOfSweet().clear();
 
                         loadSweetsFromFile(FILE_NAME);
 
-                        if (!sweet.getListOfSweet().isEmpty()) {
+                        if (!Sweet.getListOfSweet().isEmpty()) {
                             do {
                                 System.out.println("Enter the ID of the sweet you want to delete:");
                                 idsweet = scanner.nextLine();
-                                is_add = newSweet.isAdd(idsweet);
+                                is_add = NewSweet.isAdd(idsweet);
                                 if (is_add) {
                                     deletesweet1(idsweet);
                                     System.out.println("Successful delete.");
-                                    saveSweetsToFile(sweet.getListOfSweet(), FILE_NAME);
+                                    saveSweetsToFile(Sweet.getListOfSweet(), FILE_NAME);
                                     notificationService.notifyOwnerOfDeletedSweet(email, idsweet);
 
                                 } else {
@@ -240,14 +240,14 @@ public class Main {
                     } else {
                         System.out.println("You can't delete.");
                     }
-                    for (newSweet s : sweet.getListOfSweet()) {
-                        System.out.println(newSweet.printsweet(s));
+                    for (NewSweet s : Sweet.getListOfSweet()) {
+                        System.out.println(NewSweet.printsweet(s));
                     }
                 }
                 case 3 -> {
                     System.out.println("Updating a sweet:");
                     if (type.equals("Supplier") || type.equals("Owner")) {
-                        sweet.getListOfSweet().clear();
+                        Sweet.getListOfSweet().clear();
 
                         loadSweetsFromFile(FILE_NAME);
                         boolean isExist;
@@ -255,7 +255,7 @@ public class Main {
                         do {
                             System.out.println("Enter the ID of the sweet you want to update:");
                             idsweet = scanner.nextLine();
-                            isExist = newSweet.isAdd(idsweet);
+                            isExist = NewSweet.isAdd(idsweet);
                             if (!isExist) {
                                 System.out.println("Invalid ID. Please try again.");
                             }
@@ -296,7 +296,7 @@ public class Main {
                                 System.out.println("Invalid choice.");
                                 return;
                         }
-                        for (newSweet s : sweet.getListOfSweet()) {
+                        for (NewSweet s : Sweet.getListOfSweet()) {
                             if (s.getId().equals(idsweet)) {
                                 if (newName != null) s.setName(newName);
                                 if (newType != null) s.setType(newType);
@@ -304,7 +304,7 @@ public class Main {
                                 break;
                             }
                         }
-                        saveSweetsToFile(sweet.getListOfSweet(), FILE_NAME);
+                        saveSweetsToFile(Sweet.getListOfSweet(), FILE_NAME);
 
                         System.out.println("Update successful!");
                         notificationService.notifyOwnerOfUpdatedSweet(email, idsweet, newName);
@@ -312,12 +312,12 @@ public class Main {
                     } else {
                         System.out.println("You don't have permission to update.");
                     }
-                    for (newSweet s : sweet.getListOfSweet()) {
-                        System.out.println(newSweet.printsweet(s));
+                    for (NewSweet s : Sweet.getListOfSweet()) {
+                        System.out.println(NewSweet.printsweet(s));
                     }
                 }
                 case 4 -> {
-                    sweet.getListOfSweet().clear();
+                    Sweet.getListOfSweet().clear();
                     loadSweetsFromFile(FILE_NAME);
                     System.out.println("Searching for a sweet:");
                     System.out.println("1. Search based on ID of sweet");
@@ -333,8 +333,8 @@ public class Main {
                         case 1:
                             System.out.println("Please enter the ID of the sweet:");
                             idsweet = scanner.nextLine();
-                            if (sweet.Search_ID(idsweet)) {
-                                sweet.print_SweetId(idsweet);
+                            if (Sweet.searchID(idsweet)) {
+                                Sweet.printSweetId(idsweet);
                             } else {
                                 System.out.println("Sweet with the given ID not found.");
                             }
@@ -342,8 +342,8 @@ public class Main {
                         case 2:
                             System.out.println("Please enter the name of the sweet:");
                             namesweet = scanner.nextLine();
-                            if (sweet.Search_name(namesweet)) {
-                                sweet.print_Sweetname(namesweet);
+                            if (Sweet.searchName(namesweet)) {
+                                Sweet.printSweetname(namesweet);
                             } else {
                                 System.out.println("Sweet with the given name not found.");
                             }
@@ -353,8 +353,8 @@ public class Main {
                             idsweet = scanner.nextLine();
                             System.out.println("Please enter the name of the sweet:");
                             namesweet = scanner.nextLine();
-                            if (sweet.Search_name_id(namesweet, idsweet)) {
-                                sweet.Print_name_id(idsweet, namesweet);
+                            if (Sweet.searchNameId(namesweet, idsweet)) {
+                                Sweet.printNameId(idsweet, namesweet);
                             } else {
                                 System.out.println("Sweet with the given ID and name not found.");
                             }
@@ -364,8 +364,8 @@ public class Main {
                             namesweet = scanner.nextLine();
                             System.out.println("Please enter the type of the sweet:");
                             typesweet = scanner.nextLine();
-                            if (sweet.Search_name_Type(namesweet, typesweet)) {
-                                sweet.Print_Type_name(namesweet, typesweet);
+                            if (Sweet.searchNameType(namesweet, typesweet)) {
+                                Sweet.printTypeName(namesweet, typesweet);
                             } else {
                                 System.out.println("Sweet with the given name and type not found.");
                             }
@@ -377,8 +377,8 @@ public class Main {
                             namesweet = scanner.nextLine();
                             System.out.println("Please enter the type of the sweet:");
                             typesweet = scanner.nextLine();
-                            if (sweet.Secrch_all(namesweet, idsweet, typesweet)) {
-                                sweet.Print_name_id_type(idsweet, namesweet, typesweet);
+                            if (Sweet.secrchAll(namesweet, idsweet, typesweet)) {
+                                Sweet.printNameIdType(idsweet, namesweet, typesweet);
                             } else {
                                 System.out.println("Sweet with the given ID, name, and type not found.");
                             }
@@ -388,10 +388,10 @@ public class Main {
                             minPrice = scanner.nextLine();
                             System.out.println("Please enter the maximum price:");
                             maxPrice = scanner.nextLine();
-                            sweet.Pricemin_max(minPrice, maxPrice);
+                            Sweet.priceminMax(minPrice, maxPrice);
                             break;
                         case 7:
-                            for (newSweet s : sweet.getListOfSweet()) {
+                            for (NewSweet s : Sweet.getListOfSweet()) {
                                 System.out.println("Name: " + s.getName() + ", ID: " + s.getId() + ", Type: " + s.getType() + ", Price: " + s.getPrice());
                             }
                             break;
@@ -403,8 +403,8 @@ public class Main {
                 case 5 -> {
                     loadSweetsFromFile(FILE_NAME);
                     System.out.println("Ordering:");
-                    for (newSweet s : sweet.listOfSweet) {
-                        System.out.println(newSweet.printsweet(s));
+                    for (NewSweet s : Sweet.listOfSweet) {
+                        System.out.println(NewSweet.printsweet(s));
                     }
                     System.out.print("Enter the ID of sweet you want to order: ");
                     String idd = scanner.nextLine();
@@ -416,7 +416,7 @@ public class Main {
                     int quantity = scanner.nextInt();
                     scanner.nextLine();
                     try {
-                        String priceStr = sweet.getThePrice(nameSweet, typeSweet);
+                        String priceStr = Sweet.getThePrice(nameSweet, typeSweet);
                         if (priceStr == null || priceStr.trim().isEmpty()) {
                             System.out.println("Price not available for the selected sweet.");
                             return;
@@ -432,7 +432,7 @@ public class Main {
 
                         totalCost = quantity * price;
 
-                        for (newSweet sweetItem : sweet.getListOfSweet()) {
+                        for (NewSweet sweetItem : Sweet.getListOfSweet()) {
                             if (sweetItem.getId().equals(idd)) {
                                 sweetItem.setSale(quantity);
                                 System.out.println(sweetItem.getName() + " " + sweetItem.getSale());
@@ -440,7 +440,7 @@ public class Main {
                             }
                         }
 
-                        if (sweet.Search_name_Type(nameSweet, typeSweet)) {
+                        if (Sweet.searchNameType(nameSweet, typeSweet)) {
                             int orderId = OrderManager.getInstance().getNextOrderId();
                             OrderManager.getInstance().addOrder(String.valueOf(orderId), LocalDate.now(), totalCost);
 
@@ -531,11 +531,11 @@ public class Main {
                     String typesweet = data[2];
                     String pricesweet = data[3];
 
-                    if (newSweet.isAdd(idsweet)) {
+                    if (NewSweet.isAdd(idsweet)) {
                         System.out.println("Sweet with ID " + idsweet + " already exists.");
                     } else {
-                        newSweet newSweetItem = new newSweet(idsweet, namesweet, typesweet, pricesweet);
-                        sweet.addsweet(newSweetItem);
+                        NewSweet newSweetItem = new NewSweet(idsweet, namesweet, typesweet, pricesweet);
+                        Sweet.addsweet(newSweetItem);
                         System.out.println("Added sweet: " + idsweet + ", " + namesweet + ", " + typesweet + ", " + pricesweet);
                     }
 
@@ -548,9 +548,9 @@ public class Main {
         }
     }
 
-    public static void saveSweetsToFile(List<newSweet> sweetsList, String fileName) {
+    public static void saveSweetsToFile(List<NewSweet> sweetsList, String fileName) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
-            for (newSweet sweetItem : sweetsList) {
+            for (NewSweet sweetItem : sweetsList) {
                 bw.write(sweetItem.getId() + "," + sweetItem.getName() + "," + sweetItem.getType() + "," + sweetItem.getPrice());
                 bw.newLine();
             }
@@ -559,7 +559,7 @@ public class Main {
         }
     }
 
-    public static void saveUserToFile(person user, String fileName) {
+    public static void saveUserToFile(Person user, String fileName) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true))) {
             bw.write(user.getFirstName() + "," + user.getLastName() + "," + user.getEmail() + "," + user.getPass() + "," + user.getType() +"\n");
             bw.newLine();
@@ -600,10 +600,10 @@ public class Main {
                 case 3 -> {
                     System.out.println("Viewing best-selling products:");
                     loadSweetsFromFile(FILE_NAME);
-                    sweet.getListOfSweet().sort((s1, s2) -> Integer.compare(s2.getSale(), s1.getSale()));
+                    Sweet.getListOfSweet().sort((s1, s2) -> Integer.compare(s2.getSale(), s1.getSale()));
                     System.out.println("Best-selling products [From highest to lowest selling] :");
-                    for (newSweet sweet : sweet.getListOfSweet()) {
-                        System.out.println(newSweet.printsweet(sweet) + " Sales: " + sweet.getSale());
+                    for (NewSweet sweet : Sweet.getListOfSweet()) {
+                        System.out.println(NewSweet.printsweet(sweet) + " Sales: " + sweet.getSale());
                     }
                 }
                 case  4-> Feedback.readFeedbackFromFile();
@@ -650,9 +650,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter email of user to update: ");
         String email = scanner.nextLine();
-        person userToUpdate = null;
+        Person userToUpdate = null;
 
-        for (person p : sweet.getPeopleList()) {
+        for (Person p : Sweet.getPeopleList()) {
             if (p.getEmail().equals(email)) {
                 userToUpdate = p;
                 break;
@@ -683,7 +683,7 @@ public class Main {
 
     private static void rewriteUserFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("userfile.txt"))) {
-            for (person p : sweet.getPeopleList()) {
+            for (Person p : Sweet.getPeopleList()) {
                 writer.println(p.getFirstName() + "," + p.getLastName()  + "," + p.getEmail() + "," + p.getPass() + "," + p.getType());
             }
         } catch (IOException e) {
@@ -710,19 +710,19 @@ public class Main {
             return;
         }
 
-        person newPerson = new person(email, password, type, firstName, lastName);
-        sweet.getPeopleList().add(newPerson);
+        Person newPerson = new Person(email, password, type, firstName, lastName);
+        Sweet.getPeopleList().add(newPerson);
         saveUserToFile(newPerson, "userfile.txt");
         System.out.println("User added successfully.");
     }
 
     public static void viewAllUsers() {
-        if (sweet.getPeopleList().isEmpty()) {
+        if (Sweet.getPeopleList().isEmpty()) {
             System.out.println("No users to display.");
             return;
         }
 
-        for (person p : sweet.getPeopleList()) {
+        for (Person p : Sweet.getPeopleList()) {
             System.out.println("Name: "+ p.getFirstName() + " "+ p.getLastName() + " Email: "+ p.getEmail() + " Password: "+p.getPass() + " Type: "+ p.getType());
         }
     }
@@ -843,7 +843,7 @@ public class Main {
             System.out.println( discountToApply.getPercentage() + "g43g" +discountedPrice);
             if (discountedPrice > 0) {
                 System.out.println("Discount applied. New price for Sweet ID " + productId + " is: " + discountedPrice);
-                saveSweetsToFile(sweet.getListOfSweet(), FILE_NAME);
+                saveSweetsToFile(Sweet.getListOfSweet(), FILE_NAME);
 
             } else {
                 System.out.println("Failed to apply discount.");
@@ -888,7 +888,7 @@ public class Main {
         String lastName = scanner.nextLine();
         System.out.print("Enter new email: ");
         String newEmail = scanner.nextLine();
-        person p = sweet.retperson(email, pass);
+        Person p = Sweet.retperson(email, pass);
         if (p != null) {
             p.setFirstName(firstName);
             p.setLastName(lastName);
@@ -902,7 +902,7 @@ public class Main {
         }
     }
 
-    private static void updateUserInFile(String email, String pass, person updatedPerson) {
+    private static void updateUserInFile(String email, String pass, Person updatedPerson) {
         List<String> users = new ArrayList<>();
         String filePath = "userfile.txt";
 
@@ -935,7 +935,7 @@ public class Main {
     }
 
     private static void changePassword(String email, String pass, Scanner scanner) {
-        person p =sweet.retperson(email,pass);
+        Person p = Sweet.retperson(email,pass);
         System.out.print("Enter current password: ");
         String currentPassword = scanner.nextLine();
 
@@ -950,7 +950,7 @@ public class Main {
         }
     }
     private static void viewAccountDetails(String email ,String pass) {
-        person p=sweet.retperson(email,pass);
+        Person p= Sweet.retperson(email,pass);
         System.out.println("Account Details:");
         System.out.println("First Name: " + p.getFirstName());
         System.out.println("Last Name: " + p.getLastName());
@@ -958,12 +958,12 @@ public class Main {
     }
 
     private static void deleteAccount(String email ,String pass, Scanner scanner) {
-        person p=sweet.retperson(email,pass);
+        Person p= Sweet.retperson(email,pass);
         System.out.print("Are you sure you want to delete your account? (yes/no): ");
         String confirmation = scanner.nextLine();
 
         if (confirmation.equalsIgnoreCase("yes")) {
-            sweet.deleteperson(p);
+            Sweet.deleteperson(p);
             deleteUserFromFile(email,pass);
             System.out.println("Account deleted successfully.");
         } else {
@@ -1004,8 +1004,8 @@ public class Main {
             System.out.println("User not found.");
         }
     }
-    public static boolean rightlogin(person pp) {
-        for (person p : sweet.getPeopleList()) {
+    public static boolean rightlogin(Person pp) {
+        for (Person p : Sweet.getPeopleList()) {
             if (pp.getEmail().equals(p.getEmail()) && pp.getPass().equals(p.getPass())) {
                 return true;
             }
@@ -1013,7 +1013,7 @@ public class Main {
         return false;
     }
     public static boolean emailexi(String  em){
-        for (person f : sweet.getPeopleList()) {
+        for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(em)) {
                 return true;
             }
@@ -1027,16 +1027,16 @@ public class Main {
     }
 
     public static void deletesweet1(String ss) {
-        List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
+        List<NewSweet> updatedList = new ArrayList<>();
+        for (NewSweet s : Sweet.getListOfSweet()) {
             if (!s.getId().equals(ss)) {
                 updatedList.add(s);
             }
         }
-       setListOfSweet((ArrayList<newSweet>) updatedList);
+       setListOfSweet((ArrayList<NewSweet>) updatedList);
     }
-    public static void setListOfSweet(ArrayList<newSweet> listOfSweet) {
-        sweet.listOfSweet = listOfSweet;
+    public static void setListOfSweet(ArrayList<NewSweet> listOfSweet) {
+        Sweet.listOfSweet = listOfSweet;
     }
 
 }

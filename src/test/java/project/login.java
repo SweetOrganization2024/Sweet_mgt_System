@@ -3,23 +3,23 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import sweet_sys.person;
-import sweet_sys.sweet;
+import sweet_sys.Person;
+import sweet_sys.Sweet;
 
 import static org.junit.Assert.*;
 
 public class login {
-    private person loggedInUser;
+    private Person loggedInUser;
 
     @BeforeClass
     public static void setUp() {
-        sweet.getPeopleList().clear();
+        Sweet.getPeopleList().clear();
 
     }
 
     @AfterClass
     public static void tearDown() {
-        sweet.getPeopleList().clear();
+        Sweet.getPeopleList().clear();
         System.out.println("Cleanup done.");
     }
 
@@ -32,7 +32,7 @@ public class login {
 
     @When("user enters the email {string} and user enters the password {string}")
     public void userEntersTheEmailAndUserEntersThePassword(String email, String password) {
-        this.loggedInUser = person.retperson(new person(email, password));
+        this.loggedInUser = Person.retperson(new Person(email, password));
 
     }
 
@@ -41,7 +41,7 @@ public class login {
         assertNotNull("Login failed when it should have succeeded.", loggedInUser);
 
 
-        for (person p: sweet.getPeopleList()){
+        for (Person p: Sweet.getPeopleList()){
             System.out.println("User name: "+ p.getEmail() + " Passweord: " + p.getPass() + " Type:" + p.getType());
         }
     }
@@ -56,11 +56,11 @@ public class login {
     @When("the user enters the {string} with {string}")
     public void theUserEntersTheWith(String email, String password) {
         boolean found=false;
-        if(sweet.retperson( email, password) !=null){
+        if(Sweet.retperson( email, password) !=null){
             found=true;
         }
         else {
-            sweet.is_loggin = false;
+            Sweet.isLoggin = false;
         }
 
     }
@@ -69,13 +69,13 @@ public class login {
     public void theShouldAppear(String message) {
         if ("non-existent email".equals(message)) {
             System.out.println("The user is not in the System :)");
-            assertFalse("User login status is true for non-existent email", sweet.is_loggin);
+            assertFalse("User login status is true for non-existent email", Sweet.isLoggin);
         } else if ("invalid password".equals(message)) {
             System.out.println("Invalid password provided.");
-            assertFalse("User login status is true for invalid password", sweet.is_loggin);
+            assertFalse("User login status is true for invalid password", Sweet.isLoggin);
         } else {
             System.out.println("Unexpected message: " + message);
-            assertFalse("User login status is true for unexpected message", sweet.is_loggin);
+            assertFalse("User login status is true for unexpected message", Sweet.isLoggin);
         }
 
 

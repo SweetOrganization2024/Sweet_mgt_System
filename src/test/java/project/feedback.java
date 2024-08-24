@@ -1,7 +1,7 @@
 package project;
 
 import sweet_sys.Feedback;
-import sweet_sys.sweet;
+import sweet_sys.Sweet;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -33,10 +33,10 @@ public class feedback {
     }
 
     @Given("I am logged in as an Admin with {string} and {string}")
-    public void iAmLoggedInAsAnAdminWithAnd(String EM, String PASS) {
-        email=EM;
-        password=PASS;
-        person p= sweet.retperson(email,password);
+    public void iAmLoggedInAsAnAdminWithAnd(String em, String pass) {
+        email=em;
+        password=pass;
+        Person p= Sweet.retperson(email,password);
         if(p.getType().equals("ADMIN")){
             valid=true;
         }
