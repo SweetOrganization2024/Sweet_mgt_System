@@ -13,10 +13,6 @@ private static final String SIMPLE_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-
         this.password = pass;
         this.email = em;
     }
-
-    public successfull() {
-    }
-
     public static boolean isValidEmail(String email) {
         if (email == null || email.isEmpty()) {
             return false;
