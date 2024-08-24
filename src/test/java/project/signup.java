@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
 public class signup {
-    static Userfile userfile = new Userfile();
     String email = "";
     String password = "";
     String firstName = "";
