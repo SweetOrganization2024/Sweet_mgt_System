@@ -11,10 +11,9 @@ public class EmailSender {
     private static final String EMAIL_PASSWORD = System.getenv("password");
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
-    public EmailSender() {
-    
-}
+    public EmailSender(){
 
+}
     private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -33,31 +32,38 @@ public class EmailSender {
         });
     }
 
-    public static void sendEmail(String toEmail, String subject, String body) {
-        if (toEmail == null || toEmail.isEmpty()) {
-            logger.warning("Email address is not provided.");
-            return;
-        }
-        if (subject == null || subject.isEmpty()) {
-            logger.warning("Email subject is not provided.");
-            return;
-        }
-        if (body == null || body.isEmpty()) {
-            logger.warning("Email body is not provided.");
-            return;
-        }
+   public static void sendEmail(String toEmail, String subject, String body) {
+    if (toEmail == null || toEmail.isEmpty()) {
+        logger.warning("Email address is not provided.");
+        return;
+    }
+    if (subject == null || subject.isEmpty()) {
+        logger.warning("Email subject is not provided.");
+        return;
+    }
 
-        try {
-            Message message = new MimeMessage(getSession());
-            message.setFrom(new InternetAddress(EMAIL_USERNAME));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject(subject);
-            message.setText(body);
+    if (body == null || body.isEmpty()) {
+        logger.warning("Email body is not provided.");
+        return;
+    }
+
+    try {
+        Message message = new MimeMessage(getSession());
+        message.setFrom(new InternetAddress(EMAIL_USERNAME));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+        message.setSubject(subject);
+        message.setText(body);
+        
+        if (!toEmail.isEmpty() && !subject.isEmpty() && !body.isEmpty()) {
             Transport.send(message);
             logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
-        } catch (MessagingException e) {
-            logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'", toEmail, subject), e);
-            throw new RuntimeException(e);
+        } else {
+            logger.warning("Required fields for sending email are not provided.");
         }
+    } catch (MessagingException e) {
+        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'", toEmail, subject), e);
+        throw new RuntimeException(e);
     }
+}
+
 }
