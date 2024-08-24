@@ -1,5 +1,4 @@
 package sweetSys;
-
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
@@ -16,7 +15,7 @@ public class EmailSender {
         // extensibility or if initialization logic is needed later. Currently, there
         // are no instance-specific fields to initialize.
     }
-    private static Properties getProperties() {
+    public static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -25,7 +24,7 @@ public class EmailSender {
         return props;
     }
 
-    private static Session getSession() {
+    public static Session getSession() {
         return Session.getInstance(getProperties(), new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -34,19 +33,20 @@ public class EmailSender {
         });
     }
 
-public static void sendEmail(String toEmail, String subject, String body) {
-    if (toEmail == null || toEmail.isEmpty()) {
-        logger.warning("Email address is not provided.");
-        return;
-    }
-    if (subject == null || subject.isEmpty()) {
-        logger.warning("Email subject is not provided.");
-        return;
-    }
-    if (body == null || body.isEmpty()) {
-        logger.warning("Email body is not provided.");
-        return;
-    }
+    public static void sendEmail(String toEmail, String subject, String body) {
+        if (toEmail == null || toEmail.isEmpty()) {
+            logger.warning("Email address is not provided.");
+            throw new IllegalArgumentException("Email address must be provided.");
+        }
+        if (subject == null || subject.isEmpty()) {
+            logger.warning("Email subject is not provided.");
+            throw new IllegalArgumentException("Email subject must be provided.");
+        }
+        if (body == null || body.isEmpty()) {
+            logger.warning("Email body is not provided.");
+            throw new IllegalArgumentException("Email body must be provided.");
+        }
+
 
     try {
         Message message = new MimeMessage(getSession());
