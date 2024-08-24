@@ -7,7 +7,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import sweetSys.EmailSender;
-
 public class SendEmailSteps {
 
     private String toEmail;
