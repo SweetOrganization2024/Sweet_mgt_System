@@ -1,4 +1,5 @@
 package project;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,7 +14,7 @@ public class persontest {
     private String type1;
     private String lastName1;
     private String firstName1;
-    
+
     @Given("a person with email {string}, password {string}, type {string}, first name {string}, and last name {string}")
     public void createFullPerson(String email, String password, String type, String firstName, String lastName) {
         email1 = email;
@@ -21,17 +22,19 @@ public class persontest {
         type1 = type;
         firstName1 = firstName;
         lastName1 = lastName;
-        p =new person(email1,password1,type1,firstName1,lastName1);
+        p =new person("","","","","");
 
     }
 
     @When("the person's email should be in right pattern")
     public void thePersonSEmailShouldBeInRightPattern() {
         assertTrue(successfull.isValidEmail(email1));
+        p.setEmail(email1);
     }
     @When("the person's password should be in right pattern")
     public void thePersonSPasswordShouldBeInRightPattern() {
         assertTrue(successfull.isValidPassword(password1));
+        p.setPass(password1);
     }
     @When("the person is new")
     public void thePersonIsNew() {
@@ -39,6 +42,9 @@ public class persontest {
     }
     @Then("add the person")
     public void addThePerson() {
+        p.setType(type1);
+        p.setFirstName(firstName1);
+        p.setLastName(lastName1);
         sweet.setToList(p);
     }
 
