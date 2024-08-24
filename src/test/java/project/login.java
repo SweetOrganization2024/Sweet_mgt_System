@@ -55,12 +55,13 @@ public class login {
 
     @When("the user enters the {string} with {string}")
     public void theUserEntersTheWith(String email, String password) {
-       boolean found = person.ifpersonsignup(new person(email, password));
-
-        if (!found) {
+        boolean found=false;
+        if(sweet.retperson( email, password) !=null){
+            found=true;
+        }
+        else {
             sweet.is_loggin = false;
         }
-
 
     }
 
