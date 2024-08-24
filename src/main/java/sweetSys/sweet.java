@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class sweet {
     public static List<person> peopleList = new ArrayList<>();
     public static  List<newSweet> listOfSweet = new ArrayList<>();
      private static sweet instance;
     private static final Logger logger = Logger.getLogger(sweet.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(sweet.class.getName());
+
 
     public static sweet getInstance() {
         if (instance == null) {
@@ -48,7 +51,7 @@ public class sweet {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred", e);
         }
     }
 
