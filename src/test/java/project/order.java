@@ -4,14 +4,14 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweetSys.newSweet;
-import sweetSys.person;
-import sweetSys.sweet;
-import sweetSys.OrderManager;
+import sweet_sys.newSweet;
+import sweet_sys.person;
+import sweet_sys.sweet;
+import sweet_sys.OrderManager;
 import java.time.LocalDate;
 import static org.junit.Assert.*;
-import static sweetSys.OrderManager.*;
-import sweetSys.OrderManager.Order;
+import static sweet_sys.OrderManager.*;
+import sweet_sys.OrderManager.Order;
 import static org.junit.Assert.assertTrue;
 
 

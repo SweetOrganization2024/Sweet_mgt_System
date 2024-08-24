@@ -3,8 +3,8 @@ package project;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import sweetSys.FinancialReportGenerator;
-import sweetSys.sweet;
+import sweet_sys.FinancialReportGenerator;
+import sweet_sys.sweet;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 public class financialReportsGeneration {

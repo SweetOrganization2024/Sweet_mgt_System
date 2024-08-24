@@ -5,9 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import sweetSys.newSweet;
-import sweetSys.person;
-import sweetSys.sweet;
+import sweet_sys.newSweet;
+import sweet_sys.person;
+import sweet_sys.sweet;
 
 import static org.junit.Assert.assertTrue;
 
@@ -68,7 +68,7 @@ public class add {
             sweet.listOfSweet.add(MySWEET);
             System.out.println("Sweet added: " + MySWEET.getName());
         }
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
             System.out.println(newSweet.printsweet(s));
         }
     }

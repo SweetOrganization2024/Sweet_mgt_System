@@ -2,7 +2,7 @@ package project;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweetSys.*;
+import sweet_sys.*;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
 

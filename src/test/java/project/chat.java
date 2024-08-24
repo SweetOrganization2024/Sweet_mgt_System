@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import sweetSys.ChatMessage;
+import sweet_sys.ChatMessage;
 
 public class chat {
     private static final Logger logger = Logger.getLogger(chat.class.getName());

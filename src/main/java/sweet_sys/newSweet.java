@@ -1,4 +1,4 @@
-package sweetSys;
+package sweet_sys;
 public class newSweet {
 
     String id;
@@ -77,7 +77,7 @@ public class newSweet {
     }
 
     public static boolean isAdd(String id){
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
             if (s.getId().equals(id)) {
                 return true;
             }

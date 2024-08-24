@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 
-import sweetSys.*;
+import sweet_sys.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

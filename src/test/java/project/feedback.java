@@ -1,11 +1,11 @@
 package project;
 
-import sweetSys.Feedback;
-import sweetSys.sweet;
+import sweet_sys.Feedback;
+import sweet_sys.sweet;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import sweetSys.*;
+import sweet_sys.*;
 import static org.junit.Assert.assertTrue;
 
 public class feedback {

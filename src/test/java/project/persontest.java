@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import static org.junit.Assert.*;
 
-import sweetSys.*;
+import sweet_sys.*;
 
 public class persontest {
     private person p;

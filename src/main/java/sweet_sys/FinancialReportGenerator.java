@@ -1,4 +1,4 @@
-package sweetSys;
+package sweet_sys;
 
 import java.io.*;
 import java.util.*;

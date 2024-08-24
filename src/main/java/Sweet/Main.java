@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.Scanner;
-import sweetSys.*;
+import sweet_sys.*;
 import javax.mail.MessagingException;
 
 public class Main {
@@ -1028,7 +1028,7 @@ public class Main {
 
     public static void deletesweet1(String ss) {
         List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
+        for (newSweet s : sweet_sys.sweet.getListOfSweet()) {
             if (!s.getId().equals(ss)) {
                 updatedList.add(s);
             }

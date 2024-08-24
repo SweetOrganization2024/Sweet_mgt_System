@@ -3,8 +3,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import sweetSys.person;
-import sweetSys.sweet;
+import sweet_sys.person;
+import sweet_sys.sweet;
 
 import static org.junit.Assert.*;
 

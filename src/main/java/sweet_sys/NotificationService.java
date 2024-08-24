@@ -1,4 +1,4 @@
-package sweetSys;
+package sweet_sys;
 
 public class NotificationService {
 

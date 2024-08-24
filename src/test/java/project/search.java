@@ -3,8 +3,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
 
-import sweetSys.newSweet;
-import sweetSys.sweet;
+import sweet_sys.newSweet;
+import sweet_sys.sweet;
 import static org.junit.Assert.*;
 
 public class search {
