@@ -34,5 +34,14 @@ public class EmailSenderTest {
     public void testSendEmailWithEmptyBody() {
         EmailSender.sendEmail("recipient@example.com", "Subject", "");
     }
+@Test(expected = RuntimeException.class)
+public void testSendEmailWithMessagingException() {
+    String invalidEmail = "invalid-email";
+    String subject = "Test Subject";
+    String body = "Test Body";
+
+    EmailSender.sendEmail(invalidEmail, subject, body);
+}
+
     
 }
