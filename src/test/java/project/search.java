@@ -83,7 +83,7 @@ public class search {
     public void iSelectSearchBySweetNameDoesNotExist(String name) {
         this.nameOfSweet = name;
         nameSearch = Sweet.searchName(nameOfSweet);
-assertFalse(localNameSearch);
+assertFalse(nameSearch);
     }
 
 
