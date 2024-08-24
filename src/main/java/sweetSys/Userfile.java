@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 
 public class Userfile {
-    public static List<person> users = new ArrayList<>();
+    protected static List<person> users = new ArrayList<>();
 
     public static final String FILE_NAME = "userfile.txt";
     private static final Logger LOGGER = Logger.getLogger(Userfile.class.getName());
