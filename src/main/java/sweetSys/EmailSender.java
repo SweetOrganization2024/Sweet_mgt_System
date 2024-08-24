@@ -33,7 +33,7 @@ public class EmailSender {
         });
     }
 
-    public static void sendEmail(String toEmail, String subject, String body) {
+   public static void sendEmail(String toEmail, String subject, String body) {
         if (toEmail == null || toEmail.isEmpty()) {
             logger.warning("Email address is not provided.");
             throw new IllegalArgumentException("Email address must be provided.");
