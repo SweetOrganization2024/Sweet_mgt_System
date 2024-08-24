@@ -3,8 +3,6 @@ package project;
 import org.junit.Test;
 import sweetSys.EmailSender;
 
-import static org.junit.Assert.*;
-
 public class EmailSenderTest {
 
     @Test(expected = IllegalArgumentException.class)
@@ -36,4 +34,5 @@ public class EmailSenderTest {
     public void testSendEmailWithEmptyBody() {
         EmailSender.sendEmail("recipient@example.com", "Subject", "");
     }
+    
 }
