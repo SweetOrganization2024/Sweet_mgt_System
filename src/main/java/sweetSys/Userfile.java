@@ -17,7 +17,7 @@ public class Userfile {
     private static final Logger LOGGER = Logger.getLogger(Userfile.class.getName());
 
 
-     public Userfile() {
+    public Userfile() {
         //constr
     }
     public static boolean emailIsRegisted (String email){
