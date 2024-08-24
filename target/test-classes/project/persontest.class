@@ -1,0 +1,89 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package project;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+import sweetSys.person;
+import sweetSys.successfull;
+import sweetSys.sweet;
+
+public class persontest {
+    private person p;
+    private String email1;
+    private String password1;
+    private String type1;
+    private String lastName1;
+    private String firstName1;
+
+    public persontest() {
+    }
+
+    @Given("a person with email {string}, password {string}, type {string}, first name {string}, and last name {string}")
+    public void createFullPerson(String email, String password, String type, String firstName, String lastName) {
+        this.email1 = email;
+        this.password1 = password;
+        this.type1 = type;
+        this.firstName1 = firstName;
+        this.lastName1 = lastName;
+        this.p = new person(this.email1, this.password1, this.type1, this.firstName1, this.lastName1);
+    }
+
+    @When("the person's email should be in right pattern")
+    public void thePersonSEmailShouldBeInRightPattern() {
+        Assert.assertTrue(successfull.isValidEmail(this.email1));
+    }
+
+    @When("the person's password should be in right pattern")
+    public void thePersonSPasswordShouldBeInRightPattern() {
+        Assert.assertTrue(successfull.isValidPassword(this.password1));
+    }
+
+    @When("the person is new")
+    public void thePersonIsNew() {
+        Assert.assertNull(sweet.retperson(this.email1, this.password1));
+    }
+
+    @Then("add the person")
+    public void addThePerson() {
+        sweet.setToList(this.p);
+    }
+
+    @Given("a person with email {string} and password {string}")
+    public void aPersonWithEmailAndPassword(String email, String pas) {
+        this.p = sweet.retperson(email, pas);
+    }
+
+    @Then("the person's type should be {string}")
+    public void thePersonTypeShouldBe(String ty) {
+        Assert.assertEquals(ty, this.p.getType());
+    }
+
+    @Then("the person's first name should be {string}")
+    public void thePersonFirstNameShouldBe(String fn) {
+        Assert.assertEquals(fn, this.p.getFirstName());
+    }
+
+    @Then("the person's last name should be {string}")
+    public void thePersonLastNameShouldBe(String ln) {
+        Assert.assertEquals(ln, this.p.getLastName());
+    }
+
+    @Given("a person with email {string}, password {string}, and type {string}")
+    public void aPersonWithEmailPasswordAndType(String email, String password, String type) {
+        this.email1 = email;
+        this.password1 = password;
+        this.type1 = type;
+        this.p = sweet.retperson(email, password);
+    }
+
+    @Then("the person should have the type {string}")
+    public void thePersonShouldHaveTheType(String expectedType) {
+        Assert.assertEquals(expectedType, this.p.getType());
+    }
+}
