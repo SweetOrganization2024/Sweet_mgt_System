@@ -29,9 +29,6 @@ public class sweet {
         return peopleList;
     }
 
-    public static void setListOfSweet(ArrayList<newSweet> listOfSweet) {
-        sweet.listOfSweet = listOfSweet;
-    }
 
     public static boolean is_loggin = false;
 
@@ -200,15 +197,7 @@ public class sweet {
         return isUserRegistered;
     }
 
-    public static void deletesweet1(String ss) {
-        List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            if (!s.getId().equals(ss)) {
-                updatedList.add(s);
-            }
-        }
-        sweetSys.sweet.setListOfSweet((ArrayList<newSweet>) updatedList);
-    }
+
     public static void Print_name_id(String id , String name_of_sweet) {
         for (newSweet s : sweet.getListOfSweet()) {
             if (s.getName().equals(name_of_sweet) && (s.getId().equals(id))) {
