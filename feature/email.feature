@@ -27,3 +27,11 @@ Feature: Send Email Notification
     And an empty email body
     When the email is sent
     Then an error should be thrown with message "Email body must be provided."
+
+  Scenario: Log error on failure
+    Given a valid email address "test@example.com"
+    And a valid email subject "Test Subject"
+    And a valid email body "This is a test email."
+    And the email sending fails due to a messaging exception
+    When the email is sent
+    Then an error should be logged with message "Failed to send email to test@example.com with subject 'Test Subject'."
