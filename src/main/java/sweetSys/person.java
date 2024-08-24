@@ -61,17 +61,6 @@ public class person {
         }
         return false;
     }
-    public static boolean ifpersonsignup(person pp) {
-        for (person p : sweet.getPeopleList()) {
-            if (pp.getEmail().equals(p.getEmail())) {
-                if (!pp.getPass().equals(p.getPass())) {
-                    sweet.is_loggin = false;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
     public static boolean isRightType( String email, String pass, String ty){
         for( person p : sweet.getPeopleList()){
             if(p.getType().equals(ty) && p.getPass().equals(pass) && p.getEmail().equals(email)){
