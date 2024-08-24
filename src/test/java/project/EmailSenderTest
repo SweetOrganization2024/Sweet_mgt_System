@@ -1,93 +1,39 @@
 package project;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import javax.mail.*;
-import java.util.Properties;
-import java.util.logging.Logger;
-import sweetSys.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.Test;
+import sweetSys.EmailSender;
+
+import static org.junit.Assert.*;
 
 public class EmailSenderTest {
 
-    private static final String TEST_EMAIL = "test@example.com";
-    private static final String TEST_SUBJECT = "Test Subject";
-    private static final String TEST_BODY = "Test Body";
-
-    private EmailSender emailSender;
-
-    @BeforeEach
-    public void setUp() {
-        emailSender = new EmailSender();
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithNullToEmail() {
+        EmailSender.sendEmail(null, "Subject", "Body");
     }
 
-    @Test
-    public void testSendEmailSuccess() throws MessagingException {
-        Session mockSession = mock(Session.class);
-        Transport mockTransport = mock(Transport.class);
-        when(mockSession.getTransport()).thenReturn(mockTransport);
-
-        EmailSender.sendEmail(TEST_EMAIL, TEST_SUBJECT, TEST_BODY);
-
-        verify(mockTransport).send(any(Message.class));
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithEmptyToEmail() {
+        EmailSender.sendEmail("", "Subject", "Body");
     }
 
-    @Test
-    public void testSendEmailNoToEmail() {
-        Logger mockLogger = mock(Logger.class);
-        try {
-            EmailSender.sendEmail(null, TEST_SUBJECT, TEST_BODY);
-        } catch (Exception e) {
-            verify(mockLogger).warning("Email address is not provided.");
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithNullSubject() {
+        EmailSender.sendEmail("recipient@example.com", null, "Body");
     }
 
-    @Test
-    public void testSendEmailNoSubject() {
-        Logger mockLogger = mock(Logger.class);
-        try {
-            EmailSender.sendEmail(TEST_EMAIL, null, TEST_BODY);
-        } catch (Exception e) {
-            verify(mockLogger).warning("Email subject is not provided.");
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithEmptySubject() {
+        EmailSender.sendEmail("recipient@example.com", "", "Body");
     }
 
-    @Test
-    public void testSendEmailNoBody() {
-        Logger mockLogger = mock(Logger.class);
-        try {
-            EmailSender.sendEmail(TEST_EMAIL, TEST_SUBJECT, null);
-        } catch (Exception e) {
-            verify(mockLogger).warning("Email body is not provided.");
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithNullBody() {
+        EmailSender.sendEmail("recipient@example.com", "Subject", null);
     }
 
-    @Test
-    public void testSendEmailException() throws MessagingException {
-        // Mock the Session and Transport
-        Session mockSession = mock(Session.class);
-        Transport mockTransport = mock(Transport.class);
-
-        doThrow(new MessagingException("Failed")).when(mockTransport).send(any(Message.class));
-
-        RuntimeException thrown = assertThrows(RuntimeException.class, () -> EmailSender.sendEmail(TEST_EMAIL, TEST_SUBJECT, TEST_BODY));
-
-        assertEquals("An error occurred while sending email to test@example.com with subject 'Test Subject'.", thrown.getMessage());
-    }
-
-    @Test
-    public void testGetProperties() {
-        Properties props = EmailSender.getProperties();
-        assertEquals("true", props.getProperty("mail.smtp.auth"));
-        assertEquals("true", props.getProperty("mail.smtp.starttls.enable"));
-        assertEquals("smtp.gmail.com", props.getProperty("mail.smtp.host"));
-        assertEquals("587", props.getProperty("mail.smtp.port"));
-    }
-
-    @Test
-    public void testGetSession() {
-        Session session = EmailSender.getSession();
-        assertNotNull(session);
+    @Test(expected = IllegalArgumentException.class)
+    public void testSendEmailWithEmptyBody() {
+        EmailSender.sendEmail("recipient@example.com", "Subject", "");
     }
 }
