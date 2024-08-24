@@ -2,7 +2,6 @@ package project;
 import io.cucumber.java.en.*;
 import static org.junit.Assert.*;
 import sweet_sys.*;
-import java.text.ParseException;
 
 public class discounts {
     double result;
