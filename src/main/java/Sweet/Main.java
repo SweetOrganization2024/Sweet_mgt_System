@@ -15,7 +15,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         sweet app = sweet.getInstance();
         System.out.println("\n\n**   Welcome to the Sweet Management System   **\n");
-        successfull user = new successfull();
         String firstName;
         String lastName;
         String email;
@@ -176,7 +175,6 @@ public class Main {
     public static void menu(String type , String email) throws MessagingException {
         Scanner scanner = new Scanner(System.in);
         sweet.getInstance();
-        new successfull();
 
         boolean is_add;
         String idsweet = null;
@@ -227,7 +225,7 @@ public class Main {
                                 idsweet = scanner.nextLine();
                                 is_add = newSweet.isAdd(idsweet);
                                 if (is_add) {
-                                    deletesweet1(idsweet);
+                                    sweet.deletesweet1(idsweet);
                                     System.out.println("Successful delete.");
                                     saveSweetsToFile(sweet.getListOfSweet(), FILE_NAME);
                                     notificationService.notifyOwnerOfDeletedSweet(email, idsweet);
@@ -1028,18 +1026,4 @@ public class Main {
         String body = String.format("Dear Admin, a new account has been created with the following details: Name - %s, Email - %s. Please review and approve if necessary.", newAccountName, newAccountEmail);
         EmailSender.sendEmail(adminEmail, subject, body);
     }
-
-    public static void deletesweet1(String ss) {
-        List<newSweet> updatedList = new ArrayList<>();
-        for (newSweet s : sweetSys.sweet.getListOfSweet()) {
-            if (!s.getId().equals(ss)) {
-                updatedList.add(s);
-            }
-        }
-       setListOfSweet((ArrayList<newSweet>) updatedList);
-    }
-    public static void setListOfSweet(ArrayList<newSweet> listOfSweet) {
-        sweet.listOfSweet = listOfSweet;
-    }
-
 }
