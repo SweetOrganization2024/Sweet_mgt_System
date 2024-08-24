@@ -1,17 +1,24 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package project;
 
-import static org.junit.Assert.assertEquals;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
 import sweetSys.EmailSender;
 
 public class SendEmailSteps {
-
     private String toEmail;
     private String subject;
     private String body;
     private Exception exception;
+
+    public SendEmailSteps() {
+    }
 
     @Given("a valid email address {string}")
     public void aValidEmailAddress(String email) {
@@ -46,20 +53,20 @@ public class SendEmailSteps {
     @When("the email is sent")
     public void theEmailIsSent() {
         try {
-            EmailSender.sendEmail(toEmail, subject, body);
-        } catch (Exception e) {
-            this.exception = e;
+            EmailSender.sendEmail(this.toEmail, this.subject, this.body);
+        } catch (Exception var2) {
+            this.exception = var2;
         }
+
     }
 
     @Then("the email should be sent successfully")
     public void theEmailShouldBeSentSuccessfully() {
-        assertEquals(null, exception);
+        Assert.assertEquals((Object)null, this.exception);
     }
 
     @Then("an error should be thrown with message {string}")
     public void anErrorShouldBeThrownWithMessage(String errorMessage) {
-        assertEquals(errorMessage, exception.getMessage());
+        Assert.assertEquals(errorMessage, this.exception.getMessage());
     }
 }
-
