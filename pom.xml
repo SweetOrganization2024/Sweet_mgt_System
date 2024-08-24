@@ -126,7 +126,11 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.10.0.2524</version>
+                <version>3.10.0.2599</version>
+                <configuration>
+                    <sonar.host.url>${sonar.host.url}</sonar.host.url>
+                    <sonar.organization>${sonar.organization}</sonar.organization>
+                </configuration>
             </plugin>
         </plugins>
     </build>
