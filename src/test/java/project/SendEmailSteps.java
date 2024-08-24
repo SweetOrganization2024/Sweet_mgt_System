@@ -20,7 +20,7 @@ public class SendEmailSteps {
     public void aValidEmailAddress(String email) {
         this.toEmail = email;
     }
-
+    
     @Given("a valid email subject {string}")
     public void aValidEmailSubject(String subject) {
         this.subject = subject;
