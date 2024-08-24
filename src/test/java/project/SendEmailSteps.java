@@ -48,7 +48,7 @@ public class SendEmailSteps {
 
     @Given("the email sending fails due to a messaging exception")
     public void theEmailSendingFailsDueToMessagingException() {
-
+     //
     }
 
     @Given("an invalid email address {string}")
