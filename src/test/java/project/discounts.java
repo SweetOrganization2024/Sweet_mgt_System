@@ -37,7 +37,7 @@ public class discounts {
     }
 
     @And("the discount is valid from {string} to {string}")
-    public void the_discount_is_valid_from_to(String startDate, String endDate) throws ParseException {
+    public void the_discount_is_valid_from_to(String startDate, String endDate) {
         start =startDate;
         end =startDate;
         discountManage.setStart(start);
