@@ -6,7 +6,6 @@ import sweet_sys.*;
 public class discounts {
     double result;
     private DiscountManager discountManage;
-    private NewSweet sweetProduct;
     private String id ="";
     private String description="";
     private double percentage=0.0;
