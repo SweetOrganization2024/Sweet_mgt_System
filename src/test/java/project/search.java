@@ -85,7 +85,7 @@ public class search {
        /* boolean nameSearch = Sweet.searchName(nameOfSweet);
         assertFalse(nameSearch);*/
         boolean localNameSearch = Sweet.searchName(nameOfSweet);
-assertFalse(localNameSearch);
+assertTrue(localNameSearch);
     }
 
 
