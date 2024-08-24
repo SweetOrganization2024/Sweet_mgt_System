@@ -10,6 +10,10 @@ public class FinancialReportGenerator {
     private static final String FILE_NAME = "financial_data.txt";
     private static final Logger logger = Logger.getLogger(FinancialReportGenerator.class.getName());
 
+     private FinancialReportGenerator() {
+        // 
+    }
+
     public static void generateFinancialReports() {
         List<String> records = readFinancialData();
         if (records.isEmpty()) {
