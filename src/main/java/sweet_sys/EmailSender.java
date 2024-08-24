@@ -32,19 +32,20 @@ public class EmailSender {
             }
         });
     }
+   
     public static void sendEmail(String toEmail, String subject, String body) {
-    if (toEmail == null || toEmail.isEmpty()) {
-        logger.warning("Email address is not provided.");
-        throw new IllegalArgumentException("Email address must be provided.");
-    }
-    if (subject == null || subject.isEmpty()) {
-        logger.warning("Email subject is not provided.");
-        throw new IllegalArgumentException("Email subject must be provided.");
-    }
-    if (body == null || body.isEmpty()) {
-        logger.warning("Email body is not provided.");
-        throw new IllegalArgumentException("Email body must be provided.");
-    }
+        if (toEmail == null || toEmail.isEmpty()) {
+            logger.warning("Email address is not provided.");
+            throw new IllegalArgumentException("Email address must be provided.");
+        }
+        if (subject == null || subject.isEmpty()) {
+            logger.warning("Email subject is not provided.");
+            throw new IllegalArgumentException("Email subject must be provided.");
+        }
+        if (body == null || body.isEmpty()) {
+            logger.warning("Email body is not provided.");
+            throw new IllegalArgumentException("Email body must be provided.");
+        }
 
     try {
         Message message = new MimeMessage(getSession());
@@ -52,16 +53,14 @@ public class EmailSender {
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
         message.setSubject(subject);
         message.setText(body);
-        
-        // Log and send email
-        logger.info(String.format("Preparing to send email to %s with subject '%s'", toEmail, subject));
+
         Transport.send(message);
         logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
     } catch (MessagingException e) {
-        logger.severe("Failed to send email: " + e.getMessage());
-        throw new RuntimeException(e);
+        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
+        throw new RuntimeException(String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject), e);
     }
-}
+    }
 
 
 }
