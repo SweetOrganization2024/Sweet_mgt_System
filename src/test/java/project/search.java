@@ -82,8 +82,10 @@ public class search {
     @When("I select search by sweet name does not exist {string}")
     public void iSelectSearchBySweetNameDoesNotExist(String name) {
         this.nameOfSweet = name;
-        boolean nameSearch = Sweet.searchName(nameOfSweet);
-        assertFalse(nameSearch);
+       /* boolean nameSearch = Sweet.searchName(nameOfSweet);
+        assertFalse(nameSearch);*/
+        boolean localNameSearch = Sweet.searchName(nameOfSweet);
+assertFalse(localNameSearch);
     }
 
 
