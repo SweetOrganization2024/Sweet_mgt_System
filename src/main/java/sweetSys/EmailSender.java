@@ -32,7 +32,7 @@ public class EmailSender {
         });
     }
 
- public static void sendEmail(String toEmail, String subject, String body) {
+public static void sendEmail(String toEmail, String subject, String body) {
     if (toEmail == null || toEmail.isEmpty()) {
         logger.warning("Email address is not provided.");
         return;
@@ -53,15 +53,11 @@ public class EmailSender {
         message.setSubject(subject);
         message.setText(body);
 
-        if (!toEmail.isEmpty() && !subject.isEmpty() && !body.isEmpty()) {
-            Transport.send(message);
-            logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
-        } else {
-            logger.warning("Required fields for sending email are not provided.");
-        }
+        Transport.send(message);
+        logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
     } catch (MessagingException e) {
-        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'. Exception: %s", toEmail, subject, e.getMessage()), e);
-        throw new RuntimeException(String.format("An error occurred while trying to send email to %s with subject '%s'.", toEmail, subject), e);
+        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
+        throw new RuntimeException(String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject), e);
     }
 }
 
