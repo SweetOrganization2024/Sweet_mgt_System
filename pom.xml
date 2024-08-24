@@ -92,8 +92,15 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.10.0.2599</version>
+                <version>3.10.0.2524</version>
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>sonarcloud</id>
+            <url>https://maven.pkg.github.com/SonarSource/sonar-maven-plugin</url>
+        </repository>
+    </repositories>
 </project>
