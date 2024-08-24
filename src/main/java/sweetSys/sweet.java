@@ -151,41 +151,30 @@ public class sweet {
         return all;
     }
 
-    public static void Pricemin_max(String min1, String max1) {
-        try {
-            int min = Integer.parseInt(min1.trim());
-            int max = Integer.parseInt(max1.trim());
+   public static void Pricemin_max(String min1, String max1) {
+    try {
+        int min = Integer.parseInt(min1.trim());
+        int max = Integer.parseInt(max1.trim());
 
-            for (newSweet s : sweet.getListOfSweet()) {
-                String priceString = s.getPrice().trim();
-                try {
-                    int Myprice = Integer.parseInt(priceString);
-                    if (Myprice > min && Myprice < max) {
-                        logger.info("Name : " + s.getName() +
-                                " Id : " + s.getId() +
-                                " Type : " + s.getType() +
-                                " Price : " + s.getPrice());
-                    }
-                } catch (NumberFormatException e) {
-                    System.err.println("Invalid price format: " + priceString);
-                }
-            }
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid min or max value: " + e.getMessage());
-        }
-    }
-
-
-    public static boolean validSweet(String name, String id, String type) {
-        boolean valid = false;
         for (newSweet s : sweet.getListOfSweet()) {
-            if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type) ) {
-                valid=true;
-                break;}
-
+            String priceString = s.getPrice().trim();
+            try {
+                int Myprice = Integer.parseInt(priceString);
+                if (Myprice > min && Myprice < max) {
+                    logger.info("Name : " + s.getName() +
+                            " Id : " + s.getId() +
+                            " Type : " + s.getType() +
+                            " Price : " + s.getPrice());
+                }
+            } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, "Invalid price format: " + priceString, e);
+            }
         }
-        return valid;
+    } catch (NumberFormatException e) {
+        logger.log(Level.SEVERE, "Invalid min or max value: " + e.getMessage(), e);
     }
+}
+
     public static boolean validPeople(String email , String pass) {
         boolean isUserRegistered = false;
         for (person f : sweet.getPeopleList()) {
