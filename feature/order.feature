@@ -1,5 +1,4 @@
-Feature: order
-
+Feature:order
   Scenario Outline: Successful order
     Given a sweet with ID "<id_of_sweet>", name "<name_of_sweet>", and type "<type_of_sweet>" is available for order for user with Email "<email>" and password "<password>"
     And the user selects a quantity of "<quantity>" for the sweet
@@ -18,9 +17,9 @@ Feature: order
 
     Examples:
       | id_of_sweet | name_of_sweet       | type_of_sweet      |
-      | 09          | nutella cheesecake  | diet               |
+      | 09          | Nutella cheesecake  | diet               |
       | 11          | Biscuits            | sweet              |
-      | 12          | cake chocolate      | Vegetarian         |
+      | 12          | Chocolate cake      | Vegetarian         |
 
   Scenario Outline: Order payment
     Given a sweet with ID "<id_of_sweet>", name "<name_of_sweet>", and type "<type_of_sweet>" is available for order for user with Email "<email>" and password "<password>"
@@ -30,21 +29,10 @@ Feature: order
     Then the system should confirm successful payment and provide an order confirmation with order number and estimated delivery date
 
     Examples:
-      | id_of_sweet | name_of_sweet       | type_of_sweet      | email               | password      | quantity     | total_price | card_number       | expiration_date |
-      | 02          | Lotus cheesecake      | gluten free                | incoremail.com      | 4746f2781     | 2            | 100         | 1234567812345678  | 12/24           |
-      | 05          | Vegan carrot cake     | Vegetarian diet           | incoremail.com      | 4746f2781     | 3            | 150         | 8765432187654321  | 01/25           |
-      | 06          | Macaron               | zero sugar        | incoremail.com      | 4746f2781     | 1            | 50          | 1122334455667788  | 11/23           |
-
-  Scenario Outline: Order cancellation
-    Given an order with order number "<order_number>" exists
-    When the user cancels the order
-    Then the system should confirm that the order with order number "<order_number>" has been cancelled
-
-    Examples:
-      | order_number |
-      | 12345        |
-      | 67890        |
-      | 54321        |
+      | id_of_sweet | name_of_sweet         | type_of_sweet      | email               | password      | quantity     | total_price | card_number       | expiration_date |
+      | 02          | Lotus cheesecake      | gluten free        | incoremail.com      | 4746f2781     | 2            | 100         | 1234567812345678  | 12/24           |
+      | 05          | Vegan carrot cake     | Vegetarian diet    | incoremail.com      | 4746f2781     | 3            | 150         | 8765432187654321  | 01/25           |
+      | 06          | Macaron               | zero sugar         | incoremail.com      | 4746f2781     | 1            | 50          | 1122334455667788  | 11/23           |
 
   Scenario Outline: View order history
     Given a user with Email "<email>" and password "<password>" is logged in
@@ -55,3 +43,15 @@ Feature: order
       | email                     | password          |
       | incoremail.com            | 4746f2781         |
       | samiasoftware2@gmail.com  | Samia11223344@@   |
+
+  Scenario: Cancel an existing order
+    Given an order with order number "02" exists
+    When the user cancels the order
+    Then the system should confirm that the order with order number "02" has been cancelled
+
+  Scenario: Cancel an already cancelled order
+    Given an order with order number "02" exists
+    And the order with order number "02" has been cancelled
+    When the user tries to cancel the order
+    Then the system should log a warning indicating that the order with order number "02" is already cancelled
+
