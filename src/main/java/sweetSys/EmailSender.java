@@ -11,9 +11,11 @@ public class EmailSender {
     private static final String EMAIL_PASSWORD = System.getenv("password");
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
-    public EmailSender(){
-
-}
+    public EmailSender() {
+        // This constructor is intentionally left empty. It is provided for future
+        // extensibility or if initialization logic is needed later. Currently, there
+        // are no instance-specific fields to initialize.
+    }
     private static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
