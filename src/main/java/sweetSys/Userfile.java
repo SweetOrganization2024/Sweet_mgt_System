@@ -10,6 +10,8 @@ public class Userfile {
     public static List<person> users = new ArrayList<>();
 
     public static final String FILE_NAME = "userfile.txt";
+    private static final Logger LOGGER = Logger.getLogger(Userfile.class.getName());
+
 
     public Userfile() {
         //constr
@@ -39,7 +41,7 @@ public class Userfile {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred", e);
         }
     }
 
