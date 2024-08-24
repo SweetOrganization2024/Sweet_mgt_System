@@ -1,21 +1,20 @@
 package sweetSys;
-
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class EmailSender {
-
+public class EmailSender {
     private static final String EMAIL_USERNAME = "SweetSystemInstitution@gmail.com";
     private static final String EMAIL_PASSWORD = System.getenv("password");
     private static final Logger logger = Logger.getLogger(EmailSender.class.getName());
 
-    private EmailSender() {
-        // Prevent instantiation
+    public EmailSender() {
+        // This constructor is intentionally left empty. It is provided for future
+        // extensibility or if initialization logic is needed later. Currently, there
+        // are no instance-specific fields to initialize.
     }
-
     public static Properties getProperties() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -33,46 +32,34 @@ public final class EmailSender {
             }
         });
     }
-
     public static void sendEmail(String toEmail, String subject, String body) {
-        if (isValidEmail(toEmail) && isValidSubject(subject) && isValidBody(body)) {
-            try {
-                Message message = new MimeMessage(getSession());
-                message.setFrom(new InternetAddress(EMAIL_USERNAME));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-                message.setSubject(subject);
-                message.setText(body);
-
-                Transport.send(message);
-                logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
-            } catch (MessagingException e) {
-                logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
-                throw new RuntimeException(String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject), e);
-            }
-        }
-    }
-
-    private static boolean isValidEmail(String email) {
-        boolean isValid = email != null && !email.isEmpty();
-        if (!isValid) {
+        if (toEmail == null || toEmail.isEmpty()) {
             logger.warning("Email address is not provided.");
+            throw new IllegalArgumentException("Email address must be provided.");
         }
-        return isValid;
-    }
-
-    private static boolean isValidSubject(String subject) {
-        boolean isValid = subject != null && !subject.isEmpty();
-        if (!isValid) {
+        if (subject == null || subject.isEmpty()) {
             logger.warning("Email subject is not provided.");
+            throw new IllegalArgumentException("Email subject must be provided.");
         }
-        return isValid;
+        if (body == null || body.isEmpty()) {
+            logger.warning("Email body is not provided.");
+            throw new IllegalArgumentException("Email body must be provided.");
+        }
+
+    try {
+        Message message = new MimeMessage(getSession());
+        message.setFrom(new InternetAddress(EMAIL_USERNAME));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+        message.setSubject(subject);
+        message.setText(body);
+
+        Transport.send(message);
+        logger.info(String.format("Email sent successfully to %s with subject '%s'", toEmail, subject));
+    } catch (MessagingException e) {
+        logger.log(Level.SEVERE, String.format("Failed to send email to %s with subject '%s'.", toEmail, subject), e);
+        throw new RuntimeException(String.format("An error occurred while sending email to %s with subject '%s'.", toEmail, subject), e);
+    }
     }
 
-    private static boolean isValidBody(String body) {
-        boolean isValid = body != null && !body.isEmpty();
-        if (!isValid) {
-            logger.warning("Email body is not provided.");
-        }
-        return isValid;
-    }
+
 }
