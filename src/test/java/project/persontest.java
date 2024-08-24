@@ -51,6 +51,7 @@ public class persontest {
     @Given("a person with email {string} and password {string}")
     public void aPersonWithEmailAndPassword(String email, String pas) {
         p = sweet.retperson(email,pas);
+        assertTrue(person.findemail(p));
     }
 
     @Then("the person's type should be {string}")
