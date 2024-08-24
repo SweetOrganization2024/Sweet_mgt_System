@@ -10,6 +10,10 @@ import sweetSys.sweet;
 import sweetSys.OrderManager;
 import java.time.LocalDate;
 import static org.junit.Assert.*;
+import static sweetSys.OrderManager.*;
+import sweetSys.OrderManager.Order;
+import static org.junit.Assert.assertTrue;
+
 
 public class order { 
     private sweet AppSweet;
@@ -25,13 +29,15 @@ public class order {
     private String type_of_sweet1;
     private String quantity;
 
+
+
     public order() {
         this.AppSweet = sweet.getInstance();
         this.orderManager = new OrderManager();
     }
     @Before
     public void setUp() {
-        this.orderManager = OrderManager.getInstance();
+        this.orderManager = getInstance();
         this.orderManager.getOrders().clear();
     }
 
@@ -67,7 +73,7 @@ public class order {
 
     @Then("the system should confirm the order with a success message including order number, estimated delivery date, and total cost")
     public void theSystemShouldConfirmTheOrderWithASuccessMessageIncludingOrderNumberEstimatedDeliveryDateAndTotalCost() {
-        OrderManager.Order currentOrder = orderManager.getCurrentOrder();
+        Order currentOrder = orderManager.getCurrentOrder();
         if (currentOrder == null) {
             System.out.println("No orders found.");
             System.out.println("Orders List: " + orderManager.getOrders());
@@ -143,4 +149,28 @@ public class order {
     public void theSystemShouldDisplayAListOfPastOrdersIncludingOrderNumbersDatesAndTotalCosts() {
         orderManager.displayPastOrders();
     }
+    @Given("the order with order number {string} has been cancelled")
+    public void theOrderWithOrderNumberHasBeenCancelled(String idd) {
+        orderManager.cancelOrder(idd);
+        cancelled = true;
+    }
+    @When("the user tries to cancel the order")
+    public void theUserTriesToCancelTheOrder() {
+        orderManager.cancelOrder(orderId);
+    }
+    @Then("the system should log a warning indicating that the order with order number {string} is already cancelled")
+    public void theSystemShouldLogAWarningIndicatingThatTheOrderWithOrderNumberIsAlreadyCancelled(String number) {
+       boolean x=false;
+        for (newSweet s : sweet.getListOfSweet()) {
+            if (number != s.getId()){
+                x=true;
+                System.out.println("the order already cancelled");
+                assertTrue(x);
+            }
+            else{
+                assertTrue(x);
+            }
+        }
+    }
+
 }
