@@ -51,7 +51,7 @@ public class sweet {
         }
     }
 
-    public void setToList(person p) {
+  public static void setToList(person p) {
         peopleList.add(p);
     }
 
