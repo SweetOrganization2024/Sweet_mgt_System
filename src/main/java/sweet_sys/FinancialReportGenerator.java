@@ -10,20 +10,22 @@ public class FinancialReportGenerator {
     private static final String FILE_NAME = "financial_data.txt";
     private static final Logger logger = Logger.getLogger(FinancialReportGenerator.class.getName());
 
-     private FinancialReportGenerator() {
-        // 
+    private FinancialReportGenerator() {
+        // Private constructor to prevent instantiation
     }
 
     public static void generateFinancialReports() {
         List<String> records = readFinancialData();
         if (records.isEmpty()) {
-            logger.info("No financial data found.");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("No financial data found.");
+            }
             return;
         }
 
         double totalIncome = 0;
         double totalExpense = 0;
-        for (String dataLine : records) { 
+        for (String dataLine : records) {
             String[] parts = dataLine.split(",");
             if (parts.length == 3) {
                 String transactionType = parts[0].trim();
@@ -37,8 +39,10 @@ public class FinancialReportGenerator {
         }
         double netProfit = totalIncome - totalExpense;
 
-        logger.info(String.format("Financial Report:\nTotal Income: $%.2f\nTotal Expense: $%.2f\nNet Profit/Loss: $%.2f", 
-                                  totalIncome, totalExpense, netProfit));
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(String.format("Financial Report:\nTotal Income: $%.2f\nTotal Expense: $%.2f\nNet Profit/Loss: $%.2f", 
+                                      totalIncome, totalExpense, netProfit));
+        }
     }
 
     private static List<String> readFinancialData() {
@@ -49,7 +53,9 @@ public class FinancialReportGenerator {
                 records.add(line);
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Error reading financial data.", e);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, "Error reading financial data.", e);
+            }
         }
         return records;
     }
