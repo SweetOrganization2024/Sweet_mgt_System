@@ -23,9 +23,9 @@ Feature: add
     And The user should see a "<message>"
 
     Examples:
-      | email                          | password  | message                                          |
-      | incoremail.com                 | 4746f2781  | you can't add a new item                         |
-      | Adrdmain78@gmail.com           | CHF68DNH   | you must be Owner or Supplier to add a new item  |
+      | email                          | password       | message                                          |
+      | Incoemail23@gmail.com         | Samia11223344@  | you can't add a new item                         |
+      | Adrdmain78@gmail.com           | CHF68DNH       | you must be Owner or Supplier to add a new item  |
 
   Scenario Outline: Add sweet with id already exist
     Given The user login as Owner or Supplier with "<email>" and "<password>"

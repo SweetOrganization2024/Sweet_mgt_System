@@ -6,10 +6,10 @@ Feature:order
     Then the system should confirm the order with a success message including order number, estimated delivery date, and total cost
 
     Examples:
-      | id_of_sweet | name_of_sweet         | type_of_sweet      | email               | password | quantity | total_price |
-      | 02          | Lotus cheesecake      | gluten free        | incoremail.com      | 4746f2781 | 2        | 100         |
-      | 05          | Vegan carrot cake     | Vegetarian diet    | incoremail.com      | 4746f2781 | 3        | 150         |
-      | 06          | Macaron                | zero sugar        | incoremail.com      | 4746f2781 | 1        | 50          |
+      | id_of_sweet | name_of_sweet         | type_of_sweet      | email                  | password | quantity | total_price |
+      | 02          | Lotus cheesecake      | gluten free        | Incoemail23@gmail.com  | Samia11223344@ | 2        | 100         |
+      | 05          | Vegan carrot cake     | Vegetarian diet    | Incoemail23@gmail.com   | Samia11223344@ | 3        | 150         |
+      | 06          | Macaron               | zero sugar        | Incoemail23@gmail.com     | Samia11223344@ | 1        | 50          |
 
   Scenario Outline: Unavailable sweet order
     Given a sweet with ID "<id_of_sweet>", name "<name_of_sweet>", and type "<type_of_sweet>" is not available for order
@@ -30,9 +30,9 @@ Feature:order
 
     Examples:
       | id_of_sweet | name_of_sweet         | type_of_sweet      | email               | password      | quantity     | total_price | card_number       | expiration_date |
-      | 02          | Lotus cheesecake      | gluten free        | incoremail.com      | 4746f2781     | 2            | 100         | 1234567812345678  | 12/24           |
-      | 05          | Vegan carrot cake     | Vegetarian diet    | incoremail.com      | 4746f2781     | 3            | 150         | 8765432187654321  | 01/25           |
-      | 06          | Macaron               | zero sugar         | incoremail.com      | 4746f2781     | 1            | 50          | 1122334455667788  | 11/23           |
+      | 02          | Lotus cheesecake      | gluten free        | Incoemail23@gmail.com      | Samia11223344@     | 2            | 100         | 1234567812345678  | 12/24           |
+      | 05          | Vegan carrot cake     | Vegetarian diet    | Incoemail23@gmail.com      | Samia11223344@     | 3            | 150         | 8765432187654321  | 01/25           |
+      | 06          | Macaron               | zero sugar         | Incoemail23@gmail.com      | Samia11223344@     | 1            | 50          | 1122334455667788  | 11/23           |
 
  
   Scenario Outline: View order history
@@ -42,7 +42,7 @@ Feature:order
 
     Examples:
       | email                     | password          |
-      | incoremail.com            | 4746f2781         |
+      | Incoemail23@gmail.com            | Samia11223344@         |
       | samiasoftware2@gmail.com  | Samia11223344@@   |
 
   Scenario: Cancel an existing order

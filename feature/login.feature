@@ -6,11 +6,11 @@ Feature: login
         And user page "<type>" appears
 
         Examples:
-            | email                 | password       | type             |
-            | incoremail.com        | 4746f2781      | USER             |
-            | Adrdmain78@gmail.com  | CHF68DNH       | ADMIN            |
-            | h2eLLo3@gmail.com     | 09SNBC6        | Owner            |
-            | Halasara22@gmail.com  | Hala34567##    | Supplier         |
+            | email                   | password       | type             |
+            | Incoemail23@gmail.com   | Samia11223344@ | USER             |
+            | Adrdmain78@gmail.com    | CHF68DNH       | ADMIN            |
+            | h2eLLo3@gmail.com       | 09SNBC6        | Owner            |
+            | Halasara22@gmail.com    | Hala34567##    | Supplier         |
 
     Scenario Outline: Login with invalid credentials
         When user tries to login through the system

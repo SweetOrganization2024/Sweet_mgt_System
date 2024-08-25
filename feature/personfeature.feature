@@ -8,11 +8,11 @@ Feature: personfeature
     Then add the person
 
   Scenario: Find a person with all details
-    Given a person with email "incoremail.com" and password "4746f2781"
+    Given a person with email "Incoemail23@gmail.com" and password "Samia11223344@"
     Then the person's type should be "USER"
     And the person's first name should be "shahd"
     And the person's last name should be "almasri"
 
   Scenario: Checking if a person is of the right type
-    Given a person with email "incoremail.com", password "4746f2781", and type "USER"
+    Given a person with email "Incoemail23@gmail.com", password "Samia11223344@", and type "USER"
     Then the person should have the type "USER"
