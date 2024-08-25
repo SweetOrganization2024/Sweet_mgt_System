@@ -153,6 +153,14 @@ public class Sweet {
         return all;
     }
 
+
+public class SweetPriceFilter {
+    private static final Logger logger = Logger.getLogger(SweetPriceFilter.class.getName());
+    private static final String NAME_LABEL = "Name: ";
+    private static final String ID_LABEL = ", ID: ";
+    private static final String TYPE_LABEL = ", Type: ";
+    private static final String PRICE_LABEL = ", Price: ";
+
     public static void priceminMax(String min1, String max1) {
         try {
             int min = Integer.parseInt(min1.trim());
@@ -165,13 +173,14 @@ public class Sweet {
                         logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                     }
                 } catch (NumberFormatException e) {
-                    System.err.println("Invalid price format: " + priceString);
+                    logger.severe("Invalid price format: " + priceString);
                 }
             }
         } catch (NumberFormatException e) {
-            System.err.println("Invalid min or max value: " + e.getMessage());
+            logger.severe("Invalid min or max value: " + e.getMessage());
         }
     }
+}
 
     public static boolean validSweet(String name, String id, String type) {
         boolean valid = false;
