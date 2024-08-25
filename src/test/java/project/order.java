@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 
 
 public class order { 
-    private Sweet appSweet;
     private OrderManager orderManager;
     private String email;
     private String password;
@@ -32,7 +31,7 @@ public class order {
 
 
     public order() {
-        this.appSweet = Sweet.getInstance();
+      Sweet.getInstance();
         this.orderManager = new OrderManager();
     }
     @Before
