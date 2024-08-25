@@ -79,9 +79,9 @@ public class Sweet {
         return idSearch;
     }
 
-    public static void printSweetId(String id_of_sweet) {
+    public static void printSweetId(String idOfSweet) {
         for (NewSweet s : Sweet.getListOfSweet()) {
-            if (s.getId().equals(id_of_sweet)) {
+            if (s.getId().equals(idOfSweet)) {
                 logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                 break;
             }
@@ -112,14 +112,14 @@ public class Sweet {
     }
 
     public static boolean searchNameType(String name, String type) {
-        boolean nametype_search1 = false;
+        boolean nametypeSearch1 = false;
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name) && (s.getType().equals(type))) {
-                nametype_search1 = true;
+                nametypeSearch1 = true;
                 break;
             }
         }
-        return (nametype_search1);
+        return (nametypeSearch1);
     }
 
     public static void printTypeName(String name, String type) {
