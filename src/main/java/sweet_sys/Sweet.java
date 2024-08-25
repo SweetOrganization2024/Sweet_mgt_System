@@ -15,8 +15,8 @@ public class Sweet {
     public static final String TYPE_LABEL = " Type :";
     public static final String PRICE_LABEL = " Price : ";
 
-    public static List<Person> peopleList = new ArrayList<>();
-    public static List<NewSweet> listOfSweet = new ArrayList<>();
+    public static final List<Person> peopleList = new ArrayList<>();
+   public static List<NewSweet> listOfSweet = new ArrayList<>();
     private static Sweet instance;
     private static final Logger logger = Logger.getLogger(Sweet.class.getName());
 
