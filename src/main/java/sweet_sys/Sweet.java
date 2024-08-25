@@ -9,11 +9,16 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Sweet {
+
+    public static final String NAME_LABEL = "Name : ";
+    public static final String ID_LABEL = " Id : ";
+    public static final String TYPE_LABEL = " Type :";
+    public static final String PRICE_LABEL = " Price : ";
+
     public static List<Person> peopleList = new ArrayList<>();
-    public static  List<NewSweet> listOfSweet = new ArrayList<>();
+    public static List<NewSweet> listOfSweet = new ArrayList<>();
     private static Sweet instance;
     private static final Logger logger = Logger.getLogger(Sweet.class.getName());
-
 
     public static Sweet getInstance() {
         if (instance == null) {
@@ -25,9 +30,11 @@ public class Sweet {
     public static List<NewSweet> getListOfSweet() {
         return listOfSweet;
     }
+
     public static List<Person> getPeopleList() {
         return peopleList;
     }
+
     public static boolean isLoggin = false;
 
     public Sweet() {
@@ -69,15 +76,13 @@ public class Sweet {
                 break;
             }
         }
-
         return idSearch;
     }
 
     public static void printSweetId(String id_of_sweet) {
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getId().equals(id_of_sweet)) {
-                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
-
+                logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                 break;
             }
         }
@@ -94,16 +99,16 @@ public class Sweet {
         return nameSearch;
     }
 
-    public static void deleteperson(Person p){
+    public static void deleteperson(Person p) {
         peopleList.remove(p);
     }
+
     public static void printSweetname(String name) {
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name)) {
-                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
             }
         }
-
     }
 
     public static boolean searchNameType(String name, String type) {
@@ -120,7 +125,7 @@ public class Sweet {
     public static void printTypeName(String name, String type) {
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name) && s.getType().equals(type)) {
-                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                 break;
             }
         }
@@ -147,6 +152,7 @@ public class Sweet {
         }
         return all;
     }
+
     public static void priceminMax(String min1, String max1) {
         try {
             int min = Integer.parseInt(min1.trim());
@@ -156,10 +162,7 @@ public class Sweet {
                 try {
                     int myprice = Integer.parseInt(priceString);
                     if (myprice > min && myprice < max) {
-                        logger.info("Name : " + s.getName() +
-                                " Id : " + s.getId() +
-                                " Type : " + s.getType() +
-                                " Price : " + s.getPrice());
+                        logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                     }
                 } catch (NumberFormatException e) {
                     System.err.println("Invalid price format: " + priceString);
@@ -169,16 +172,19 @@ public class Sweet {
             System.err.println("Invalid min or max value: " + e.getMessage());
         }
     }
+
     public static boolean validSweet(String name, String id, String type) {
         boolean valid = false;
         for (NewSweet s : Sweet.getListOfSweet()) {
-            if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type) ) {
-                valid=true;
-                break;}
+            if (s.getName().equals(name) && s.getId().equals(id) && s.getType().equals(type)) {
+                valid = true;
+                break;
+            }
         }
         return valid;
     }
-    public static boolean validPeople(String email , String pass) {
+
+    public static boolean validPeople(String email, String pass) {
         boolean isUserRegistered = false;
         for (Person f : Sweet.getPeopleList()) {
             if (f.getEmail().equals(email) && f.getPass().equals(pass) && f.getType().equals("USER")) {
@@ -189,28 +195,26 @@ public class Sweet {
         return isUserRegistered;
     }
 
-
-    public static void printNameId(String id , String nameOfSweet) {
+    public static void printNameId(String id, String nameOfSweet) {
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(nameOfSweet) && (s.getId().equals(id))) {
-                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
+                logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                 break;
             }
         }
     }
 
-    public static void printNameIdType(String id , String nameOfSweet , String type) {
+    public static void printNameIdType(String id, String nameOfSweet, String type) {
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(nameOfSweet) && (s.getId().equals(id)) && (s.getType().equals(type))) {
-                logger.info("Name : " + s.getName() + " Id : " + s.getId() + " Type :" + s.getType() + " Price : " + s.getPrice());
-
+                logger.info(NAME_LABEL + s.getName() + ID_LABEL + s.getId() + TYPE_LABEL + s.getType() + PRICE_LABEL + s.getPrice());
                 break;
             }
         }
     }
 
     public static String getThePrice(String name, String type) {
-        String result= "";
+        String result = "";
         for (NewSweet s : Sweet.getListOfSweet()) {
             if (s.getName().equals(name) && s.getType().equals(type)) {
                 result = s.getPrice();
@@ -220,29 +224,29 @@ public class Sweet {
         return result;
     }
 
-    public static boolean idSupOrOwner(String email,String pass){
-        for (Person p : Sweet.getPeopleList()){
-            if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner"))){
+    public static boolean idSupOrOwner(String email, String pass) {
+        for (Person p : Sweet.getPeopleList()) {
+            if (p.getEmail().equals(email) && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner"))) {
                 return true;
             }
         }
         return false;
     }
 
-    public static Person retperson(String email, String pass){
-        for (Person p : getPeopleList()){
+    public static Person retperson(String email, String pass) {
+        for (Person p : getPeopleList()) {
             if (p.getEmail().equals(email) && p.getPass().equals(pass))
                 return p;
         }
         return null;
     }
-    public static boolean idSupOrOwnerorAD(String email,String pass){
-        for (Person p : Sweet.getPeopleList()){
-            if (p.getEmail().equals(email)  && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner") || p.getType().equals("ADMIN"))){
+
+    public static boolean idSupOrOwnerorAD(String email, String pass) {
+        for (Person p : Sweet.getPeopleList()) {
+            if (p.getEmail().equals(email) && p.getPass().equals(pass) && (p.getType().equals("Supplier") || p.getType().equals("Owner") || p.getType().equals("ADMIN"))) {
                 return true;
             }
         }
         return false;
     }
-
 }
