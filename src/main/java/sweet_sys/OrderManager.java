@@ -37,21 +37,26 @@ public class OrderManager {
     public void addOrder(String orderId, LocalDate orderDate, double totalCost) {
         Order newOrder = new Order(orderId, orderDate, totalCost);
         orders.add(newOrder);
-        logger.info(String.format("Order added: %s", newOrder.getOrderId()));
+        if (logger.isLoggable(java.util.logging.Level.INFO)) {
+            logger.info(String.format("Order added: %s", newOrder.getOrderId()));
+        }
     }
 
     public Order getCurrentOrder() {
         if (orders.isEmpty()) {
-            logger.info("No orders found.");
+            if (logger.isLoggable(java.util.logging.Level.INFO)) {
+                logger.info("No orders found.");
+            }
             return null;
         }
         return orders.get(orders.size() - 1);
     }
 
-
     public void cancelOrder(String orderId) {
         if (orders.isEmpty()) {
-            logger.warning("No orders available to cancel.");
+            if (logger.isLoggable(java.util.logging.Level.WARNING)) {
+                logger.warning("No orders available to cancel.");
+            }
             return;
         }
 
@@ -59,29 +64,37 @@ public class OrderManager {
             if (order.getOrderId().equals(orderId)) {
                 if (!"cancelled".equals(order.status)) {
                     order.setStatus("cancelled");
-                    logger.info(String.format("Order %s has been cancelled.", orderId));
+                    if (logger.isLoggable(java.util.logging.Level.INFO)) {
+                        logger.info(String.format("Order %s has been cancelled.", orderId));
+                    }
                 } else {
-                    logger.warning(String.format("Order %s is already cancelled.", orderId));
+                    if (logger.isLoggable(java.util.logging.Level.WARNING)) {
+                        logger.warning(String.format("Order %s is already cancelled.", orderId));
+                    }
                 }
                 return;
             }
         }
-        logger.warning(String.format("Order %s not found for cancellation.", orderId));
+        if (logger.isLoggable(java.util.logging.Level.WARNING)) {
+            logger.warning(String.format("Order %s not found for cancellation.", orderId));
+        }
     }
-
 
     public void displayPastOrders() {
         if (orders.isEmpty()) {
-            logger.info("No past orders to display.");
+            if (logger.isLoggable(java.util.logging.Level.INFO)) {
+                logger.info("No past orders to display.");
+            }
             return;
         }
 
         for (Order order : orders) {
-            logger.info(String.format("Order ID: %s, Date: %s, Total Cost: %.2f",
-                    order.getOrderId(), order.getOrderDate(), order.getTotalCost()));
+            if (logger.isLoggable(java.util.logging.Level.INFO)) {
+                logger.info(String.format("Order ID: %s, Date: %s, Total Cost: %.2f",
+                        order.getOrderId(), order.getOrderDate(), order.getTotalCost()));
+            }
         }
     }
-
 
     public static class Order {
         private final String orderId;
