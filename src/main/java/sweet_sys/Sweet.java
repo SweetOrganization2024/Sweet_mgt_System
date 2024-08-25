@@ -1,9 +1,3 @@
-
-
-
-
-
-You said:
 package sweet_sys;
 
 import java.io.BufferedReader;
@@ -17,7 +11,7 @@ import java.util.logging.Level;
 public class Sweet {
     public static List<Person> peopleList = new ArrayList<>();
     public static  List<NewSweet> listOfSweet = new ArrayList<>();
-     private static Sweet instance;
+    private static Sweet instance;
     private static final Logger logger = Logger.getLogger(Sweet.class.getName());
 
 
@@ -27,7 +21,7 @@ public class Sweet {
         }
         return instance;
     }
-    
+
     public static List<NewSweet> getListOfSweet() {
         return listOfSweet;
     }
@@ -55,7 +49,7 @@ public class Sweet {
         }
     }
 
-  public static void setToList(Person p) {
+    public static void setToList(Person p) {
         peopleList.add(p);
     }
 
