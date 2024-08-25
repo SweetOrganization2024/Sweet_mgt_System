@@ -1,6 +1,4 @@
-02,Lotus cheesecake,gluten free,50
+02,Lotus cheesecake,Gluten free,10.00
 03,Crepe,sweet,40
 04,Donuts,sweet,30
 05,Vegan carrot cake,Vegetarian diet,25
-06,Macaron,zero sugar,30
-07,Cake of chocolate,sweet,100

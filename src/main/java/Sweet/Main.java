@@ -185,14 +185,15 @@ public class Main {
         int menu = 0;
         double totalCost;
 
-        while (menu != 6) {
+        while (menu != 7) {
             System.out.println("Main Menu:");
             System.out.println("1. Add a new sweet");
             System.out.println("2. Delete a sweet");
             System.out.println("3. Update a sweet");
             System.out.println("4. Search a sweet");
             System.out.println("5. Order");
-            System.out.println("6. Exit");
+            System.out.println("6. return to Management Menu");
+            System.out.println("7. Exit");
             System.out.print("Please enter your choice: ");
 
             menu = scanner.nextInt();
@@ -502,11 +503,12 @@ public class Main {
                             break;
                     }
                 }
-                case 6 -> System.out.println("Exiting the program...");
+                case 6 -> Manager(email,type);
+                case 7 -> System.out.println("Exiting the program...");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
-        while (menu != 6);
+        while (menu != 7);
     }
 
 
@@ -536,7 +538,7 @@ public class Main {
                     } else {
                         NewSweet newSweetItem = new NewSweet(idsweet, namesweet, typesweet, pricesweet);
                         Sweet.addsweet(newSweetItem);
-                        System.out.println("Added sweet: " + idsweet + ", " + namesweet + ", " + typesweet + ", " + pricesweet);
+                        System.out.println("Sweet: " + idsweet + ", " + namesweet + ", " + typesweet + ", " + pricesweet);
                     }
 
                 } else {
@@ -576,7 +578,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int admin;
         do {
-            System.out.println("Admin Management Menu:");
+            System.out.println("Management Menu:");
             System.out.println("1. Manage user accounts");
             System.out.println("2. Generate financial reports");
             System.out.println("3. View best-selling products");
@@ -611,7 +613,7 @@ public class Main {
                     manageDiscounts();}
                 else System.out.println("You can't apply discount you want to be Supplier or Owner.");
                 }
-                case 6 -> System.out.println("Exiting admin management. Goodbye!");
+                case 6 -> System.out.println("Exiting management. Goodbye!");
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         } while (admin!=6);
@@ -840,7 +842,6 @@ public class Main {
 
         if (discountToApply != null) {
             double discountedPrice = DiscountManager.applyDiscountToProduct(productId, discountToApply);
-            System.out.println( discountToApply.getPercentage() + "g43g" +discountedPrice);
             if (discountedPrice > 0) {
                 System.out.println("Discount applied. New price for Sweet ID " + productId + " is: " + discountedPrice);
                 saveSweetsToFile(Sweet.getListOfSweet(), FILE_NAME);
@@ -869,7 +870,7 @@ public class Main {
 
             switch (choice) {
                 case 1 -> updatePersonalInformation(email,pass,scanner);
-                case 2 -> changePassword(email,pass,scanner);
+                case 2 -> pass = changePassword(email,pass,scanner);
                 case 3 -> viewAccountDetails(email,pass);
                 case 4 -> deleteAccount(email,pass,scanner);
                 case 5 -> {
@@ -886,13 +887,10 @@ public class Main {
         String firstName = scanner.nextLine();
         System.out.print("Enter new last name: ");
         String lastName = scanner.nextLine();
-        System.out.print("Enter new email: ");
-        String newEmail = scanner.nextLine();
         Person p = Sweet.retperson(email, pass);
         if (p != null) {
             p.setFirstName(firstName);
             p.setLastName(lastName);
-            p.setEmail(newEmail);
 
             updateUserInFile(email, pass, p);
 
@@ -910,14 +908,19 @@ public class Main {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] userDetails = line.split(",");
-                if (userDetails[2].equals(email) && userDetails[3].equals(pass)) {
-                    users.add(updatedPerson.getFirstName() + "," +
-                            updatedPerson.getLastName() + "," +
-                            updatedPerson.getEmail() + "," +
-                            updatedPerson.getPass() + ","+
-                            userDetails[4] );
+                if (userDetails.length >= 5) {
+                    if (userDetails[2].equals(email) && userDetails[3].equals(pass)) {
+                        users.add(updatedPerson.getFirstName() + "," +
+                                updatedPerson.getLastName() + "," +
+                                updatedPerson.getEmail() + "," +
+                                updatedPerson.getPass() + "," +
+                                userDetails[4]);
+                    } else {
+                        users.add(line);
+                    }
                 } else {
-                    users.add(line);
+                    // Handle malformed line or log it
+                    System.out.println("Skipping malformed line: " + line);
                 }
             }
         } catch (IOException e) {
@@ -934,28 +937,36 @@ public class Main {
         }
     }
 
-    private static void changePassword(String email, String pass, Scanner scanner) {
+
+    private static String changePassword(String email, String pass, Scanner scanner) {
         Person p = Sweet.retperson(email,pass);
         System.out.print("Enter current password: ");
         String currentPassword = scanner.nextLine();
-
+        String newPassword=pass;
         if (p.getPass().equals(currentPassword)) {
             System.out.print("Enter new password: ");
-            String newPassword = scanner.nextLine();
+            newPassword = scanner.nextLine();
             p.setPass(newPassword);
             updateUserInFile(email, pass, p);
             System.out.println("Password changed successfully.");
         } else {
             System.out.println("Current password is incorrect.");
         }
+        return newPassword;
     }
-    private static void viewAccountDetails(String email ,String pass) {
-        Person p= Sweet.retperson(email,pass);
+    private static void viewAccountDetails(String email, String pass) {
+        Person p = Sweet.retperson(email, pass);
+        if (p == null) {
+            System.out.println("No account found with the provided email and password.");
+            return;
+        }
+
         System.out.println("Account Details:");
         System.out.println("First Name: " + p.getFirstName());
         System.out.println("Last Name: " + p.getLastName());
         System.out.println("Email: " + p.getEmail());
     }
+
 
     private static void deleteAccount(String email ,String pass, Scanner scanner) {
         Person p= Sweet.retperson(email,pass);
@@ -1033,7 +1044,7 @@ public class Main {
                 updatedList.add(s);
             }
         }
-       setListOfSweet((ArrayList<NewSweet>) updatedList);
+        setListOfSweet((ArrayList<NewSweet>) updatedList);
     }
     public static void setListOfSweet(ArrayList<NewSweet> listOfSweet) {
         Sweet.listOfSweet = listOfSweet;
